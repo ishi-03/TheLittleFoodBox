@@ -1,0 +1,2339 @@
+[
+  {
+    "id": "indian",
+    "category": "Indian",
+    "tagline": "Slow-cooked with love",
+    "accent": "#8b5e3c",
+    "color": "#e8d5c4",
+    "sections": [
+      {
+        "title": "Street & Chaat",
+        "items": [
+          {
+            "name": "Club Kachori Sabzi",
+            "price": 100,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "indian"
+            ],
+            "unit": "per plate"
+          },
+          {
+            "name": "Dhokla Chaat",
+            "price": 300,
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Dal Pakwan",
+            "price": 750,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "serves": "10 pcs"
+          }
+        ]
+      },
+      {
+        "title": "Tandoor & Snacks",
+        "items": [
+          {
+            "name": "Kebab",
+            "price": 450,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "indian",
+              "starters"
+            ],
+            "serves": "10 pcs"
+          },
+          {
+            "name": "Paneer Tikka",
+            "price": 400,
+            "veg": true,
+            "spicy": true,
+            "serves": "10 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Rolls & Wraps",
+        "items": [
+          {
+            "name": "Kathi Roll",
+            "price": 120,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "indian",
+              "starters"
+            ],
+            "unit": "per pc"
+          },
+          {
+            "name": "Frankie Roll",
+            "price": 110,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "indian",
+              "starters"
+            ],
+            "unit": "per pc"
+          }
+        ]
+      },
+      {
+        "title": "Curries",
+        "items": [
+          {
+            "name": "Dal Makhani",
+            "price": 900,
+            "veg": true,
+            "spicy": false,
+            "chefPick": true,
+            "category": [
+              "indian"
+            ],
+            "popular": true,
+            "photo": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80"
+          },
+          {
+            "name": "Paneer Butter Masala",
+            "price": 600,
+            "veg": true,
+            "spicy": false,
+            "chefPick": true,
+            "category": [
+              "indian"
+            ],
+            "popular": true,
+            "photo": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80"
+          },
+          {
+            "name": "Veg Malai Kofta",
+            "price": 450,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "popular": true,
+            "photo": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80"
+          },
+          {
+            "name": "Paneer Lababdar",
+            "price": 600,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "photo": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=80"
+          },
+          {
+            "name": "Chola",
+            "price": 450,
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          },
+          {
+            "name": "Vegetables (All Types)",
+            "price": 450,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ]
+          },
+          {
+            "name": "Black Dal",
+            "price": 900,
+            "veg": true,
+            "spicy": false,
+            "serves": 6,
+            "category": [
+              "indian"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Rice",
+        "items": [
+          {
+            "name": "Veg Biryani",
+            "price": 800,
+            "veg": true,
+            "spicy": true,
+            "chefPick": true,
+            "popular": true,
+            "category": [
+              "indian"
+            ],
+            "photo": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80"
+          },
+          {
+            "name": "Biryani With Raita",
+            "price": "800-1200",
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "indian"
+            ],
+            "serves": "S/L"
+          },
+          {
+            "name": "Matar Pulao",
+            "price": 800,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "photo": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&q=80"
+          },
+          {
+            "name": "Jeera Rice",
+            "price": 650,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "photo": "https://images.unsplash.com/photo-1536304993881-ff86e0c9d44b?w=600&q=80"
+          }
+        ]
+      },
+      {
+        "title": "Breads",
+        "items": [
+          {
+            "name": "Butter Naan",
+            "price": 80,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "popular": true
+          },
+          {
+            "name": "Garlic Naan",
+            "price": 100,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "popular": true
+          },
+          {
+            "name": "Tandoori Roti",
+            "price": 60,
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Roti",
+            "price": 80,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "indian"
+            ],
+            "unit": "per pc"
+          }
+        ]
+      },
+      {
+        "title": "Indian Breakfast & Snacks",
+        "items": [
+          {
+            "name": "DIY Dal Pakwan",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Mini Podi Idli with Chutney",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          },
+          {
+            "name": "Smoked Missal Pav",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          },
+          {
+            "name": "Chole Kulcha Pockets",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          },
+          {
+            "name": "Baked Vada Pav Bombs",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          },
+          {
+            "name": "Baked Cheese Chilli Buns",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Chole Samosa",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          }
+        ]
+      },
+      {
+        "title": "Gujarati Snacks",
+        "items": [
+          {
+            "name": "Dhokla",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Fafda",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Gathiya",
+            "price": "Ask",
+            "category": [
+              "indian"
+            ],
+            "veg": true,
+            "spicy": false
+          },
+          {
+            "name": "Jalebi",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": false
+          },
+          {
+            "name": "Khandvi",
+            "price": "Ask",
+            "category": [
+              "indian"
+            ],
+            "veg": true,
+            "spicy": false
+          },
+          {
+            "name": "Patra",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          },
+          {
+            "name": "Khasta Kachori",
+            "price": "Ask",
+            "veg": true,
+            "category": [
+              "indian"
+            ],
+            "spicy": true
+          }
+        ]
+      },
+      {
+        "title": "English Breakfast",
+        "items": [
+          {
+            "name": "Croissants (Cheese & Thecha / Plain)",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          },
+          {
+            "name": "Cheese Butter Croissant",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          },
+          {
+            "name": "Nutella Croissant",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          },
+          {
+            "name": "Croissant with Butter & Marmalade",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          },
+          {
+            "name": "Assorted Cold Sandwiches",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          },
+          {
+            "name": "Breakfast Muffins",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          },
+          {
+            "name": "Assorted Cookie Tray",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast",
+              "indian"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Healthy Breakfast Ideas",
+        "items": [
+          {
+            "name": "Muesli Bowls",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast"
+            ]
+          },
+          {
+            "name": "Classic Avocado Toast",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast"
+            ]
+          },
+          {
+            "name": "Paneer Avocado Toast",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast"
+            ]
+          },
+          {
+            "name": "Sprouts Salad Jars",
+            "price": "Ask",
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "breakfast"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "italian",
+    "category": "Italian",
+    "tagline": "Bakery & continental delights",
+    "accent": "#b23a2a",
+    "color": "#f4d6d3",
+    "sections": [
+      {
+        "title": "Italian Starters",
+        "items": [
+          {
+            "name": "Stuffed Footlong Bread",
+            "price": 450,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "starters"
+            ]
+          },
+          {
+            "name": "Arancini Balls with Scallion Sauce",
+            "price": 550,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "italian",
+              "starters"
+            ]
+          },
+          {
+            "name": "Grilled Focaccia",
+            "price": 400,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "italian",
+              "starters"
+            ]
+          },
+          {
+            "name": "Bruschetta (Tomato / Olive / Mushroom)",
+            "price": 750,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "italian",
+              "starters"
+            ]
+          },
+          {
+            "name": "Stuffed Panini",
+            "price": 200,
+            "veg": true,
+            "spicy": false,
+            "unit": "per pc",
+            "minOrder": 3,
+            "category": [
+              "italian",
+              "starters"
+            ]
+          },
+          {
+            "name": "Bocconcini Pizza",
+            "price": 120,
+            "veg": true,
+            "spicy": false,
+            "unit": "per pc",
+            "minOrder": 3,
+            "category": [
+              "italian",
+              "starters"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Italian Mains",
+        "items": [
+          {
+            "name": "Conchiglioni Pasta",
+            "price": 100,
+            "veg": true,
+            "spicy": false,
+            "unit": "per pc",
+            "minOrder": 10,
+            "category": [
+              "italian"
+            ]
+          },
+          {
+            "name": "Pasta (Any Sauce)",
+            "price": "1100-1600",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "italian"
+            ]
+          },
+          {
+            "name": "Ratatouille",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "italian"
+            ]
+          },
+          {
+            "name": "Risotto",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "italian"
+            ]
+          },
+          {
+            "name": "Lasagne",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "italian"
+            ]
+          },
+          {
+            "name": "Gnocchi",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "italian"
+            ]
+          },
+          {
+            "name": "Cannelloni",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "italian"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Italian Breads & Pizza",
+        "items": [
+          {
+            "name": "Garlic Bread Loaf",
+            "price": 600,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian",
+              "starters"
+            ]
+          },
+          {
+            "name": "Pizza (Red Sauce / Pesto Sauce)",
+            "price": 600,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "italian"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "starters",
+    "category": "Starters",
+    "tagline": "Perfect bites to begin",
+    "accent": "#6f8a3a",
+    "color": "#e6efd2",
+    "sections": [
+      {
+        "title": "Starters",
+        "items": [
+          {
+            "name": "Sesame Potatoes",
+            "price": 300,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Mini Rajma Rolls",
+            "price": 110,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 5,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Pinwheel Sandwich",
+            "price": 400,
+            "veg": true,
+            "spicy": false,
+            "serves": "10 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Corn Cheese Balls",
+            "price": 300,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Ragda Tikki Chaat",
+            "price": 400,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Chaat in Kulhar",
+            "price": 80,
+            "veg": true,
+            "spicy": true,
+            "minOrder": 6,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Corn Croquette with Spicy Dip",
+            "price": 400,
+            "veg": true,
+            "spicy": true,
+            "serves": "8 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Jalapeño Poppers",
+            "price": 350,
+            "veg": true,
+            "spicy": true,
+            "serves": "8 pcs",
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Cigar Rolls with Peri Peri",
+            "price": 350,
+            "veg": true,
+            "spicy": true,
+            "serves": "8 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Chola Wrap",
+            "price": 110,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 5,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Mini Burger",
+            "price": 110,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 5,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Turkish Pizza",
+            "price": 90,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Mini Rostie With Dips",
+            "price": 100,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 6,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Stuffed Mushroom",
+            "price": 300,
+            "veg": true,
+            "spicy": false,
+            "serves": "10 pcs",
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Stuffed Pesto Potato",
+            "price": 350,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Burmese Curry Samosa",
+            "price": "650-800",
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Bharwa Aloo",
+            "price": 400,
+            "veg": true,
+            "spicy": true,
+            "serves": "8 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Corn Cheese Puff",
+            "price": 100,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 8,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Galette (Mushroom/Farm Fresh)",
+            "price": 450,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Aloo Wrap",
+            "price": 110,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Spicy Paneer Wrap",
+            "price": 150,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Mini Vada Pav Wrap",
+            "price": 110,
+            "veg": true,
+            "spicy": true,
+            "minOrder": 6,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Mini Falafel Wrap",
+            "price": 110,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 6,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Railway Cutlet",
+            "price": 400,
+            "veg": true,
+            "spicy": false,
+            "minOrder": 8,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Baked Vada Pav",
+            "price": 600,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Bombay Vada Pav",
+            "price": 300,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Spicy Paneer Sandwich",
+            "price": 250,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Caprese Sandwich",
+            "price": 250,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Coleslaw Sandwich",
+            "price": 250,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Dabeli",
+            "price": 450,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Kulcha Pocket",
+            "price": 500,
+            "veg": true,
+            "spicy": false,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Pizza Pinwheel",
+            "price": 600,
+            "veg": true,
+            "spicy": false,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "italian"
+            ]
+          },
+          {
+            "name": "Baked Samosa",
+            "price": 350,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Punjabi Samosa",
+            "price": 200,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          },
+          {
+            "name": "Mini Corn & Cheese Samosa",
+            "price": 250,
+            "veg": true,
+            "spicy": false,
+            "serves": "6 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Chinese Samosa",
+            "price": 350,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters"
+            ]
+          },
+          {
+            "name": "Kachori (Dal / Mutter)",
+            "price": 250,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "starters",
+              "indian"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mexican",
+    "category": "Mexican",
+    "tagline": "Bold flavors & vibrant bites",
+    "accent": "#c94c2c",
+    "color": "#f4e1d2",
+    "sections": [
+      {
+        "title": "Mexican Starters",
+        "items": [
+          {
+            "name": "Nachos",
+            "price": 350,
+            "veg": true,
+            "spicy": true,
+            "serves": "8",
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Taco",
+            "price": 450,
+            "veg": true,
+            "spicy": true,
+            "serves": "8 pcs",
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Mexican Cheesy Potatoes",
+            "price": 350,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Tostada",
+            "price": 500,
+            "veg": true,
+            "spicy": true,
+            "serves": "8",
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Avocado Potatoes",
+            "price": 550,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Fajita",
+            "price": 125,
+            "veg": true,
+            "spicy": true,
+            "unit": "per pc",
+            "minOrder": 6,
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Quesadillas",
+            "price": 750,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          },
+          {
+            "name": "Guacamole",
+            "price": 450,
+            "veg": true,
+            "spicy": false,
+            "category": [
+              "mexican",
+              "starters"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Mexican Mains",
+        "items": [
+          {
+            "name": "Enchiladas",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "mexican"
+            ]
+          },
+          {
+            "name": "Burrito Bowl",
+            "price": "600-1100",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "mexican"
+            ]
+          },
+          {
+            "name": "Mexican Rice Curry",
+            "price": "1200-1800",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "mexican"
+            ]
+          },
+          {
+            "name": "Burrito Wrap",
+            "price": 130,
+            "veg": true,
+            "spicy": true,
+            "unit": "per pc",
+            "minOrder": 4,
+            "category": [
+              "mexican"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "oriental",
+    "category": "Oriental",
+    "tagline": "Asian flavors & wok classics",
+    "accent": "#3b6b5a",
+    "color": "#dcebe6",
+    "sections": [
+      {
+        "title": "Oriental Starters",
+        "items": [
+          {
+            "name": "Vietnamese Roll",
+            "price": 650,
+            "veg": true,
+            "spicy": false,
+            "serves": "10 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Sushi",
+            "price": 700,
+            "veg": true,
+            "spicy": false,
+            "serves": "8 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Wontons",
+            "price": 600,
+            "veg": true,
+            "spicy": false,
+            "serves": "10 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Spring Roll",
+            "price": 700,
+            "veg": true,
+            "spicy": true,
+            "serves": "6 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Dumplings",
+            "price": 750,
+            "veg": true,
+            "spicy": false,
+            "serves": "10 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Thai Cups",
+            "price": 750,
+            "veg": true,
+            "spicy": true,
+            "serves": "10 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Oriental Mains",
+        "items": [
+          {
+            "name": "Edamame Black Rice",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Bangkok Bowl",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Buddha Bowl",
+            "price": "1300-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Stir Fried Noodles (Soba / Udon)",
+            "price": "1300-1800",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Burnt Garlic Rice",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Stir Fried Veg",
+            "price": "1000-1400",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Thai Curry with Steam Rice",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Pad Thai",
+            "price": "1200-1700",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Indo-Chinese",
+        "items": [
+          {
+            "name": "Crispy Baby Corn",
+            "price": "800-1200",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Stir Fried Lotus Stem",
+            "price": "800-1200",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Noodles (Hakka / Schezwan)",
+            "price": "1000-1600",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Chilli Garlic Noodles",
+            "price": "900-1400",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Chilli Paneer",
+            "price": 900,
+            "veg": true,
+            "spicy": true,
+            "serves": "10 pcs",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Mushroom in Hot Garlic Sauce",
+            "price": 900,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Classic Fried Rice",
+            "price": "900-1400",
+            "veg": true,
+            "spicy": false,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Schezwan Fried Rice",
+            "price": "900-1400",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental"
+            ]
+          },
+          {
+            "name": "Chilli Potato",
+            "price": "900-1400",
+            "veg": true,
+            "spicy": true,
+            "serves": "S/L",
+            "category": [
+              "oriental",
+              "starters"
+            ]
+          },
+          {
+            "name": "Veg Manchurian",
+            "price": 1000,
+            "veg": true,
+            "spicy": true,
+            "category": [
+              "oriental"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+  "id": "salads",
+  "category": "Salads",
+  "tagline": "Fresh & healthy bowls",
+  "accent": "#5a8d4e",
+  "color": "#e3f2e1",
+  "sections": [
+    {
+      "title": "Salads",
+      "items": [
+        {
+          "name": "Cous Cous & Chickpea Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Quinoa Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Watermelon Feta Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Raw Papaya Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": true,
+          "category": ["salads"]
+        },
+        {
+          "name": "Greek Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Mexican Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": true,
+          "category": ["salads"]
+        },
+        {
+          "name": "Caesar Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Russian Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Cold Pasta Salad",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        },
+        {
+          "name": "Green Salad with Chickpea",
+          "price": 500,
+          "veg": true,
+          "spicy": false,
+          "category": ["salads"]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "desserts",
+  "category": "Desserts",
+  "tagline": "Sweet endings",
+  "accent": "#b86b77",
+  "color": "#f7d8dd",
+  "sections": [
+
+    {
+      "title": "Indian Desserts",
+      "items": [
+        {
+          "name": "Seasonal Halwa Cups",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","indian"]
+        },
+        {
+          "name": "Gulab Jamun with Ice Cream Shots",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","indian"]
+        },
+        {
+          "name": "Angoori Rasmalai",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","indian"]
+        }
+      ]
+    },
+
+    {
+      "title": "Cup Desserts",
+      "items": [
+        {
+          "name": "Seasonal Fresh Fruit Cream Cups",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts"]
+        },
+        {
+          "name": "Pudding Cups",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts"]
+        },
+        {
+          "name": "Rasgulla Pudding Cups",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","indian"]
+        }
+      ]
+    },
+
+    {
+      "title": "Tea Cakes",
+      "items": [
+        {
+          "name": "Lotus Biscoff Tea Cake",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        },
+        {
+          "name": "Chocolate Walnut Tea Cake",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        },
+        {
+          "name": "Flavored Cup Cakes",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        },
+        {
+          "name": "Chocolate Walnut Fudge",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        }
+      ]
+    },
+
+    {
+      "title": "Cheesecake Jars",
+      "items": [
+        {
+          "name": "Blueberry Cheesecake Jar",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        },
+        {
+          "name": "Lotus Biscoff Cheesecake Jar",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        },
+        {
+          "name": "Oreo Nutella Cheesecake Jar",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["desserts","italian"]
+        }
+      ]
+    }
+
+  ]
+},
+{
+  "id": "cream-cheese",
+  "category": "Cream Cheese",
+  "tagline": "Gourmet cheese creations",
+  "accent": "#8a7c4c",
+  "color": "#f3eedc",
+  "sections": [
+    {
+      "title": "Cream Cheese Specials",
+      "items": [
+        {
+          "name": "Burnt Garlic & Green Onion Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Thecha Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Italian Summer Dreams Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Truffle Mushroom Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Truffle Edamame Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Za'atar & Olive Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Jalapeno Cheddar Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Cranberry Jalapeno Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Charred Chilli Corn Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Wasabi Togarashi Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Mango Chilli Jam Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Truffle Shiitake Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Mexican Corn Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Cranberry Pistachio Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Pomegranate Herb Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Feta Cucumber Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Korean Corn Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Truffle Almond Cheese Ball",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Strawberry Pistachio Cheese",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Herbed Cream Cheese",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Berry Mascarpone Spread",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Aglio Olio Cheese Spread",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Blueberry Almond Cheese Spread",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Avocado & Feta Mousse Savoury Cheese",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Malgapodi & Curry Leaf Cheese Spread",
+          "price": "Ask",
+          "veg": true,
+          "spicy": true,
+          "category": ["cream-cheese"]
+        },
+        {
+          "name": "Spiced Honey & Dates Cheese Spread",
+          "price": "Ask",
+          "veg": true,
+          "spicy": false,
+          "category": ["cream-cheese"]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "dips",
+  "category": "Dips",
+  "tagline": "Perfect pairings for every bite",
+  "accent": "#6f8a6a",
+  "color": "#e7efe5",
+  "sections": [
+    
+    {
+      "title": "Dips",
+      "items": [
+        { "name": "Sundried Tomatoes & Basil Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Mexican Dip", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Pesto", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Creamy Edamame Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "French Onion Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Spinach Corn Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Cucumber Curd Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Jalapeno Curd Dip", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Guacamole", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Thai Style Guacamole", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Jalapeno Popper Dip", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Smoked Tikka Dip", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Layered Pesto Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Baked Taco Dip", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+
+        { "name": "Creamy Mushroom Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Edamame Truffle Mousse", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Mexican Bean Dip", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Peach Salsa", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Roasted Bell Pepper Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Spicy Thai Hummus", "price": "Ask", "veg": true, "spicy": true, "category": ["dips"] },
+        { "name": "Spinach & Water Chestnut Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Warm Broccoli Dip", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+
+        { "name": "Classic Hummus", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Pesto Hummus", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Beetroot Hummus", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Roasted Bell Pepper Hummus", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] },
+        { "name": "Roasted Garlic Hummus", "price": "Ask", "veg": true, "spicy": false, "category": ["dips"] }
+      ]
+    },
+     {
+      "title": "accomplishments",
+      "items": [
+        {
+          "name": "Lavash",
+          "price": 120,
+          "veg": true,
+          "spicy": false,
+          "category": ["dips","cream-cheese"]
+        },
+        {
+          "name": "Garlic Toast",
+          "price": 120,
+          "veg": true,
+          "spicy": false,
+          "category": ["dips","cream-cheese"]
+        },
+        {
+          "name": "Nachos",
+          "price": 120,
+          "veg": true,
+          "spicy": false,
+          "category": ["dips","cream-cheese"]
+        },
+        {
+          "name": "Pizza Sticks",
+          "price": 120,
+          "veg": true,
+          "spicy": false,
+          "category": ["dips","cream-cheese"]
+        },
+        {
+          "name": "Crackers",
+          "price": 120,
+          "veg": true,
+          "spicy": false,
+          "category": ["dips","cream-cheese"]
+        },
+        {
+          "name": "Pita Chips",
+          "price": 120,
+          "veg": true,
+          "spicy": false,
+          "category": ["dips","cream-cheese"]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "platters",
+  "category": "Platters",
+  "tagline": "Curated sharing boards",
+  "accent": "#8b6f47",
+  "color": "#f3eadc",
+  "sections": [
+    {
+      "title": "Signature Platters",
+      "items": [
+        {
+          "name": "Dips & Cheese Customised Platter",
+          "price": 2800,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        },
+        {
+          "name": "Mexican Platter",
+          "price": 3000,
+          "veg": true,
+          "spicy": true,
+          "category": ["platters"]
+        },
+        {
+          "name": "Bao Platter",
+          "price": 3000,
+          "veg": true,
+          "spicy": true,
+          "category": ["platters"]
+        },
+        {
+          "name": "Mediterranean Platter",
+          "price": 3000,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        },
+        {
+          "name": "Tea Time Platter",
+          "price": 2800,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        },
+        {
+          "name": "Burger Platter",
+          "price": 2500,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        },
+        {
+          "name": "Hummus Platter",
+          "price": 1800,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        },
+        {
+          "name": "Guacamole Platter",
+          "price": 1800,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        }
+      ]
+    },
+
+    {
+      "title": "Regional Platters",
+      "items": [
+        {
+          "name": "Bombay Platter",
+          "price": 2500,
+          "veg": true,
+          "spicy": true,
+          "category": ["platters"]
+        },
+        {
+          "name": "Indian Platter",
+          "price": 3500,
+          "veg": true,
+          "spicy": true,
+          "category": ["platters"]
+        },
+        {
+          "name": "Litti Chokha Platter",
+          "price": 2000,
+          "veg": true,
+          "spicy": true,
+          "category": ["platters"]
+        },
+        {
+          "name": "Chinese Platter",
+          "price": 3500,
+          "veg": true,
+          "spicy": true,
+          "category": ["platters"]
+        },
+        {
+          "name": "Italian Platter",
+          "price": 3500,
+          "veg": true,
+          "spicy": false,
+          "category": ["platters"]
+        }
+      ]
+    }
+  ]
+},
+{
+  "id": "grazing-tables",
+  "category": "Grazing Tables",
+  "tagline": "Curated grazing bites for events",
+  "accent": "#8a7b5c",
+  "color": "#f3efe6",
+  "sections": [
+
+    {
+      "title": "Indian Grazing Bites",
+      "items": [
+        { "name": "Sabudana Bites with Thecha", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Dum Aloo Bombs", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Pav Bhaji Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Mini Samosas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Ghee Roasted Sweet Potatoes", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+      ]
+    },
+
+    {
+      "title": "Mexican Grazing Bites",
+      "items": [
+        { "name": "Tarts (Mexican)", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Burrito Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Bean & Corn Quesadillas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Taco Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+      ]
+    },
+    {
+      "title": "Italian Grazing Bites",
+      "items": [
+        { "name": "Coin Pizzas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Caramelised Onion Bruschetta", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Cheesy Pesto Garlic Bread", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+      ]
+    },
+
+    {
+      "title": "Asian Grazing Bites",
+      "items": [
+        { "name": "Kung Pao Lotus Stem Cones", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Chilli Tofu with Peanut Crunch", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Mini Bao Buns", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+      ]
+    },
+
+    {
+      "title": "Fusion Grazing Bites",
+      "items": [
+        { "name": "Tea Time Sandwich Cake", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Truffle Galouti Sliders", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Sweet Corn Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+        { "name": "Corn Ribs", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+      ]
+    },
+    {
+  "title": "Chaat Grazing Bites",
+  "items": [
+    { "name": "Avocado Papdi Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Kulhad Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Pani Puri Shots", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Rose Samosa Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Amritsari Kulcha Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Kachori Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Jhalmuri Cones", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Sev Puri", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Ragda Patties", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Sprouts Tikki Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Agra Tikki Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},
+{
+  "title": "Bread Grazing Bites",
+  "items": [
+    { "name": "Chole Kulcha", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Paneer Makhani", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Peri Peri Exotic Veggies", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Falafel Shwarma", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Asian Veggies", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+
+    { "name": "Cheese & Thecha Croissant", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Classic Cheese Croissant", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Aglio Olio Croissant", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Pesto Croissant", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+
+    { "name": "Dabeli Hotdog", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Chilli Paneer Hotdog", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Soya Kheema Hotdog", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+
+    { "name": "Peri Peri Paneer Slider", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Exotic Veggies Slider", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Paneer Bhurji Slider", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Soya Kheema Slider", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+
+    { "name": "Pizza Bombs", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Cheese Chilli Buns", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Vada Pav Buns", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Make Your Own Plate",
+  "items": [
+    { "name": "Dal Pakwaan", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Burmese Idli", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Loaded Nachos", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Aloo Tuk Tuk Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Masala Corn Bar", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Channa Zor Garam", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Drinks To Go",
+  "items": [
+    { "name": "Khus Khus Spritz", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Rose & Lemonade Cooler", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Hazelnut Cold Coffee", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Masala Thumbs Up", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Classic Shikanji", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},
+{
+  "title": "Indian Mains - Vegetables",
+  "items": [
+    { "name": "Dal Makhani", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Tawa Sabzi", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Paneer Makhani", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Paneer Kofta", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Dal Tadka with Caramelised Onions", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Methi Mutter Malai", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Edamame and Corn Palak", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Nawabi Paneer", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Rajma Curry", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Amritsari Pindi Chole", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Kashmiri Dum Aloo", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Indian Breads",
+  "items": [
+    { "name": "Lal Mirch Paratha", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Ajwain Paratha", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Tawa Roti", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Laccha Paratha", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Pudina Paratha", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Mains Rice",
+  "items": [
+    { "name": "Steamed Rice", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Jeera Rice", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Dum Pukht Biryani", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Paneer Makhani Biryani", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Continental Mains",
+  "items": [
+    { "name": "Fried Rice with Chilli Paneer", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Burrito Bowl", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Red / Green Thai Curry with Jasmine Rice", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Baked Pasta - Alfredo / Arrabiata", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Veg Lasagna", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Enchiladas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Classic Mac & Cheese", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Burnt Garlic Rice with Veggies in Black Bean Sauce", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Millet Pizzas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Peri Peri Fried Rice with Veggies in White Sauce", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Sweet Tooth",
+  "items": [
+    { "name": "Seasonal Fresh Fruit Cream Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Seasonal Halwa Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Gulab Jamun with Icecream Shots", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Flavored Cup Cakes", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Pudding Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Cream Cheese Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Baccha Party - Starters",
+  "items": [
+    { "name": "Mini Burgers", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Mini Cheese Croissant", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Snack Station - Popcorn, Makhana, Chips etc.", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Assorted Fruits in Cones / Skewers", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Mexican Baskets", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Lebanese Boats", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Coin Pizzas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Coin Idlis", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Assorted Sandwiches", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Choice of Chaat", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "DIY Nachos Station", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+},{
+  "title": "Baccha Party - Mains",
+  "items": [
+    { "name": "Pasta in a Sauce of Your Choice", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Classic Hakka Noodles", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Millet Pizzas", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Pav Bhaji Cups", "price": "Ask", "veg": true, "category": ["grazing-tables"] },
+    { "name": "Thepla and Raw Banana Taco", "price": "Ask", "veg": true, "category": ["grazing-tables"] }
+  ]
+}
+    
+
+  ]
+}
+]

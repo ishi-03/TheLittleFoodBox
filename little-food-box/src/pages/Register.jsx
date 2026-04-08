@@ -1,0 +1,49 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Register = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleRegister = async () => {
+    const res = await fetch("http://localhost:5000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    });
+
+    const data = await res.json();
+
+    if (data._id) {
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/subscription");
+    } else {
+      alert(data.message);
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Register</h2>
+
+      <input name="name" placeholder="Name" onChange={handleChange} /><br /><br />
+      <input name="email" placeholder="Email" onChange={handleChange} /><br /><br />
+      <input name="password" type="password" placeholder="Password" onChange={handleChange} /><br /><br />
+
+      <button onClick={handleRegister}>Register</button>
+    </div>
+  );
+};
+
+export default Register;
