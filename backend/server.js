@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 import cors from "cors";
 import User from "./models/User.js";
 import Subscription from "./models/Subscriptions.js";
+
 const app = express();
 
-app.use(cors());
+// ✅ CORS only once
+app.use(cors({
+  origin: "https://thelittlefoodbox-1.onrender.com"
+}));
+
 app.use(express.json());
-
-mongoose.connect("mongodb+srv://thelittlefoodbox:tlfbbyparul@mcpcluster.sxchofi.mongodb.net/thelittlefoodbox?retryWrites=true&w=majority")
-.then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
-
 app.get("/", (req, res) => {
     res.send("Backend running");
 });
