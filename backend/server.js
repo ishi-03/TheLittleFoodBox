@@ -6,33 +6,44 @@ import Subscription from "./models/Subscriptions.js";
 
 const app = express();
 
-// ✅ CORS only once
+// ✅ MongoDB connection
+mongoose.connect("mongodb+srv://thelittlefoodbox:tlfbbyparul@mcpcluster.sxchofi.mongodb.net/thelittlefoodbox?retryWrites=true&w=majority")
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+// ✅ CORS (only once)
 app.use(cors({
   origin: "https://thelittlefoodbox-1.onrender.com"
 }));
 
 app.use(express.json());
+
+// ✅ Test route
 app.get("/", (req, res) => {
-    res.send("Backend running");
+  res.send("Backend running");
 });
+
+// ✅ Subscribe
 app.post("/api/subscribe", async (req, res) => {
-    try {
-const { timeSlot, userId } = req.body;
-      const newSub = new Subscription({
-  timeSlot,
-  userId,
-  plan: "monthly",
-  startDate: new Date()
+  try {
+    const { timeSlot, userId } = req.body;
+
+    const newSub = new Subscription({
+      timeSlot,
+      userId,
+      plan: "monthly",
+      startDate: new Date()
+    });
+
+    await newSub.save();
+    res.json({ message: "Subscription saved successfully" });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-        await newSub.save();
-
-        res.json({ message: "Subscription saved successfully" });
-
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
+// ✅ Get all subscriptions
 app.get("/api/subscriptions", async (req, res) => {
   try {
     const data = await Subscription.find();
@@ -41,6 +52,8 @@ app.get("/api/subscriptions", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// ✅ Register
 app.post("/api/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -53,11 +66,14 @@ app.post("/api/register", async (req, res) => {
     const user = new User({ name, email, password });
     await user.save();
 
-res.json(user);
+    res.json(user);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
+// ✅ Login
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -67,10 +83,16 @@ app.post("/api/login", async (req, res) => {
     return res.status(400).json({ message: "Invalid credentials" });
   }
 
-  res.json( user );
+  res.json(user);
 });
+
+// ✅ Get user subscriptions
 app.get("/api/subscriptions/:userId", async (req, res) => {
   const data = await Subscription.find({ userId: req.params.userId });
   res.json(data);
 });
-app.listen(5000, () => console.log("Server running on port 5000"));
+
+// ✅ PORT FIX (IMPORTANT FOR RENDER)
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log("Server running"));
