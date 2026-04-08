@@ -7,7 +7,7 @@ const MySubscription = () => {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:5000/api/subscriptions/${user._id}`)
+    fetch(`https://thelittlefoodbox.onrender.com/api/subscriptions/${user._id}`)
       .then(res => res.json())
       .then(res => setData(res));
   }, []);

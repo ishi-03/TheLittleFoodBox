@@ -23,7 +23,7 @@ const Subscriptions = () => {
     return;
   }
 
-  const res = await fetch("http://localhost:5000/api/subscribe", {
+  const res = await fetch("https://thelittlefoodbox.onrender.com/api/subscribe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
