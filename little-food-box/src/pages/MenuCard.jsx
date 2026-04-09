@@ -491,7 +491,6 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
               <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(34px,4vw,52px)", fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-1.5px", lineHeight: 1 }}>
                 {current.category}
               </h1>
-              <span style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-muted)", marginBottom: 6 }}>{allItems.length} dishes</span>
             </div>
             <FilterBar key={`fb-${panelKey}`} items={allItems} activeFilter={activeFilter} onFilterChange={handleFilterChange} accent={current.accent} />
           </div>
