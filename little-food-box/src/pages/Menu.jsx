@@ -1,9 +1,9 @@
 import MenuText from "./MenuText";
-import Nav from "../components/Nav";
+// import Nav from "../components/Nav";
 export default function Menu() {
   return (
     <div className="relative w-full min-h-screen bg-[#f5e9d9] overflow-hidden">
-      <Nav />
+      {/* <Nav /> */}
 
       {/* PARTICLE BACKGROUND */}
       <div className="absolute inset-0 -z-10 opacity-50 pointer-events-none 
