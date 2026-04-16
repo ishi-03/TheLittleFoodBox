@@ -121,7 +121,7 @@ html, body, #root {
 /* Main brand title */
 .ntb-hero-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(18pt, 3.5vw, 28pt);
+ font-size: clamp(18pt, 3.5vw, 28pt);
   font-weight: 400;
   letter-spacing: 0.22em;
   color: #fff;
@@ -364,14 +364,16 @@ html, body, #root {
   color: #fff;
   text-decoration: none;
   font-family: 'Cinzel', serif;
-
-  font-size: clamp(14px, 1.8vw, 20px);
+font-size: 16px;
+  padding: 14px 18px;
+  width: 90%;
+  text-align: center;
+/* font-size: clamp(14px, 1.8vw, 20px); */
   letter-spacing: 0.18em;
 
   backdrop-filter: blur(10px);
   background: rgba(0,0,0,0.35);
 
-  padding: 12px 22px;
   border-radius: 10px;
 
   transition: all 0.3s ease;
@@ -420,21 +422,67 @@ html, body, #root {
 @media (max-width: 890px) {
   .ntb-col-anchor { font-size: 12pt; padding: 12px 14px; }
 }
-
 @media (max-width: 600px) {
-  .ntb-hero-title { letter-spacing: 0.14em; }
-  .ntb-cols     { flex-direction: column; }
-  .ntb-col      { width: 100%; height: 20%; left: 0 !important; bottom: -100%; }
-.ntb-cols.open .ntb-col:nth-child(1) { bottom: 0; transition: bottom .6s ease .2s; }
-.ntb-cols.open .ntb-col:nth-child(2) { bottom: 0; transition: bottom .6s ease .5s; }
-.ntb-cols.open .ntb-col:nth-child(3) { bottom: 0; transition: bottom .6s ease .8s; }
-.ntb-cols.open .ntb-col:nth-child(4) { bottom: 0; transition: bottom .6s ease 1.1s; }
-.ntb-cols.open .ntb-col:nth-child(5) { bottom: 0; transition: bottom .6s ease 1.4s; }
 
-  .ntb-images-track { animation-duration: 30s; }
-}
-`;
+  /* Layout */
+  .ntb-cols {
+    flex-direction: column;
+    overflow: hidden;
+  }
 
+  /* Initial state (hidden below screen) */
+  .ntb-col {
+    display: flex;
+    position: relative !important;
+    left: auto !important;
+    width: 100% !important;
+    height: 20vh !important;
+    min-height: 80px;
+
+    transform: translateY(100%);
+    opacity: 0;
+
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.6s ease;
+  }
+
+  /* Animate in */
+  .ntb-cols.open .ntb-col {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Smooth stagger */
+  .ntb-cols.open .ntb-col:nth-child(1) { transition-delay: 0.1s; }
+  .ntb-cols.open .ntb-col:nth-child(2) { transition-delay: 0.2s; }
+  .ntb-cols.open .ntb-col:nth-child(3) { transition-delay: 0.3s; }
+  .ntb-cols.open .ntb-col:nth-child(4) { transition-delay: 0.4s; }
+  .ntb-cols.open .ntb-col:nth-child(5) { transition-delay: 0.5s; }
+
+  /* Disable hover (mobile) */
+  .ntb-col:hover {
+    transform: none;
+  }
+
+  /* Button styling */
+  .ntb-col-anchor {
+    font-size: 13pt;
+    padding: 12px 18px;
+    width: 80%;
+  }
+
+  /* Close button */
+  .ntb-close {
+    top: 16px;
+    left: 16px;
+  }
+
+  /* Hero text */
+  .ntb-hero-title {
+    font-size: clamp(16pt, 6vw, 22pt);
+  }
+
+}`;
 const T_SPIN_HIDE = 150;
 export default function Navbar() {
   const [phase, setPhase] = useState("idle");
