@@ -1,12 +1,10 @@
-import { useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
+import Nav from "./Nav";   // top navbar
 import { Outlet } from "react-router-dom";
-export default function Layout() {
-  const { pathname } = useLocation();
 
+export default function Layout() {
   return (
     <>
-      {pathname === "/" && <Navbar />}
+      <Nav />
       <Outlet />
     </>
   );

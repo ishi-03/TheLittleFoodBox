@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { name: "Contact", to: "/contact", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061" }
 ];
 
-// const COL_COLORS = ["#ff0000", "#e27f00", "#c4a700", "#8bd528", "#00fa9a"];
 
 /* ─────────────────────────────────────────────────────────────
    STYLES
