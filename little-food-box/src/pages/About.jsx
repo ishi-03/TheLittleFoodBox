@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,500&family=Jost:wght@300;400;500;600&display=swap');
 
@@ -446,7 +446,7 @@ const testimonials = [
 export default function About() {
   const [counts, setCounts] = useState({ orders: 0, dishes: 0, years: 0, happy: 0 });
   const targets = { orders: 500, dishes: 40, years: 3, happy: 200 };
-
+const navigate = useNavigate();
   useEffect(() => {
     const duration = 2000;
     const start = Date.now();
@@ -468,7 +468,25 @@ export default function About() {
   return (
     <>
       <style>{css}</style>
-
+<button
+  onClick={() => navigate(-1)}
+  style={{
+    position: "absolute",
+    top: "90px",
+    left: "24px",
+    background: "transparent",
+    border: "none",
+    fontSize: "22px",
+    cursor: "pointer",
+    color: "#6b3f23",
+    zIndex: 20,
+    transition: "color 0.2s"
+  }}
+  onMouseEnter={e => e.currentTarget.style.color = "#b5572a"}
+  onMouseLeave={e => e.currentTarget.style.color = "#6b3f23"}
+>
+  ←
+</button>
       {/* HERO */}
       <section className="hero">
         <div className="hero-ring hero-ring-1" />

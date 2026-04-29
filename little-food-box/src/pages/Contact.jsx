@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Field = ({ id, label, type = "text", textarea, form, setForm, focused, setFocused }) => {
   const val = form[id];
   const isFocused = focused === id;
@@ -68,7 +69,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
   const [focused, setFocused] = useState(null);
-
+const navigate = useNavigate();
   const msgSentSubmit = () => {
     if (!form.name || !form.phone) return;
 
@@ -95,6 +96,31 @@ export default function ContactPage() {
       display: "flex",
       flexDirection: "column",
     }}>
+      <div style={{
+  maxWidth: "1100px",
+  margin: "0 auto",
+  padding: "1.2rem 1rem 0"
+}}>
+  <button
+  onClick={() => navigate(-1)}
+  style={{
+    position: "absolute",
+    top: "90px",        // navbar ke niche adjust karo
+    left: "24px",       // proper left alignment
+    background: "transparent",
+    border: "none",
+    fontSize: "22px",
+    cursor: "pointer",
+    color: "#6b5440",
+    transition: "all 0.2s",
+    zIndex: 10
+  }}
+  onMouseEnter={e => e.currentTarget.style.color = "#b5451b"}
+  onMouseLeave={e => e.currentTarget.style.color = "#6b5440"}
+>
+  ←
+</button>
+</div>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
