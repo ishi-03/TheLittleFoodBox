@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
@@ -410,6 +410,7 @@ const todayName = dayNames[new Date().getDay()];
 const Subscriptions = () => {
   const [timeSlot, setTimeSlot] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubscribe = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -430,6 +431,28 @@ const Subscriptions = () => {
     <>
       <style>{styles}</style>
       <div className="sub-root">
+        <button
+  onClick={() => {
+    if (window.history.length > 1) navigate(-1);
+    else navigate("/");
+  }}
+  style={{
+    position: "absolute",
+    top: "90px",
+    left: "24px",
+    background: "transparent",
+    border: "none",
+    fontSize: "22px",
+    cursor: "pointer",
+    color: "#3d7a35",
+    zIndex: 10,
+    transition: "color 0.2s"
+  }}
+  onMouseEnter={e => e.currentTarget.style.color = "#5aaa4e"}
+  onMouseLeave={e => e.currentTarget.style.color = "#3d7a35"}
+>
+  ←
+</button>
         <div className="sub-container">
 
           {/* HEADER */}

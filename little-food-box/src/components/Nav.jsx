@@ -544,9 +544,8 @@ export default function Nav({
                 <a
                   href={href}
                   className={[
-                    isActive(href) ? "active" : "",
-                    label === "Subscription" ? "pill" : "",
-                  ].filter(Boolean).join(" ")}
+  isActive(href) ? "active pill" : "",
+].filter(Boolean).join(" ")}
                 >
                   {label}
                 </a>

@@ -1,7 +1,15 @@
 import MenuText from "./MenuText";
-// import Nav from "../components/Nav";
+import { useNavigate } from "react-router-dom";
 export default function Menu() {
+  const navigate = useNavigate();
   return (
+    <>
+    <button
+  onClick={() => navigate(-1)}
+  className="absolute top-[90px] left-6 z-50 text-xl cursor-pointer text-[#6b3f23] hover:text-[#b5572a] transition"
+>
+  ←
+</button>
     <div className="relative w-full min-h-screen bg-[#f5e9d9] overflow-hidden">
       {/* <Nav /> */}
 
@@ -80,5 +88,6 @@ export default function Menu() {
 </div>
       </div>
     </div>
+    </>
   );
 }
