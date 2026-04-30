@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
 const NAV_LINKS = [
   { label: "Menu", href: "/menu" },
   { label: "Subscription", href: "/subscription" },
@@ -27,7 +27,7 @@ export default function Nav({
   const [menuOpen, setMenuOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
   const avatarRef = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -607,8 +607,13 @@ export default function Nav({
               </>
             ) : (
               <>
-                <button className="btn-login" onClick={() => onLogin?.()}>Log In</button>
-                <button className="btn-register" onClick={() => onRegister?.()}>Register</button>
+<button
+  className="btn-login"
+  onClick={() => navigate("/login")}
+>
+  Log In
+</button>            
+    <button className="btn-register" onClick={() => navigate("/register")}>Register</button>
               </>
             )}
           </div>
@@ -674,16 +679,16 @@ export default function Nav({
           <div className="drawer-auth">
             <button
               className="btn-register"
-              onClick={() => { setMenuOpen(false); onRegister?.(); }}
+              onClick={() => navigate("/register")}
             >
               Create Account
             </button>
-            <button
-              className="btn-login"
-              onClick={() => { setMenuOpen(false); onLogin?.(); }}
-            >
-              Log In
-            </button>
+           <button
+  className="btn-login"
+  onClick={() => navigate("/login")}
+>
+  Log In
+</button>
           </div>
         )}
       </div>

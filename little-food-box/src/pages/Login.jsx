@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye } from "lucide-react";
-
+import { Link } from "react-router-dom";
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -27,7 +27,13 @@ const Login = () => {
 
   return (
     <div className="h-screen w-full flex overflow-hidden" style={{ background: "#e9dfd2" }}>
-
+  {/* BACK BUTTON */}
+  <button
+    onClick={() => navigate(-1)}
+    className="absolute top-6 left-6 z-50 text-xl cursor-pointer text-[#6b3f23] hover:text-[#b5572a] transition"
+  >
+    ←
+  </button>
       {/* ───── LEFT SIDE ───── */}
       <div className="relative hidden md:block" style={{ width: "48%", flexShrink: 0, overflow: "hidden" }}>
 
@@ -246,9 +252,17 @@ const Login = () => {
           {/* SIGNUP */}
           <p style={{ textAlign: "center", fontSize: 13, color: "#6f7f6f" }}>
             New here?{" "}
-            <span style={{ color: "#4e6b4e", fontWeight: 500, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 2 }}>
-              Create an account →
-            </span>
+           <Link
+  to="/register"
+  style={{
+    color: "#4e6b4e",
+    fontWeight: 500,
+    textDecoration: "underline",
+    textUnderlineOffset: 2
+  }}
+>
+  Create an account →
+</Link>
           </p>
         </div>
 
