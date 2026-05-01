@@ -56,7 +56,12 @@ app.get("/api/subscriptions", async (req, res) => {
 // ✅ Register
 app.post("/api/register", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
+
+    // ✅ check confirm password
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
 
     const existing = await User.findOne({ email });
     if (existing) {

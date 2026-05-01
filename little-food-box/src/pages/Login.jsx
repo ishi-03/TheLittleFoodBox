@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import LeftAuthLayout from "../components/LeftAuthLayout";
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -35,63 +36,7 @@ const Login = () => {
     ←
   </button>
       {/* ───── LEFT SIDE ───── */}
-      <div className="relative hidden md:block" style={{ width: "48%", flexShrink: 0, overflow: "hidden" }}>
-
-        {/*
-          The image shows an ARCH shape:
-          - Top-left corner: sharp (square)
-          - Top-right corner: large rounded curve (the arch)
-          - Bottom-left: sharp
-          - Bottom-right: sharp
-          
-          We achieve this with border-radius on only the top-right corner,
-          combined with overflow:hidden on the parent.
-          
-          The inward curve at top-right means the image itself is clipped
-          with a concave notch — like the right panel overlaps into the left.
-          We use an SVG clip-path for a true concave curve.
-        */}
-        <div
-          className="w-full h-full"
-          style={{
-            clipPath: "inset(0 0 0 0 round 0 140px 0 0)",
-          }}
-        >
-          <img
-            src="/login.png"
-            alt="food"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-      {/* Top-left text */}
-<div className="absolute top-14 left-40 z-10" style={{ color: "#2f3e2f" }}>
-  <p style={{ 
-    fontSize: 11, letterSpacing: 6, textTransform: "uppercase", 
-    fontWeight: 500, opacity: 0.75, marginBottom: 6, fontFamily: "inherit" 
-  }}>
-    Good Food,
-  </p>
-  <h1 style={{ 
-    fontFamily: "'Playfair Display', serif", fontSize: 32, fontWeight: 400, 
-    lineHeight: 1.2, marginBottom: 2, color: "#2f3e2f", display: "flex", alignItems: "center", gap: 10
-  }}>
-    little box of
-    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 4 }}>
-      <path d="M10 16.5C10 16.5 1 11 1 5.5C1 3 3 1.5 5.5 2.5C7.5 3.3 10 6 10 6C10 6 12.5 3.3 14.5 2.5C17 1.5 19 3 19 5.5C19 11 10 16.5 10 16.5Z" 
-        stroke="#2f3e2f" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  </h1>
-  <h1 style={{ 
-    fontFamily: "'Dancing Script', cursive", fontSize: 54, fontStyle: "italic", fontWeight: 600, 
-    lineHeight: 1.1, color: "#4e6b4e", marginTop: -4
-  }}>
-    happiness
-  </h1>
-</div>
-
-       
-      </div>
+      <LeftAuthLayout />
 
       {/* ───── RIGHT SIDE ───── */}
       <div className="relative flex-1 flex items-center justify-center" style={{ padding: 24 }}>
