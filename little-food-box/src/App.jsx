@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/profile.jsx";
 import Register from "./pages/Register";
 import About from "./pages/About.jsx";
-
+import AdminEvents from "./pages/AdminEvents.jsx";
 export default function App() {
   return (
     <Routes>
@@ -28,6 +28,10 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/my-subscription" element={<MySubscription />} />
         <Route path="/about" element={<About />} />
+        <Route
+  path="/admin/events"
+  element={<AdminEvents />}
+/>
       </Route>
 
       {/* WITHOUT NAV */}

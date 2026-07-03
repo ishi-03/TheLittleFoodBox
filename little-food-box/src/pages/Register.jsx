@@ -22,7 +22,7 @@ const handleRegister = async () => {
     return;
   }
 
-  const res = await fetch("https://thelittlefoodbox.onrender.com/api/register", {
+  const res = await fetch("https://thelittlefoodbox-2.onrender.com/api/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

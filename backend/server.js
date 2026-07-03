@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import User from "./models/User.js";
 import Subscription from "./models/Subscriptions.js";
+import menuRoutes from "./routes/menuRoutes.js";
+import eventRoutes from "./routes/eventRoutes.js";
 
 const app = express();
 
@@ -13,7 +15,12 @@ mongoose.connect("mongodb+srv://thelittlefoodbox:tlfbbyparul@mcpcluster.sxchofi.
 
 // ✅ CORS (only once)
 app.use(cors({
-  origin: "https://thelittlefoodbox-1.onrender.com"
+  origin: [
+    "http://localhost:5173",
+    "https://thelittlefoodbox-1.onrender.com",
+    "https://thelittlefoodbox.com"
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
@@ -96,6 +103,10 @@ app.get("/api/subscriptions/:userId", async (req, res) => {
   const data = await Subscription.find({ userId: req.params.userId });
   res.json(data);
 });
+
+app.use("/api/menu", menuRoutes);
+
+app.use("/api/events", eventRoutes);
 
 // ✅ PORT FIX (IMPORTANT FOR RENDER)
 const PORT = process.env.PORT || 5000;

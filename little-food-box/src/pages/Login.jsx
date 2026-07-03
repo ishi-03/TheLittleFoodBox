@@ -12,7 +12,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    const res = await fetch("https://thelittlefoodbox.onrender.com/api/login", {
+    const res = await fetch("https://thelittlefoodbox-2.onrender.com/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
@@ -29,12 +29,12 @@ const Login = () => {
   return (
     <div className="h-screen w-full flex overflow-hidden" style={{ background: "#e9dfd2" }}>
   {/* BACK BUTTON */}
-  <button
-    onClick={() => navigate(-1)}
-    className="absolute top-6 left-6 z-50 text-xl cursor-pointer text-[#6b3f23] hover:text-[#b5572a] transition"
-  >
-    ←
-  </button>
+<button
+  onClick={() => navigate(-1)}
+  className="absolute top-6 left-6 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md text-lg cursor-pointer text-[#6b3f23] hover:text-[#b5572a] hover:shadow-lg transition-all duration-200"
+>
+  ←
+</button>
       {/* ───── LEFT SIDE ───── */}
       <LeftAuthLayout />
 
