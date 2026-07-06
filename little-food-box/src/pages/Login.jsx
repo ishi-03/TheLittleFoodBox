@@ -20,7 +20,8 @@ const Login = () => {
     const data = await res.json();
     if (data._id) {
       localStorage.setItem("user", JSON.stringify(data));
-      navigate("/subscription");
+window.dispatchEvent(new Event("storage"));
+navigate("/subscription");
     } else {
       alert(data.message);
     }

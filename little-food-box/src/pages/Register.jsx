@@ -41,8 +41,9 @@ const handleRegister = async () => {
     return;
   }
 
-  localStorage.setItem("user", JSON.stringify(data));
-  navigate("/subscription");
+ localStorage.setItem("user", JSON.stringify(data));
+window.dispatchEvent(new Event("storage"));
+navigate("/subscription");
 };
 
   return (

@@ -18,11 +18,31 @@ const NAV_LINKS = [
  */
 export default function Nav({
   activePage = "",
-  user = null,
-  onLogin,
-  onRegister,
-  onLogout,
 }) {
+
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user"));
+    } catch {
+      return null;
+    }
+  });
+  useEffect(() => {
+    const syncUser = () => {
+      try {
+        setUser(JSON.parse(localStorage.getItem("user")));
+      } catch {
+        setUser(null);
+      }
+    };
+
+    window.addEventListener("storage", syncUser);
+
+    // same tab ke liye bhi
+    syncUser();
+
+    return () => window.removeEventListener("storage", syncUser);
+  }, []);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
@@ -544,8 +564,8 @@ export default function Nav({
                 <a
                   href={href}
                   className={[
-  isActive(href) ? "active pill" : "",
-].filter(Boolean).join(" ")}
+                    isActive(href) ? "active pill" : "",
+                  ].filter(Boolean).join(" ")}
                 >
                   {label}
                 </a>
@@ -581,7 +601,7 @@ export default function Nav({
                       className={`avatar-caret ${avatarOpen ? "open" : ""}`}
                       width="10" height="6" viewBox="0 0 10 6" fill="none"
                     >
-                      <path d="M1 1l4 4 4-4" stroke="#9a7d65" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M1 1l4 4 4-4" stroke="#9a7d65" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
 
@@ -598,8 +618,12 @@ export default function Nav({
                     </a>
                     <button
                       className="dropdown-item logout-item"
-                      onClick={() => { setAvatarOpen(false); onLogout?.(); }}
-                    >
+                      onClick={() => {
+                        localStorage.removeItem("user");
+                        setUser(null);
+                        setAvatarOpen(false);
+                        navigate("/login");
+                      }}                    >
                       <span className="drop-icon">🚪</span> Log Out
                     </button>
                   </div>
@@ -607,13 +631,13 @@ export default function Nav({
               </>
             ) : (
               <>
-<button
-  className="btn-login"
-  onClick={() => navigate("/login")}
->
-  Log In
-</button>            
-    <button className="btn-register" onClick={() => navigate("/register")}>Register</button>
+                <button
+                  className="btn-login"
+                  onClick={() => navigate("/login")}
+                >
+                  Log In
+                </button>
+                <button className="btn-register" onClick={() => navigate("/register")}>Register</button>
               </>
             )}
           </div>
@@ -670,8 +694,12 @@ export default function Nav({
             </a>
             <button
               className="drawer-logout"
-              onClick={() => { setMenuOpen(false); onLogout?.(); }}
-            >
+onClick={() => {
+  localStorage.removeItem("user");
+  setUser(null);
+  setMenuOpen(false);
+  navigate("/login");
+}}            >
               🚪 Log Out
             </button>
           </>
@@ -683,12 +711,12 @@ export default function Nav({
             >
               Create Account
             </button>
-           <button
-  className="btn-login"
-  onClick={() => navigate("/login")}
->
-  Log In
-</button>
+            <button
+              className="btn-login"
+              onClick={() => navigate("/login")}
+            >
+              Log In
+            </button>
           </div>
         )}
       </div>
