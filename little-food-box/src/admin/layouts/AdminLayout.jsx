@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
 export default function AdminLayout() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div
       style={{
@@ -10,22 +13,22 @@ export default function AdminLayout() {
         minHeight: "100vh",
       }}
     >
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       <div
+        className="ml-0 md:ml-[260px]"
         style={{
-          marginLeft: 260,
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <Topbar />
+        <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
 
         <main
+          className="p-4 sm:p-6 md:p-[30px] overflow-x-hidden"
           style={{
             flex: 1,
-            padding: 30,
           }}
         >
           <Outlet />

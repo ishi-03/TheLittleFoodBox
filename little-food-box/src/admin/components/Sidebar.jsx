@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
 
   const menus = [
     {
@@ -39,13 +38,13 @@ export default function Sidebar() {
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") {
-        setIsOpen(false);
+        onClose();
       }
     };
 
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+  }, [onClose]);
 
   useEffect(() => {
     if (isOpen) {
@@ -59,39 +58,10 @@ export default function Sidebar() {
     };
   }, [isOpen]);
 
-  const closeSidebar = () => setIsOpen(false);
+  const closeSidebar = () => onClose();
 
   return (
     <>
-      {/* Mobile Hamburger Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-40 flex items-center justify-center w-11 h-11 rounded-lg"
-        style={{
-          background: "#1f2937",
-          color: "#fff",
-          border: "none",
-          cursor: "pointer",
-        }}
-        aria-label="Open menu"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
-      </button>
-
       {/* Mobile Backdrop */}
       <div
         onClick={closeSidebar}
@@ -182,23 +152,23 @@ export default function Sidebar() {
             paddingTop: 20,
           }}
         >
-          
+
           <a
-  href="/menu"
-  className="block mb-0 md:mb-0"
-  style={{
-    display: "block",
-    textDecoration: "none",
-    textAlign: "center",
-    padding: "13px",
-    borderRadius: 10,
-    background: "#374151",
-    color: "#fff",
-    marginBottom: 10,
-  }}
->
-  🌐 View Website
-</a>
+            href="/menu"
+            className="block mb-0 md:mb-0"
+            style={{
+              display: "block",
+              textDecoration: "none",
+              textAlign: "center",
+              padding: "13px",
+              borderRadius: 10,
+              background: "#374151",
+              color: "#fff",
+              marginBottom: 10,
+            }}
+          >
+            🌐 View Website
+          </a>
 
           <button
             onClick={() => {

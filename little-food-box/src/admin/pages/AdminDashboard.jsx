@@ -53,7 +53,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F3] via-[#F5F2EA] to-[#EEF2E9] p-4 sm:p-6 md:p-10 pt-20 md:pt-10 md:ml-[260px] overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F3] via-[#F5F2EA] to-[#EEF2E9] p-4 sm:p-6 md:p-10 overflow-x-hidden">
 
       <div className="mx-auto max-w-7xl">
 
