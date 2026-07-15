@@ -11,21 +11,43 @@ const Login = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async () => {
-    const res = await fetch("https://thelittlefoodbox-2.onrender.com/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+ const handleLogin = async () => {
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
+
     const data = await res.json();
-    if (data._id) {
-      localStorage.setItem("user", JSON.stringify(data));
-window.dispatchEvent(new Event("storage"));
-navigate("/subscription");
+
+console.log("LOGIN RESPONSE:", data);
+    if (data.success) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+
+console.log("Saved User:", localStorage.getItem("user"));
+      window.dispatchEvent(new Event("storage"));
+
+      if (data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/subscription");
+      }
     } else {
       alert(data.message);
     }
-  };
+  } catch (err) {
+    console.log(err);
+    alert("Server Error");
+  }
+};
 
   return (
     <div className="h-screen w-full flex overflow-hidden" style={{ background: "#e9dfd2" }}>

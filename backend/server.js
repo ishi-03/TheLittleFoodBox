@@ -1,114 +1,75 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import User from "./models/User.js";
-import Subscription from "./models/Subscriptions.js";
-import menuRoutes from "./routes/menuRoutes.js";
-import eventRoutes from "./routes/eventRoutes.js";
+import dotenv from "dotenv";
 
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+// import menuItemRoutes from "./routes/menuItemRoutes.js";
+import subscriptionRoutes from "./routes/subscriptionRoutes.js";
+import subscriptionPlanRoutes from "./routes/subscriptionPlanRoutes.js";
+import deliverySlotRoutes from "./routes/deliverySlotRoutes.js";
+// import orderRoutes from "./routes/orderRoutes.js";
+import eventRoutes from "./routes/eventRoutes.js";
+import saladRoutes from "./routes/saladRoutes.js";
+dotenv.config();
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 const app = express();
 
-// ✅ MongoDB connection
-mongoose.connect("mongodb+srv://thelittlefoodbox:tlfbbyparul@mcpcluster.sxchofi.mongodb.net/thelittlefoodbox?retryWrites=true&w=majority")
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
-
-// ✅ CORS (only once)
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://thelittlefoodbox-1.onrender.com",
-    "https://thelittlefoodbox.com"
-  ],
-  credentials: true
-}));
+// -------------------- Middleware --------------------
 
 app.use(express.json());
 
-// ✅ Test route
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://thelittlefoodbox-1.onrender.com",
+      "https://thelittlefoodbox.com",
+    ],
+    credentials: true,
+  })
+);
+
+// -------------------- MongoDB --------------------
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.log(err));
+
+// -------------------- Test Route --------------------
+
 app.get("/", (req, res) => {
-  res.send("Backend running");
+  res.send("Backend Running 🚀");
 });
 
-// ✅ Subscribe
-app.post("/api/subscribe", async (req, res) => {
-  try {
-    const { timeSlot, userId } = req.body;
+// -------------------- API Routes --------------------
 
-    const newSub = new Subscription({
-      timeSlot,
-      userId,
-      plan: "monthly",
-      startDate: new Date()
-    });
+app.use("/api/auth", authRoutes);
 
-    await newSub.save();
-    res.json({ message: "Subscription saved successfully" });
+app.use("/api/users", userRoutes);
 
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+app.use("/api/categories", categoryRoutes);
 
-// ✅ Get all subscriptions
-app.get("/api/subscriptions", async (req, res) => {
-  try {
-    const data = await Subscription.find();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// app.use("/api/menu-items", menuItemRoutes);
+app.use("/api/salads", saladRoutes);
+app.use("/api/subscriptions", subscriptionRoutes);
+console.log("Subscription Plan Route Loaded");
 
-// ✅ Register
-app.post("/api/register", async (req, res) => {
-  try {
-    const { name, email, password, confirmPassword } = req.body;
+app.use("/api/subscription-plans", subscriptionPlanRoutes);
 
-    // ✅ check confirm password
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
+app.use("/api/delivery-slots", deliverySlotRoutes);
 
-    const existing = await User.findOne({ email });
-    if (existing) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    const user = new User({ name, email, password });
-    await user.save();
-
-    res.json(user);
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// ✅ Login
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  const user = await User.findOne({ email, password });
-
-  if (!user) {
-    return res.status(400).json({ message: "Invalid credentials" });
-  }
-
-  res.json(user);
-});
-
-// ✅ Get user subscriptions
-app.get("/api/subscriptions/:userId", async (req, res) => {
-  const data = await Subscription.find({ userId: req.params.userId });
-  res.json(data);
-});
-
-app.use("/api/menu", menuRoutes);
+// app.use("/api/orders", orderRoutes);
 
 app.use("/api/events", eventRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+// -------------------- Start Server --------------------
 
-// ✅ PORT FIX (IMPORTANT FOR RENDER)
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log("Server running"));
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

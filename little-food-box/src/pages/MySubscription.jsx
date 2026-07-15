@@ -1,25 +1,50 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const MySubscription = () => {
-  const [data, setData] = useState([]);
-  const user = JSON.parse(localStorage.getItem("user"));
+ const [data, setData] = useState([]);
+const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!user) return;
-    fetch(`https://thelittlefoodbox.onrender.com/api/subscriptions/${user._id}`)
-      .then(res => res.json())
-      .then(res => setData(res));
-  }, []);
+useEffect(() => {
+  if (!token) return;
 
-  if (!user) return (
+  loadSubscriptions();
+}, []);
+
+const loadSubscriptions = async () => {
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/subscriptions/my`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const result = await res.json();
+
+    if (result.success) {
+      setData(result.subscriptions);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+if (!token) {
+  return (
     <div style={styles.page}>
       <div style={styles.empty}>
         <div style={styles.emptyIcon}>🔒</div>
         <h3 style={styles.emptyTitle}>Please log in</h3>
-        <p style={styles.emptyText}>Sign in to view your subscription plans.</p>
+        <p style={styles.emptyText}>
+          Sign in to view your subscription plans.
+        </p>
       </div>
     </div>
   );
+}
 
   return (
     <>
@@ -70,8 +95,12 @@ const MySubscription = () => {
               <div style={styles.emptyIcon}>🍱</div>
               <h3 style={styles.emptyTitle}>No subscriptions yet</h3>
               <p style={styles.emptyText}>You haven't signed up for any plans. Start your first box today.</p>
-              <button style={styles.emptyBtn}>Browse Plans</button>
-            </div>
+<button
+  style={styles.emptyBtn}
+  onClick={() => navigate("/subscription")}
+>
+  Browse Plans
+</button>            </div>
           ) : (
             data.map((sub, i) => (
               <div
@@ -80,14 +109,33 @@ const MySubscription = () => {
                 style={{ ...styles.card, animationDelay: `${i * 0.08}s` }}
               >
                 <div style={styles.cardNumber}>{String(i + 1).padStart(2, "0")}</div>
-                <div style={styles.cardPlan}>{sub.plan}</div>
-                <div style={styles.chipRow}>
-                  <span style={styles.chip}>🕐 <strong>{sub.timeSlot}</strong></span>
-                  <span style={styles.chip}>📅 <strong>Weekly</strong></span>
-                </div>
+                <div style={styles.cardPlan}>{sub.planId?.name}</div>
+               <div style={styles.chipRow}>
+  <span style={styles.chip}>
+    🕐 <strong>
+      {sub.deliverySlotId?.startTime} - {sub.deliverySlotId?.endTime}
+    </strong>
+  </span>
+
+  <span style={styles.chip}>
+    📅 <strong>{sub.planId?.validity} Days</strong>
+  </span>
+
+  <span style={styles.chip}>
+    🚚 <strong>{sub.deliveryPattern}</strong>
+  </span>
+</div>
                 <div style={styles.cardFooter}>
-                  <span className="status-dot" style={styles.statusDot}>Active</span>
-                  <button className="manage-btn" style={styles.manageBtn}>Manage Plan →</button>
+                  <span className="status-dot" style={styles.statusDot}>{sub.status}</span>
+                 <button
+  className="manage-btn"
+  style={styles.manageBtn}
+  onClick={() =>
+    alert("Coming Soon")
+  }
+>
+  Manage Plan →
+</button>
                 </div>
               </div>
             ))

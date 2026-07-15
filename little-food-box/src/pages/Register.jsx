@@ -16,35 +16,45 @@ const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-const handleRegister = async () => {
-  if (form.password !== form.confirmPassword) {
-    alert("Passwords do not match");
-    return;
-  }
+  const handleRegister = async () => {
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-  const res = await fetch("https://thelittlefoodbox-2.onrender.com/api/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: form.name,
-      email: form.email,
-      password: form.password, 
+    const API = import.meta.env.VITE_API_URL;
+
+    const res = await fetch(
+      `${API}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password,
         confirmPassword: form.confirmPassword,
 
-    }),
-  });
+      }),
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if (!res.ok) {
-    alert(data.message);
-    return;
-  }
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
 
- localStorage.setItem("user", JSON.stringify(data));
+  localStorage.setItem("token", data.token);
+
+localStorage.setItem(
+  "user",
+  JSON.stringify(data.user)
+);
+
 window.dispatchEvent(new Event("storage"));
+
 navigate("/subscription");
-};
+  };
 
   return (
     <div className="h-screen w-full flex overflow-hidden" style={{ background: "#e9dfd2" }}>

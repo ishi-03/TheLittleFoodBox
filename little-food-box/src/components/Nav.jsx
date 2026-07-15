@@ -610,6 +610,15 @@ export default function Nav({
                       <div className="avatar-dropdown-name">{user.name}</div>
                       <div className="avatar-dropdown-label">✦ Member</div>
                     </div>
+                    {user?.role === "admin" && (
+  <a
+    href="/admin"
+    onClick={() => setAvatarOpen(false)}
+  >
+    <span className="drop-icon">🛠️</span>
+    Admin Dashboard
+  </a>
+)}
                     <a href="/my-subscription" onClick={() => setAvatarOpen(false)}>
                       <span className="drop-icon">📦</span> My Subscription
                     </a>
