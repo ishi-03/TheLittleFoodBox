@@ -227,19 +227,25 @@ export default function AdminSalads() {
                      <td className="px-4 py-3">
   <div className="space-y-1 text-sm">
 
-    {/* <div className="flex items-center gap-2">
-      <span>🔥</span>
-      <span className="font-medium text-[#2A2A28]">
-        {salad.calories || "--"} kcal
-      </span>
-    </div>
+{(salad.calories || salad.protein) ? (
+  <div className="space-y-1 text-sm">
+    {salad.calories && (
+      <div className="flex items-center gap-2">
+        🔥 <span>{salad.calories} kcal</span>
+      </div>
+    )}
 
-    <div className="flex items-center gap-2">
-      <span>🥩</span>
-      <span className="font-medium text-[#2A2A28]">
-        {salad.protein || "--"} g Protein
-      </span>
-    </div> */}
+    {salad.protein && (
+      <div className="flex items-center gap-2">
+        🥩 <span>{salad.protein} g Protein</span>
+      </div>
+    )}
+  </div>
+) : (
+  <span className="text-sm text-gray-400">
+    —
+  </span>
+)}
 
   </div>
 </td>
@@ -248,21 +254,27 @@ export default function AdminSalads() {
 
                       <td className="px-4 py-3">
 
-                        <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2">
 
-                         {salad.variants?.vegan && (
-  <span>Vegan</span>
+{salad.variants?.regular && (
+<span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium">
+🥗 Regular
+</span>
+)}
+
+{salad.variants?.vegan && (
+<span className="rounded-full bg-green-100 text-green-700 px-3 py-1 text-xs font-medium">
+🌱 Vegan
+</span>
 )}
 
 {salad.variants?.jain && (
-  <span>Jain</span>
+<span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium">
+🪔 Jain
+</span>
 )}
 
-{salad.variants?.regular && (
-  <span>Regular</span>
-)}
-
-                        </div>
+</div>
 
                       </td>
 
