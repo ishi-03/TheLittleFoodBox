@@ -138,9 +138,9 @@ export default function AdminSalads() {
                     Category
                   </th>
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                  {/* <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
                     Nutrition
-                  </th>
+                  </th> */}
 
                   <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
                     Options
@@ -224,7 +224,7 @@ export default function AdminSalads() {
 
                       {/* Nutrition */}
 
-                     <td className="px-4 py-3">
+                     {/* <td className="px-4 py-3">
   <div className="space-y-1 text-sm">
 
 {(salad.calories || salad.protein) ? (
@@ -248,7 +248,7 @@ export default function AdminSalads() {
 )}
 
   </div>
-</td>
+</td> */}
 
                       {/* Vegan Jain */}
 
