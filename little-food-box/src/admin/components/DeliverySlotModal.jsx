@@ -1,5 +1,39 @@
 import { useEffect, useState } from "react";
 
+const timeOptions = [
+  "06:00",
+  "07:00",
+  "08:00",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+];
+
+const getEndTime = (start) => {
+  const [hour] = start.split(":").map(Number);
+  const end = (hour + 1) % 24;
+  return `${String(end).padStart(2, "0")}:00`;
+};
+
+const formatTime = (time) => {
+  const [hour] = time.split(":").map(Number);
+
+  const period = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+
+  return `${displayHour}:00 ${period}`;
+};
+
 export default function DeliverySlotModal({
   open,
   onClose,
@@ -7,9 +41,7 @@ export default function DeliverySlotModal({
   editingSlot,
 }) {
   const [form, setForm] = useState({
-    shift: "Lunch",
-    startTime: "",
-    endTime: "",
+    startTime: "09:00",
     active: true,
     sortOrder: 1,
   });
@@ -17,9 +49,7 @@ export default function DeliverySlotModal({
   useEffect(() => {
     if (editingSlot) {
       setForm({
-        shift: editingSlot.shift || "Lunch",
-        startTime: editingSlot.startTime || "",
-        endTime: editingSlot.endTime || "",
+        startTime: editingSlot.startTime || "09:00",
         active:
           editingSlot.active === undefined
             ? true
@@ -28,9 +58,7 @@ export default function DeliverySlotModal({
       });
     } else {
       setForm({
-        shift: "Lunch",
-        startTime: "",
-        endTime: "",
+        startTime: "09:00",
         active: true,
         sortOrder: 1,
       });
@@ -40,13 +68,10 @@ export default function DeliverySlotModal({
   if (!open) return null;
 
   const handleSave = () => {
-    if (!form.startTime || !form.endTime) {
-      alert("Please fill all fields");
-      return;
-    }
-
     onSave({
-      ...form,
+      startTime: form.startTime,
+      endTime: getEndTime(form.startTime),
+      active: form.active,
       sortOrder: Number(form.sortOrder),
     });
   };
@@ -58,69 +83,40 @@ export default function DeliverySlotModal({
           {editingSlot ? "Edit Delivery Slot" : "Add Delivery Slot"}
         </h2>
 
-        <div className="grid gap-4">
+        <div className="space-y-5">
+          {/* Delivery Slot */}
           <div>
-            <label className="block text-sm font-medium text-stone-600 mb-1.5">
-              Shift
+            <label className="block text-sm font-medium text-stone-600 mb-2">
+              Delivery Slot
             </label>
+
             <select
-              value={form.shift}
+              value={form.startTime}
               onChange={(e) =>
                 setForm({
                   ...form,
-                  shift: e.target.value,
+                  startTime: e.target.value,
                 })
               }
-              className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
+              className="w-full rounded-lg border border-stone-300 bg-white px-3 py-3 text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
             >
-              <option>Lunch</option>
-              <option>Evening</option>
+              {timeOptions.map((time) => (
+                <option key={time} value={time}>
+                  {formatTime(time)} - {formatTime(getEndTime(time))}
+                </option>
+              ))}
             </select>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-stone-600 mb-1.5">
-                Start Time
-              </label>
-              <input
-                type="time"
-                value={form.startTime}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    startTime: e.target.value,
-                  })
-                }
-                className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-stone-600 mb-1.5">
-                End Time
-              </label>
-              <input
-                type="time"
-                value={form.endTime}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    endTime: e.target.value,
-                  })
-                }
-                className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
-              />
-            </div>
-          </div>
-
+          {/* Sort Order */}
           <div>
-            <label className="block text-sm font-medium text-stone-600 mb-1.5">
+            <label className="block text-sm font-medium text-stone-600 mb-2">
               Sort Order
             </label>
+
             <input
               type="number"
-              placeholder="Sort Order"
+              min="1"
               value={form.sortOrder}
               onChange={(e) =>
                 setForm({
@@ -128,11 +124,12 @@ export default function DeliverySlotModal({
                   sortOrder: e.target.value,
                 })
               }
-              className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
+              className="w-full rounded-lg border border-stone-300 bg-white px-3 py-3 text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-700/30 focus:border-emerald-700"
             />
           </div>
 
-          <label className="flex items-center gap-2.5 pt-1 cursor-pointer">
+          {/* Active */}
+          <label className="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
               checked={form.active}
@@ -144,8 +141,21 @@ export default function DeliverySlotModal({
               }
               className="h-4 w-4 rounded border-stone-300 text-emerald-700 focus:ring-emerald-700/30"
             />
-            <span className="text-sm text-stone-700">Active</span>
+
+            <span className="text-sm text-stone-700 font-medium">
+              Active Slot
+            </span>
           </label>
+
+          {/* Preview */}
+          <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3">
+            <p className="text-sm text-stone-500">Selected Slot</p>
+
+            <p className="text-lg font-semibold text-emerald-800 mt-1">
+              {formatTime(form.startTime)} -{" "}
+              {formatTime(getEndTime(form.startTime))}
+            </p>
+          </div>
         </div>
 
         <div className="flex justify-end gap-3 mt-8">
