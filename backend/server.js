@@ -25,7 +25,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://thelittlefoodbox-1.onrender.com",
+      "https://thelittlefoodbox-2.onrender.com",
       "https://thelittlefoodbox.com",
     ],
     credentials: true,

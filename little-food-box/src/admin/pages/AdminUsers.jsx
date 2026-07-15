@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+const API = import.meta.env.VITE_API_URL;
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -12,14 +13,11 @@ const token = localStorage.getItem("token");
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/users",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+     const { data } = await axios.get(`${API}/api/users`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
       setUsers(data);
     } catch (error) {
