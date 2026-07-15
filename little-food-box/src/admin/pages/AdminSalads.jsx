@@ -224,15 +224,25 @@ export default function AdminSalads() {
 
                       {/* Nutrition */}
 
-                      <td className="px-4 py-3 text-sm text-[#4A4A45]">
+                     <td className="px-4 py-3">
+  <div className="space-y-1 text-sm">
 
-                        🔥 {salad.calories} cal
+    <div className="flex items-center gap-2">
+      <span>🔥</span>
+      <span className="font-medium text-[#2A2A28]">
+        {salad.calories || "--"} kcal
+      </span>
+    </div>
 
-                        <br />
+    <div className="flex items-center gap-2">
+      <span>🥩</span>
+      <span className="font-medium text-[#2A2A28]">
+        {salad.protein || "--"} g Protein
+      </span>
+    </div>
 
-                        🥩 {salad.protein}g Protein
-
-                      </td>
+  </div>
+</td>
 
                       {/* Vegan Jain */}
 
