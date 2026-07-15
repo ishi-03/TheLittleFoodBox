@@ -2,12 +2,6 @@ import mongoose from "mongoose";
 
 const deliverySlotSchema = new mongoose.Schema(
   {
-    shift: {
-      type: String,
-      enum: ["Lunch", "Evening"],
-      required: true,
-    },
-
     startTime: {
       type: String,
       required: true,
@@ -25,7 +19,7 @@ const deliverySlotSchema = new mongoose.Schema(
 
     sortOrder: {
       type: Number,
-      default: 0,
+      default: 1,
     },
   },
   {

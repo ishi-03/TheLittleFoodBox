@@ -44,10 +44,11 @@ export const getDeliverySlot = async (req, res) => {
 
 // ================= CREATE =================
 
+// ================= CREATE =================
+
 export const createDeliverySlot = async (req, res) => {
   try {
     const {
-      shift,
       startTime,
       endTime,
       active,
@@ -55,7 +56,6 @@ export const createDeliverySlot = async (req, res) => {
     } = req.body;
 
     const exists = await DeliverySlot.findOne({
-      shift,
       startTime,
       endTime,
     });
@@ -68,7 +68,6 @@ export const createDeliverySlot = async (req, res) => {
     }
 
     const newSlot = await DeliverySlot.create({
-      shift,
       startTime,
       endTime,
       active,
