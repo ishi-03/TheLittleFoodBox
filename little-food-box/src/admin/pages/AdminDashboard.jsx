@@ -53,19 +53,19 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F3] via-[#F5F2EA] to-[#EEF2E9] p-6 md:p-10">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F3] via-[#F5F2EA] to-[#EEF2E9] p-4 sm:p-6 md:p-10 overflow-x-hidden">
 
       <div className="mx-auto max-w-7xl">
 
         {/* Header */}
 
-        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="mb-8 md:mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
 
           <div>
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#7A9B57]">
               Admin Overview
             </p>
-            <h1 className="font-serif text-4xl font-bold text-[#2A2A28] md:text-5xl">
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#2A2A28] md:text-5xl">
               Dashboard
             </h1>
             <p className="mt-2 text-[#6B6B65]">
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-[#E5E1D6] bg-white/70 px-5 py-3 text-right shadow-sm backdrop-blur-sm">
+          <div className="w-full md:w-auto rounded-2xl border border-[#E5E1D6] bg-white/70 px-5 py-3 text-right shadow-sm backdrop-blur-sm">
             <p className="text-xs uppercase tracking-wide text-[#9A9A92]">
               Today
             </p>
@@ -86,14 +86,14 @@ export default function AdminDashboard() {
 
         {/* Cards */}
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
           {cards.map((card) => (
 
             <div
               key={card.title}
               onClick={() => navigate(card.path)}
-              className="group relative cursor-pointer overflow-hidden rounded-3xl border border-[#ECE8DC] bg-white p-6 shadow-[0_2px_10px_rgba(42,42,40,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(42,42,40,0.12)]"
+              className="group relative cursor-pointer overflow-hidden rounded-3xl border border-[#ECE8DC] bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(42,42,40,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(42,42,40,0.12)]"
             >
 
               <div
@@ -110,7 +110,7 @@ export default function AdminDashboard() {
                   </p>
 
                   <h1
-                    className="mt-3 font-serif text-4xl font-bold"
+                    className="mt-3 font-serif text-3xl sm:text-4xl font-bold"
                     style={{ color: card.color }}
                   >
                     {card.value}
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
                 </div>
 
                 <div
-                  className="flex h-14 w-14 items-center justify-center rounded-2xl text-3xl transition-transform duration-300 group-hover:scale-110"
+                  className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl text-2xl sm:text-3xl transition-transform duration-300 group-hover:scale-110"
                   style={{ backgroundColor: `${card.color}1A` }}
                 >
                   {card.icon}
@@ -135,19 +135,19 @@ export default function AdminDashboard() {
 
         {/* Quick Actions */}
 
-        <div className="mt-8 rounded-3xl border border-[#ECE8DC] bg-white p-6 shadow-[0_2px_10px_rgba(42,42,40,0.05)] md:p-8">
+        <div className="mt-8 rounded-3xl border border-[#ECE8DC] bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(42,42,40,0.05)] md:p-8">
 
-          <h2 className="mb-5 font-serif text-2xl font-bold text-[#2A2A28]">
+          <h2 className="mb-5 font-serif text-xl sm:text-2xl font-bold text-[#2A2A28]">
             Quick Actions
           </h2>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
 
             <button
               onClick={() =>
                 navigate("/admin/salads")
               }
-              className="flex items-center gap-2 rounded-xl bg-[#3F6C51] px-5 py-3 font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#345a43] hover:shadow-md active:scale-95"
+              className="flex items-center justify-center gap-2 rounded-xl bg-[#3F6C51] px-5 py-3 font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#345a43] hover:shadow-md active:scale-95 w-full sm:w-auto"
             >
               <span>➕</span> Add Salad
             </button>
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
               onClick={() =>
                 navigate("/admin/subscription-plans")
               }
-              className="flex items-center gap-2 rounded-xl bg-[#C97C5D] px-5 py-3 font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#b56a4d] hover:shadow-md active:scale-95"
+              className="flex items-center justify-center gap-2 rounded-xl bg-[#C97C5D] px-5 py-3 font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#b56a4d] hover:shadow-md active:scale-95 w-full sm:w-auto"
             >
               <span>➕</span> Add Plan
             </button>
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
               onClick={() =>
                 navigate("/admin/subscriptions")
               }
-              className="flex items-center gap-2 rounded-xl bg-[#8A6BAE] px-5 py-3 font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#785a9c] hover:shadow-md active:scale-95"
+              className="flex items-center justify-center gap-2 rounded-xl bg-[#8A6BAE] px-5 py-3 font-medium text-white shadow-sm transition-all duration-200 hover:bg-[#785a9c] hover:shadow-md active:scale-95 w-full sm:w-auto"
             >
               <span>📋</span> View Subscriptions
             </button>
@@ -176,15 +176,15 @@ export default function AdminDashboard() {
 
         {/* Recent */}
 
-        <div className="mt-8 rounded-3xl border border-[#ECE8DC] bg-white p-6 shadow-[0_2px_10px_rgba(42,42,40,0.05)] md:p-8">
+        <div className="mt-8 rounded-3xl border border-[#ECE8DC] bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(42,42,40,0.05)] md:p-8">
 
-          <h2 className="mb-5 font-serif text-2xl font-bold text-[#2A2A28]">
+          <h2 className="mb-5 font-serif text-xl sm:text-2xl font-bold text-[#2A2A28]">
             Recent Subscriptions
           </h2>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
 
-            <table className="w-full border-collapse">
+            <table className="w-full min-w-[480px] border-collapse">
 
               <thead>
 
