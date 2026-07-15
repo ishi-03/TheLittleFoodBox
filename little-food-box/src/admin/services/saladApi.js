@@ -8,13 +8,22 @@ export const getSalads = async () => {
 export const createSalad = async (salad) => {
   const token = localStorage.getItem("token");
 
+  const fd = new FormData();
+
+  Object.keys(salad).forEach((key) => {
+    if (key === "ingredients" || key === "dressings" || key === "variants") {
+      fd.append(key, JSON.stringify(salad[key]));
+    } else {
+      fd.append(key, salad[key]);
+    }
+  });
+
   const res = await fetch(API, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(salad),
+    body: fd,
   });
 
   return await res.json();
@@ -23,13 +32,22 @@ export const createSalad = async (salad) => {
 export const updateSalad = async (id, salad) => {
   const token = localStorage.getItem("token");
 
+  const fd = new FormData();
+
+  Object.keys(salad).forEach((key) => {
+    if (key === "ingredients" || key === "dressings" || key === "variants") {
+      fd.append(key, JSON.stringify(salad[key]));
+    } else {
+      fd.append(key, salad[key]);
+    }
+  });
+
   const res = await fetch(`${API}/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(salad),
+    body: fd,
   });
 
   return await res.json();

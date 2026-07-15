@@ -198,31 +198,33 @@ return (
 
         <div className="md:col-span-2">
 
-          <label className={labelClass}>
-            Image URL
-          </label>
+        <label className={labelClass}>
+  Salad Image
+</label>
 
-          <input
-            className={inputClass}
-            placeholder="Paste image url"
-            value={form.image}
-            onChange={(e)=>
-              setForm({
-                ...form,
-                image:e.target.value,
-              })
-            }
-          />
-
-          {form.image && (
-
-            <img
-              src={form.image}
-              alt="preview"
-              className="mt-4 h-40 w-full object-cover rounded-xl border border-stone-200"
-            />
-
-          )}
+<input
+  type="file"
+  accept="image/*"
+  className={inputClass}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      image: e.target.files[0],
+    })
+  }
+/>
+{form.image && (
+  <img
+    src={
+      typeof form.image === "string"
+        ? form.image
+        : URL.createObjectURL(form.image)
+    }
+    className="mt-4 h-40 rounded-xl object-cover"
+    alt=""
+  />
+)}
+        
 
         </div>
 

@@ -7,7 +7,7 @@ import {
   updateSalad,
   deleteSalad,
 } from "../controllers/saladController.js";
-
+import upload from "../middleware/upload.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import adminMiddleware from "../middleware/adminMiddleware.js";
 
@@ -25,6 +25,7 @@ router.post(
   "/",
   authMiddleware,
   adminMiddleware,
+  upload.single("image"),
   createSalad
 );
 
@@ -32,6 +33,7 @@ router.put(
   "/:id",
   authMiddleware,
   adminMiddleware,
+  upload.single("image"),
   updateSalad
 );
 

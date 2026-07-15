@@ -58,7 +58,13 @@ export const createSalad = async (req, res) => {
       });
     }
 
-    const salad = await Salad.create(req.body);
+    const salad = await Salad.create({
+      ...req.body,
+      image: req.file ? req.file.path : "",
+      ingredients: JSON.parse(req.body.ingredients || "[]"),
+      dressings: JSON.parse(req.body.dressings || "[]"),
+      variants: JSON.parse(req.body.variants || "{}"),
+    });
 
     res.status(201).json({
       success: true,
@@ -72,17 +78,31 @@ export const createSalad = async (req, res) => {
     });
   }
 };
-
 // ================= UPDATE =================
 
 export const updateSalad = async (req, res) => {
   try {
+    const updateData = {
+      ...req.body,
+    };
+
+    if (req.file) {
+      updateData.image = req.file.path;
+    }
+
+    if (req.body.ingredients)
+      updateData.ingredients = JSON.parse(req.body.ingredients);
+
+    if (req.body.dressings)
+      updateData.dressings = JSON.parse(req.body.dressings);
+
+    if (req.body.variants)
+      updateData.variants = JSON.parse(req.body.variants);
+
     const salad = await Salad.findByIdAndUpdate(
       req.params.id,
-      req.body,
-      {
-        new: true,
-      }
+      updateData,
+      { new: true }
     );
 
     if (!salad) {
@@ -104,7 +124,6 @@ export const updateSalad = async (req, res) => {
     });
   }
 };
-
 // ================= DELETE =================
 
 export const deleteSalad = async (req, res) => {

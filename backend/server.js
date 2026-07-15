@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -58,6 +59,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/salads", saladRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 console.log("Subscription Plan Route Loaded");
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api/subscription-plans", subscriptionPlanRoutes);
 
