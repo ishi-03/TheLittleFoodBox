@@ -27,6 +27,12 @@ const deliverySlotSchema = new mongoose.Schema(
   }
 );
 
+// 👇 Schema ke baad, export se pehle
+deliverySlotSchema.index(
+  { startTime: 1, endTime: 1 },
+  { unique: true }
+);
+
 export default mongoose.model(
   "DeliverySlot",
   deliverySlotSchema
