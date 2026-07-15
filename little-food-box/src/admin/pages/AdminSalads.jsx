@@ -227,7 +227,7 @@ export default function AdminSalads() {
                      <td className="px-4 py-3">
   <div className="space-y-1 text-sm">
 
-    <div className="flex items-center gap-2">
+    {/* <div className="flex items-center gap-2">
       <span>🔥</span>
       <span className="font-medium text-[#2A2A28]">
         {salad.calories || "--"} kcal
@@ -239,7 +239,7 @@ export default function AdminSalads() {
       <span className="font-medium text-[#2A2A28]">
         {salad.protein || "--"} g Protein
       </span>
-    </div>
+    </div> */}
 
   </div>
 </td>
