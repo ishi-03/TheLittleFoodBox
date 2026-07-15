@@ -77,13 +77,13 @@ export default function AdminSalads() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F3] via-[#F5F2EA] to-[#EEF2E9] p-6 md:p-10">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F3] via-[#F5F2EA] to-[#EEF2E9] p-4 sm:p-6 md:p-10">
 
       <div className="mx-auto max-w-6xl">
 
         {/* Header */}
 
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 md:mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
           <div>
 
@@ -91,11 +91,11 @@ export default function AdminSalads() {
               Menu
             </p>
 
-            <h1 className="font-serif text-3xl font-bold text-[#2A2A28] md:text-4xl">
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#2A2A28] md:text-4xl">
               Salads
             </h1>
 
-            <p className="mt-1 text-[#8A8A82]">
+            <p className="mt-1 text-sm sm:text-base text-[#8A8A82]">
               Manage all salads
             </p>
 
@@ -106,7 +106,7 @@ export default function AdminSalads() {
               setEditingSalad(null);
               setOpen(true);
             }}
-            className="inline-flex items-center gap-1.5 self-start rounded-xl bg-[#3F6C51] px-5 py-3 font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#345a43] hover:shadow-md active:translate-y-px sm:self-auto"
+            className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#3F6C51] px-5 py-3 font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#345a43] hover:shadow-md active:translate-y-px sm:w-auto sm:justify-start sm:self-auto"
           >
             <span className="text-base leading-none">+</span>
             Add Salad
@@ -114,73 +114,173 @@ export default function AdminSalads() {
 
         </div>
 
-        {/* Table */}
+        {/* Empty state (shared, shown when there is no data at all) */}
 
-        <div className="overflow-hidden rounded-3xl border border-[#ECE8DC] bg-white shadow-[0_2px_10px_rgba(42,42,40,0.05)]">
+        {salads.length === 0 && (
+          <div className="rounded-3xl border border-[#ECE8DC] bg-white px-4 py-12 text-center shadow-[0_2px_10px_rgba(42,42,40,0.05)]">
+            <div className="mb-2 text-3xl">🥗</div>
+            <p className="mb-1 text-[15px] font-semibold text-[#4A4A45]">
+              No salads found
+            </p>
+            <p className="text-[13px] text-[#9A9A92]">
+              Add your first salad to build out the menu.
+            </p>
+          </div>
+        )}
 
-          <div className="overflow-x-auto">
+        {/* Mobile / tablet: card list (hidden on md+) */}
 
-            <table className="min-w-full border-collapse">
+        {salads.length > 0 && (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:hidden">
 
-              <thead className="bg-[#FAF8F3]">
+            {salads.map((salad) => (
 
-                <tr>
+              <div
+                key={salad._id}
+                className="rounded-2xl border border-[#ECE8DC] bg-white p-4 shadow-[0_2px_10px_rgba(42,42,40,0.05)]"
+              >
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Image
-                  </th>
+                <div className="flex items-start gap-3">
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Name
-                  </th>
+                  <img
+                    src={
+                      salad.image ||
+                      "https://placehold.co/70x70"
+                    }
+                    alt=""
+                    className="h-16 w-16 flex-shrink-0 rounded-xl border border-[#ECE8DC] object-cover"
+                  />
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Category
-                  </th>
+                  <div className="min-w-0 flex-1">
 
-                  {/* <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Nutrition
-                  </th> */}
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="truncate font-semibold text-[#2A2A28]">
+                          {salad.name}
+                        </div>
+                        <div className="text-sm text-[#9A9A92]">
+                          {salad.ingredients?.length || 0} Ingredients
+                        </div>
+                      </div>
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Options
-                  </th>
+                      {salad.active ? (
+                        <span className="flex-shrink-0 rounded-full border border-[#DCE8D4] bg-[#EAF2E7] px-2.5 py-1 text-[11px] font-medium text-[#3F6C51]">
+                          Active
+                        </span>
+                      ) : (
+                        <span className="flex-shrink-0 rounded-full border border-[#F0D3CC] bg-[#FBEAE7] px-2.5 py-1 text-[11px] font-medium text-[#C0503F]">
+                          Inactive
+                        </span>
+                      )}
+                    </div>
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Status
-                  </th>
+                    <div className="mt-1 text-sm text-[#4A4A45]">
+                      {salad.category}
+                    </div>
 
-                  <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
-                    Actions
-                  </th>
+                  </div>
 
-                </tr>
+                </div>
 
-              </thead>
+                <div className="mt-3 flex flex-wrap gap-2">
 
-              <tbody>
+                  {salad.variants?.regular && (
+                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium">
+                      🥗 Regular
+                    </span>
+                  )}
 
-                {salads.length === 0 ? (
+                  {salad.variants?.vegan && (
+                    <span className="rounded-full bg-green-100 text-green-700 px-3 py-1 text-xs font-medium">
+                      🌱 Vegan
+                    </span>
+                  )}
+
+                  {salad.variants?.jain && (
+                    <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium">
+                      🪔 Jain
+                    </span>
+                  )}
+
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+
+                  <button
+                    onClick={() =>
+                      editSalad(salad)
+                    }
+                    className="flex-1 rounded-lg border border-[#CBD9E8] bg-[#EEF3F9] px-3 py-2 text-xs font-semibold text-[#3A6EA5] transition-colors hover:border-[#B4C9E0] hover:bg-[#E2EAF4]"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      removeSalad(salad._id)
+                    }
+                    className="flex-1 rounded-lg border border-[#F0D3CC] bg-[#FBEAE7] px-3 py-2 text-xs font-semibold text-[#C0503F] transition-colors hover:border-[#E8BFB5] hover:bg-[#F7DDD6]"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+        )}
+
+        {/* Desktop: table (hidden below md) */}
+
+        {salads.length > 0 && (
+          <div className="hidden overflow-hidden rounded-3xl border border-[#ECE8DC] bg-white shadow-[0_2px_10px_rgba(42,42,40,0.05)] md:block">
+
+            <div className="overflow-x-auto">
+
+              <table className="min-w-full border-collapse">
+
+                <thead className="bg-[#FAF8F3]">
 
                   <tr>
 
-                    <td colSpan="7">
-                      <div className="px-4 py-12 text-center">
-                        <div className="mb-2 text-3xl">🥗</div>
-                        <p className="mb-1 text-[15px] font-semibold text-[#4A4A45]">
-                          No salads found
-                        </p>
-                        <p className="text-[13px] text-[#9A9A92]">
-                          Add your first salad to build out the menu.
-                        </p>
-                      </div>
-                    </td>
+                    <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Image
+                    </th>
+
+                    <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Name
+                    </th>
+
+                    <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Category
+                    </th>
+
+                    {/* <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Nutrition
+                    </th> */}
+
+                    <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Options
+                    </th>
+
+                    <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Status
+                    </th>
+
+                    <th className="border-b border-[#ECE8DC] px-4 py-3.5 text-left text-[12.5px] font-semibold uppercase tracking-wide text-[#9A9A92]">
+                      Actions
+                    </th>
 
                   </tr>
 
-                ) : (
+                </thead>
 
-                  salads.map((salad) => (
+                <tbody>
+
+                  {salads.map((salad) => (
 
                     <tr
                       key={salad._id}
@@ -328,17 +428,16 @@ export default function AdminSalads() {
 
                     </tr>
 
-                  ))
+                  ))}
 
-                )}
+                </tbody>
 
-              </tbody>
+              </table>
 
-            </table>
+            </div>
 
           </div>
-
-        </div>
+        )}
 
         <SaladModal
           open={open}
