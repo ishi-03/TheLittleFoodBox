@@ -682,6 +682,7 @@ const Subscriptions = () => {
   const [expandedDay, setExpandedDay] = useState(null);
   const [subscribed, setSubscribed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
   const saladSectionRef = useRef(null);
 
   useEffect(() => {
@@ -981,8 +982,18 @@ updated[dayIndex] = {
                         onClick={() => handlePickSalad(index, salad)}
                       >
                         <span className="chip-check">✓</span>
-                        <div className="chip-thumb">🥗</div>
-                        <div className="chip-name">{salad.name}</div>
+<div className="chip-thumb">
+  <img
+    src={salad.image}
+    alt={salad.name}
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      borderRadius: "12px",
+    }}
+  />
+</div>                        <div className="chip-name">{salad.name}</div>
                         <div className="chip-kcal">{salad.calories} kcal</div>
                       </div>
                     ))}
@@ -1054,7 +1065,21 @@ updated[dayIndex] = {
 )}
 
                   {isExpanded && selectedSalad && (
+                    
                     <div className="salad-detail-panel">
+                      <img
+  src={selectedSalad.image}
+  alt={selectedSalad.name}
+  onClick={() => setPreviewImage(selectedSalad.image)}
+  style={{
+    width: "100%",
+    height: "260px",
+    objectFit: "cover",
+    borderRadius: "18px",
+    cursor: "zoom-in",
+    marginBottom: "18px",
+  }}
+/>
                       <h5>{selectedSalad.name}</h5>
                       <p className="desc">{selectedSalad.description}</p>
 
@@ -1140,6 +1165,52 @@ updated[dayIndex] = {
           </div>
         )}
       </div>
+      {previewImage && (
+  <div
+    onClick={() => setPreviewImage(null)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,.85)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 99999,
+      cursor: "zoom-out",
+      padding: "30px",
+    }}
+  >
+    <img
+      src={previewImage}
+      alt=""
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        maxWidth: "90%",
+        maxHeight: "90%",
+        borderRadius: "20px",
+        boxShadow: "0 20px 60px rgba(0,0,0,.5)",
+      }}
+    />
+
+    <button
+      onClick={() => setPreviewImage(null)}
+      style={{
+        position: "absolute",
+        top: 20,
+        right: 20,
+        width: 45,
+        height: 45,
+        borderRadius: "50%",
+        border: "none",
+        background: "white",
+        fontSize: "22px",
+        cursor: "pointer",
+      }}
+    >
+      ✕
+    </button>
+  </div>
+)}
     </>
   );
 };
