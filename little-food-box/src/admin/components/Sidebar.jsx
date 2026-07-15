@@ -88,22 +88,22 @@ export default function Sidebar() {
           paddingTop: 20,
         }}
       >
-        
-          href="/menu"
-          className="block mb-0 md:mb-0"
-          style={{
-            display: "block",
-            textDecoration: "none",
-            textAlign: "center",
-            padding: "13px",
-            borderRadius: 10,
-            background: "#374151",
-            color: "#fff",
-            marginBottom: 10,
-          }}
-        >
-          🌐 View Website
-        </a>
+        <a
+  href="/menu"
+  className="block mb-0 md:mb-0"
+  style={{
+    display: "block",
+    textDecoration: "none",
+    textAlign: "center",
+    padding: "13px",
+    borderRadius: 10,
+    background: "#374151",
+    color: "#fff",
+    marginBottom: 10,
+  }}
+>
+  🌐 View Website
+</a>
 
         <button
           onClick={logout}
