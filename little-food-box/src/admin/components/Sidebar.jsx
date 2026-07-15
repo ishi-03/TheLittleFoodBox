@@ -36,17 +36,11 @@ export default function Sidebar() {
 
   return (
     <aside
+      className="fixed top-0 left-0 w-full md:w-[260px] h-auto md:h-screen z-50 flex flex-col box-border overflow-x-hidden"
       style={{
-        position: "fixed",
-        left: 0,
-        top: 0,
-        width: 260,
-        height: "100vh",
         background: "#1f2937",
         color: "#fff",
         padding: 20,
-        display: "flex",
-        flexDirection: "column",
         boxSizing: "border-box",
       }}
     >
@@ -55,12 +49,13 @@ export default function Sidebar() {
           marginBottom: 35,
           textAlign: "center",
         }}
+        className="text-base md:text-xl mb-4 md:mb-[35px]"
       >
         🥗 Admin Panel
       </h2>
 
       {/* Navigation */}
-      <div style={{ flex: 1 }}>
+      <div className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible overflow-y-visible gap-2 md:gap-0 pb-2 md:pb-0 -mx-1 px-1 md:mx-0 md:px-0">
         {menus.map((menu) => {
           const active = pathname === menu.path;
 
@@ -68,10 +63,9 @@ export default function Sidebar() {
             <Link
               key={menu.path}
               to={menu.path}
+              className="block flex-shrink-0 md:flex-shrink whitespace-nowrap md:whitespace-normal mb-0 md:mb-[10px]"
               style={{
-                display: "block",
                 padding: "13px 16px",
-                marginBottom: 10,
                 borderRadius: 10,
                 textDecoration: "none",
                 color: "#fff",
@@ -88,28 +82,32 @@ export default function Sidebar() {
 
       {/* Bottom Section */}
       <div
+        className="flex flex-col gap-2 md:gap-0 mt-2 md:mt-0"
         style={{
           borderTop: "1px solid rgba(255,255,255,0.15)",
           paddingTop: 20,
         }}
       >
-        <a
-  href="/menu"
-  style={{
-    display: "block",
-    textDecoration: "none",
-    textAlign: "center",
-    padding: "13px",
-    borderRadius: 10,
-    background: "#374151",
-    color: "#fff",
-  }}
->
-  🌐 View Website
-</a>
+        
+          href="/menu"
+          className="block mb-0 md:mb-0"
+          style={{
+            display: "block",
+            textDecoration: "none",
+            textAlign: "center",
+            padding: "13px",
+            borderRadius: 10,
+            background: "#374151",
+            color: "#fff",
+            marginBottom: 10,
+          }}
+        >
+          🌐 View Website
+        </a>
 
         <button
           onClick={logout}
+          className="w-full"
           style={{
             width: "100%",
             padding: "13px",
