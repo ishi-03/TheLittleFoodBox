@@ -544,27 +544,93 @@ const styles = `
     gap: 4px;
   }
 
+  /* ============ EXPANDED SALAD DETAIL CARD (restaurant style) ============ */
   .salad-detail-panel {
     margin-top: 14px;
     background: #FAF8F2;
     border: 1px solid rgba(27,40,24,0.06);
-    border-radius: 16px;
-    padding: 18px 20px;
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(27,40,24,0.05);
     animation: fadeUp 0.35s ease both;
   }
+
+  .detail-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .detail-image-col {
+    flex: 0 0 45%;
+    max-width: 45%;
+    position: relative;
+    cursor: zoom-in;
+    min-height: 260px;
+  }
+  .detail-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .detail-zoom-badge {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(27,40,24,0.15);
+  }
+
+  .detail-content-col {
+    flex: 1 1 55%;
+    max-width: 55%;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
   .salad-detail-panel h5 {
     font-family: 'Playfair Display', serif;
-    margin: 0 0 6px;
-    font-size: 16px;
+    margin: 0 0 8px;
+    font-size: 20px;
     color: #1B2818;
   }
-  .salad-detail-panel p.desc { color: #7C8874; font-size: 12.5px; margin: 0 0 14px; line-height: 1.55; }
+  .salad-detail-panel p.desc {
+    color: #7C8874;
+    font-size: 13px;
+    margin: 0 0 18px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 720px) {
+    .detail-grid { flex-direction: column; }
+    .detail-image-col {
+      flex: 0 0 auto;
+      max-width: 100%;
+      width: 100%;
+      height: 220px;
+      min-height: 220px;
+    }
+    .detail-content-col {
+      max-width: 100%;
+      padding: 20px 20px 24px;
+    }
+  }
 
   .macro-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
     gap: 10px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .macro-cell { background: #fff; border-radius: 10px; padding: 8px 10px; border: 1px solid rgba(27,40,24,0.05); }
   .macro-cell .k { font-size: 10px; color: #A09075; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -684,7 +750,18 @@ const Subscriptions = () => {
   const [submitting, setSubmitting] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const saladSectionRef = useRef(null);
+useEffect(() => {
+  const close = (e) => {
+    if (e.key === "Escape") {
+      setPreviewImage(null);
+    }
+  };
 
+  window.addEventListener("keydown", close);
+
+  return () =>
+    window.removeEventListener("keydown", close);
+}, []);
   useEffect(() => {
     loadPlans();
     loadSlots();
@@ -1065,50 +1142,48 @@ updated[dayIndex] = {
 )}
 
                   {isExpanded && selectedSalad && (
-                    
                     <div className="salad-detail-panel">
-                      <img
-  src={selectedSalad.image}
-  alt={selectedSalad.name}
-  onClick={() => setPreviewImage(selectedSalad.image)}
-  style={{
-    width: "100%",
-    height: "260px",
-    objectFit: "cover",
-    borderRadius: "18px",
-    cursor: "zoom-in",
-    marginBottom: "18px",
-  }}
-/>
-                      <h5>{selectedSalad.name}</h5>
-                      <p className="desc">{selectedSalad.description}</p>
-
-                      <div className="macro-grid">
-                        <div className="macro-cell"><div className="k">Calories</div><div className="v">{selectedSalad.calories}</div></div>
-                        <div className="macro-cell"><div className="k">Protein</div><div className="v">{selectedSalad.protein}g</div></div>
-                        <div className="macro-cell"><div className="k">Carbs</div><div className="v">{selectedSalad.carbs}g</div></div>
-                        <div className="macro-cell"><div className="k">Fat</div><div className="v">{selectedSalad.fat}g</div></div>
-                      </div>
-
-                      <div className="tag-row">
-                        {deriveTags(selectedSalad).map((t) => (
-                          <span key={t.key} className={`diet-tag ${t.key}`}>{t.label}</span>
-                        ))}
-                      </div>
-
-                      {selectedSalad.ingredients?.length > 0 && (
-                        <div className="ing-row">
-                          {selectedSalad.ingredients.map((item, i) => (
-                            <span key={i} className="ing-chip">{item}</span>
-                          ))}
+                      <div className="detail-grid">
+                        <div
+                          className="detail-image-col"
+                          onClick={() => setPreviewImage(selectedSalad.image)}
+                        >
+                          <img src={selectedSalad.image} alt={selectedSalad.name} />
+                          <div className="detail-zoom-badge">🔍</div>
                         </div>
-                      )}
 
-                      {selectedSalad.dressings?.length > 0 && (
-                        <p className="desc" style={{ margin: 0 }}>
-                          Dressing: {selectedSalad.dressings.join(", ")}
-                        </p>
-                      )}
+                        <div className="detail-content-col">
+                          <h5>{selectedSalad.name}</h5>
+                          <p className="desc">{selectedSalad.description}</p>
+
+                          <div className="macro-grid">
+                            <div className="macro-cell"><div className="k">Calories</div><div className="v">{selectedSalad.calories}</div></div>
+                            <div className="macro-cell"><div className="k">Protein</div><div className="v">{selectedSalad.protein}g</div></div>
+                            <div className="macro-cell"><div className="k">Carbs</div><div className="v">{selectedSalad.carbs}g</div></div>
+                            <div className="macro-cell"><div className="k">Fat</div><div className="v">{selectedSalad.fat}g</div></div>
+                          </div>
+
+                          <div className="tag-row">
+                            {deriveTags(selectedSalad).map((t) => (
+                              <span key={t.key} className={`diet-tag ${t.key}`}>{t.label}</span>
+                            ))}
+                          </div>
+
+                          {selectedSalad.ingredients?.length > 0 && (
+                            <div className="ing-row">
+                              {selectedSalad.ingredients.map((item, i) => (
+                                <span key={i} className="ing-chip">{item}</span>
+                              ))}
+                            </div>
+                          )}
+
+                          {selectedSalad.dressings?.length > 0 && (
+                            <p className="desc" style={{ margin: 0 }}>
+                              Dressing: {selectedSalad.dressings.join(", ")}
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
