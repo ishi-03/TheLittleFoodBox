@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const menus = [
     {
@@ -34,95 +36,190 @@ export default function Sidebar() {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const closeSidebar = () => setIsOpen(false);
+
   return (
-    <aside
-      className="fixed top-0 left-0 w-full md:w-[260px] h-auto md:h-screen z-50 flex flex-col box-border overflow-x-hidden"
-      style={{
-        background: "#1f2937",
-        color: "#fff",
-        padding: 20,
-        boxSizing: "border-box",
-      }}
-    >
-      <h2
+    <>
+      {/* Mobile Hamburger Button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-40 flex items-center justify-center w-11 h-11 rounded-lg"
         style={{
-          marginBottom: 35,
-          textAlign: "center",
+          background: "#1f2937",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
         }}
-        className="text-base md:text-xl mb-4 md:mb-[35px]"
+        aria-label="Open menu"
       >
-        🥗 Admin Panel
-      </h2>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
 
-      {/* Navigation */}
-      <div className="flex-1 flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible overflow-y-visible gap-2 md:gap-0 pb-2 md:pb-0 -mx-1 px-1 md:mx-0 md:px-0">
-        {menus.map((menu) => {
-          const active = pathname === menu.path;
-
-          return (
-            <Link
-              key={menu.path}
-              to={menu.path}
-              className="block flex-shrink-0 md:flex-shrink whitespace-nowrap md:whitespace-normal mb-0 md:mb-[10px]"
-              style={{
-                padding: "13px 16px",
-                borderRadius: 10,
-                textDecoration: "none",
-                color: "#fff",
-                background: active ? "#166534" : "transparent",
-                fontWeight: active ? "600" : "400",
-                transition: "0.2s",
-              }}
-            >
-              {menu.name}
-            </Link>
-          );
-        })}
-      </div>
-
-      {/* Bottom Section */}
+      {/* Mobile Backdrop */}
       <div
-        className="flex flex-col gap-2 md:gap-0 mt-2 md:mt-0"
+        onClick={closeSidebar}
+        className={`md:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+      />
+
+      <aside
+        className={`fixed top-0 left-0 w-[260px] md:w-[260px] h-screen z-50 flex flex-col box-border overflow-x-hidden transition-transform duration-300 ease-in-out
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
         style={{
-          borderTop: "1px solid rgba(255,255,255,0.15)",
-          paddingTop: 20,
+          background: "#1f2937",
+          color: "#fff",
+          padding: 20,
+          boxSizing: "border-box",
         }}
       >
-        <a
-  href="/menu"
-  className="block mb-0 md:mb-0"
-  style={{
-    display: "block",
-    textDecoration: "none",
-    textAlign: "center",
-    padding: "13px",
-    borderRadius: 10,
-    background: "#374151",
-    color: "#fff",
-    marginBottom: 10,
-  }}
->
-  🌐 View Website
-</a>
-
+        {/* Mobile Close Button */}
         <button
-          onClick={logout}
-          className="w-full"
+          onClick={closeSidebar}
+          className="md:hidden absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-lg"
           style={{
-            width: "100%",
-            padding: "13px",
-            border: "none",
-            borderRadius: 10,
-            background: "#dc2626",
+            background: "#374151",
             color: "#fff",
-            fontSize: 15,
+            border: "none",
             cursor: "pointer",
-            fontWeight: 500,
+          }}
+          aria-label="Close menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
+        <h2
+          style={{
+            marginBottom: 35,
+            textAlign: "center",
           }}
         >
-          🚪 Logout
-        </button>
-      </div>
-    </aside>
+          🥗 Admin Panel
+        </h2>
+
+        {/* Navigation */}
+        <div style={{ flex: 1 }}>
+          {menus.map((menu) => {
+            const active = pathname === menu.path;
+
+            return (
+              <Link
+                key={menu.path}
+                to={menu.path}
+                onClick={closeSidebar}
+                style={{
+                  display: "block",
+                  padding: "13px 16px",
+                  marginBottom: 10,
+                  borderRadius: 10,
+                  textDecoration: "none",
+                  color: "#fff",
+                  background: active ? "#166534" : "transparent",
+                  fontWeight: active ? "600" : "400",
+                  transition: "0.2s",
+                }}
+              >
+                {menu.name}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Bottom Section */}
+        <div
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.15)",
+            paddingTop: 20,
+          }}
+        >
+          
+            href="/menu"
+            onClick={closeSidebar}
+            style={{
+              display: "block",
+              textDecoration: "none",
+              textAlign: "center",
+              padding: "13px",
+              borderRadius: 10,
+              background: "#374151",
+              color: "#fff",
+              marginBottom: 10,
+            }}
+          >
+            🌐 View Website
+          </a>
+
+          <button
+            onClick={() => {
+              closeSidebar();
+              logout();
+            }}
+            style={{
+              width: "100%",
+              padding: "13px",
+              border: "none",
+              borderRadius: 10,
+              background: "#dc2626",
+              color: "#fff",
+              fontSize: 15,
+              cursor: "pointer",
+              fontWeight: 500,
+            }}
+          >
+            🚪 Logout
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }
