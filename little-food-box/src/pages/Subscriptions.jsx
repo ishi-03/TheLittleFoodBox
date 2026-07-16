@@ -836,75 +836,26 @@ updated[dayIndex] = {
   // Single CTA: creates the subscription, then saves the chosen
   // per-day salads on it. Preserves the original two API calls,
   // just consolidated behind one button click as requested.
-  const handleStartSubscription = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("Please login first");
-      return;
-    }
-    if (!selectedPlan || !selectedSlot || !startDate) {
-      alert("Please select a plan, delivery slot, and start date");
-      return;
-    }
-    if (!allDaysFilled) {
-      alert("Please select a salad for every day before continuing");
-      return;
-    }
+const handleStartSubscription = () => {
+  if (!selectedPlan || !selectedSlot || !startDate) {
+    alert("Please select a plan, delivery slot and start date");
+    return;
+  }
 
-    setSubmitting(true);
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/subscriptions`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          planId: selectedPlan,
-          deliverySlotId: selectedSlot,
-          startDate,
-          deliveryPattern: currentPlan?.deliveryPatterns?.[0] || "Daily",
-          notes: "",
-        }),
-      });
-      const data = await res.json();
+  if (!allDaysFilled) {
+    alert("Please select a salad for every day");
+    return;
+  }
 
-      if (!data.success) {
-        alert(data.message);
-        setSubmitting(false);
-        return;
-      }
-
-      const newSubscriptionId = data.subscription._id;
-      setSubscriptionId(newSubscriptionId);
-
-      const saveRes = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/subscriptions/${newSubscriptionId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ mealSelections }),
-        }
-      );
-      const saveData = await saveRes.json();
-
-      if (saveData.success) {
-        setSubscribed(true);
-        setTimeout(() => navigate("/my-subscription"), 1400);
-      } else {
-        alert(saveData.message);
-      }
-    } catch (err) {
-      console.log(err);
-      alert("Something went wrong");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
+  navigate(`/checkout/${selectedPlan}`, {
+    state: {
+      plan: currentPlan,
+      slot: currentSlot,
+      startDate,
+      mealSelections,
+    },
+  });
+};
   const step = !selectedPlan ? 1 : !allDaysFilled ? 2 : 3;
 
   return (

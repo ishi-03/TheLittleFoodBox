@@ -14,6 +14,7 @@ import Login from "./pages/Login.jsx";
 import Profile from "./pages/profile.jsx";
 import Register from "./pages/Register.jsx";
 import About from "./pages/About.jsx";
+import Checkout from "./pages/Checkout.jsx";
 // import CustomizeSubscription from "./admin/pages/CustomizeSubscription.jsx";
 // Admin
 import ProtectedAdmin from "./admin/components/ProtectedAdmin.jsx";
@@ -52,7 +53,7 @@ export default function App() {
       {/* ================= AUTH ================= */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
+<Route path="/checkout/:id" element={<Checkout />} />
       {/* ================= ADMIN ================= */}
       <Route path="/admin" element={<ProtectedAdmin />}>
         <Route element={<AdminLayout />}>

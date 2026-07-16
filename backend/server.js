@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
@@ -16,6 +15,8 @@ import eventRoutes from "./routes/eventRoutes.js";
 import saladRoutes from "./routes/saladRoutes.js";
 dotenv.config();
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
+
 const app = express();
 
 // -------------------- Middleware --------------------
@@ -66,9 +67,10 @@ app.use("/api/subscription-plans", subscriptionPlanRoutes);
 app.use("/api/delivery-slots", deliverySlotRoutes);
 
 // app.use("/api/orders", orderRoutes);
-
 app.use("/api/events", eventRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/payment", paymentRoutes);
+
 // -------------------- Start Server --------------------
 
 const PORT = process.env.PORT || 5000;
