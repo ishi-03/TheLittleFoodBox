@@ -445,8 +445,11 @@ const styles = `
     transition: max-height 0.6s cubic-bezier(.2,.8,.2,1), opacity 0.5s ease;
   }
   .salad-section.collapsed { max-height: 0; opacity: 0; }
-  .salad-section.expanded { max-height: 6000px; opacity: 1; }
-
+.salad-section.expanded {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+}
   .day-card {
     background: #fff;
     border-radius: 20px;
