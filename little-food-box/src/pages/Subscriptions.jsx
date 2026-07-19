@@ -1,6 +1,10 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { FaArrowLeft, FaCheck, FaChevronDown, FaChevronUp, FaTimes } from "react-icons/fa";
+import SubscriptionHeader from "../admin/components/SubscriptionHeader";
+import MealSelectionSection from "../admin/components/MealSelectionSection";
+import DeliverySection from "../admin/components/DeliverySection";
+// import ChooseBowlModal from "../admin/components/ChooseBowlModal";
 /* ============================================================
    DESIGN TOKENS
    Cream / sage / forest palette carried over from the existing
@@ -737,8 +741,12 @@ function deriveTags(salad) {
 
 const Subscriptions = () => {
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState("");
-  const [plans, setPlans] = useState([]);
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+const [startDate, setStartDate] = useState(
+  tomorrow.toISOString().split("T")[0]
+);  const [plans, setPlans] = useState([]);
   const [slots, setSlots] = useState([]);
   const [subscriptionId, setSubscriptionId] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -750,6 +758,7 @@ const Subscriptions = () => {
   const [submitting, setSubmitting] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const saladSectionRef = useRef(null);
+  const [deliveryPattern, setDeliveryPattern] = useState("Daily");
 useEffect(() => {
   const close = (e) => {
     if (e.key === "Escape") {
@@ -805,21 +814,164 @@ useEffect(() => {
     () => mealSelections.filter((m) => m.salad).length,
     [mealSelections]
   );
+const generateMealSchedule = (
+  plan,
+  startDate,
+  deliveryPattern,
+  selectedSlot,
+  slots,
+  salads
+) => {
+  console.log("Pattern:", deliveryPattern);
 
+  if (!plan || !startDate || !selectedSlot) return [];
+
+  const meals = [];
+  const current = new Date(startDate);
+
+  for (let i = 1; i <= plan.units; i++) {
+    console.log("Meal", i, current.toLocaleDateString());
+const defaultSalad = salads[(i - 1) % salads.length];
+
+meals.push({
+  mealNo: i,
+  day: i,
+  date: new Date(current),
+  deliverySlotId: selectedSlot,
+
+  salad: defaultSalad?._id || "",
+  selectedSalad: defaultSalad || null,
+
+  dressing: defaultSalad?.dressings?.[0] || "",
+  vegan: false,
+  jain: false,
+  variant: "regular",
+});
+
+    current.setDate(
+      current.getDate() +
+        (deliveryPattern === "Alternate Day" ? 2 : 1)
+    );
+    console.log(
+  `Meal ${i}`,
+  "Date:",
+  current.toLocaleDateString(),
+  "Slot ID:",
+  selectedSlot
+);
+
+const slotObj = slots.find((s) => s._id === selectedSlot);
+
+console.log(
+  `Meal ${i} Slot:`,
+  slotObj?.shift,
+  slotObj?.startTime,
+  "-",
+  slotObj?.endTime
+);
+  }
+
+  return meals;
+};
   const allDaysFilled = mealSelections.length > 0 && mealSelections.every((m) => m.salad);
+
+
 
   // Selecting a plan immediately builds the per-day meal slots
   // (client-side only) and reveals the "Choose Your Salads" section.
-  const handleSelectPlan = (plan) => {
-    setSelectedPlan(plan._id);
-    const meals = [];
-    for (let i = 1; i <= plan.units; i++) meals.push({ day: i, salad: "" });
-    setMealSelections(meals);
-    setExpandedDay(null);
-    setTimeout(() => {
-      saladSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 250);
-  };
+const handleSelectPlan = (plan) => {
+  setSelectedPlan(plan._id);
+
+  if (startDate && selectedSlot) {
+    const meals = generateMealSchedule(
+  plan,
+  startDate,
+  deliveryPattern,
+  selectedSlot,
+  slots,
+  salads
+)
+
+setMealSelections((prev) => {
+  return meals.map((meal, index) => {
+    const oldMeal = prev[index];
+
+    if (!oldMeal) return meal;
+
+    return {
+      ...meal,
+
+      // preserve user's changes
+date: meal.date,     deliverySlotId:
+        meal.deliverySlotId,
+
+      salad: oldMeal.salad,
+      selectedSalad: oldMeal.selectedSalad,
+      dressing: oldMeal.dressing,
+      vegan: oldMeal.vegan,
+      jain: oldMeal.jain,
+      variant: oldMeal.variant,
+      isEdited: oldMeal.isEdited,
+      status: oldMeal.status,
+    };
+  });
+});  } else {
+    setMealSelections([]);
+  }
+
+  setExpandedDay(null);
+
+  setTimeout(() => {
+    saladSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, 250);
+};
+  useEffect(() => {
+  if (!selectedPlan || !startDate || !selectedSlot) return;
+
+  const plan = plans.find((p) => p._id === selectedPlan);
+  if (!plan) return;
+
+  const meals = generateMealSchedule(
+  plan,
+  startDate,
+  deliveryPattern,
+  selectedSlot,
+  slots,
+  salads
+)
+setMealSelections((prev) => {
+  return meals.map((meal, index) => {
+    const oldMeal = prev[index];
+
+    if (!oldMeal) return meal;
+
+    return {
+      ...meal,
+date: meal.date,     deliverySlotId:
+         meal.deliverySlotId,
+
+      salad: oldMeal.salad,
+      selectedSalad: oldMeal.selectedSalad,
+      dressing: oldMeal.dressing,
+      vegan: oldMeal.vegan,
+      jain: oldMeal.jain,
+      variant: oldMeal.variant,
+      isEdited: oldMeal.isEdited,
+      status: oldMeal.status,
+    };
+  });
+});
+}, [
+  selectedPlan,
+  startDate,
+  selectedSlot,
+  deliveryPattern,
+  plans,
+  slots
+]);
 
   const handlePickSalad = (dayIndex, salad) => {
     setMealSelections((prev) => {
@@ -828,8 +980,17 @@ updated[dayIndex] = {
   ...updated[dayIndex],
   salad: salad._id,
   selectedSalad: salad,
+
+  dressing: salad.dressings?.[0] || "",
+
+  vegan: false,
+  jain: false,
+
   variant: "regular",
-};      return updated;
+
+  isEdited: true,
+  status: "Pending",
+};    return updated;
     });
   };
 
@@ -837,6 +998,8 @@ updated[dayIndex] = {
   // per-day salads on it. Preserves the original two API calls,
   // just consolidated behind one button click as requested.
 const handleStartSubscription = () => {
+  console.log("HANDLE START SUBSCRIPTION CALLED");
+
   if (!selectedPlan || !selectedSlot || !startDate) {
     alert("Please select a plan, delivery slot and start date");
     return;
@@ -846,15 +1009,16 @@ const handleStartSubscription = () => {
     alert("Please select a salad for every day");
     return;
   }
-
-  navigate(`/checkout/${selectedPlan}`, {
-    state: {
-      plan: currentPlan,
-      slot: currentSlot,
-      startDate,
-      mealSelections,
-    },
-  });
+console.log(mealSelections);
+navigate(`/checkout/${selectedPlan}`, {
+  state: {
+    plan: currentPlan,
+    slot: currentSlot,
+    startDate,
+    deliveryPattern,
+    mealSelections,
+  },
+});
 };
   const step = !selectedPlan ? 1 : !allDaysFilled ? 2 : 3;
 
@@ -870,284 +1034,51 @@ const handleStartSubscription = () => {
         </button>
 
         <div className="sub-container">
-          {/* ============ HERO ============ */}
-          <div className="hero">
-            <div className="hero-ring-wrap">
-              <svg className="hero-ring" viewBox="0 0 190 190" width="190" height="190">
-                <circle cx="95" cy="95" r="86" fill="none" stroke="#5AAA4E" strokeOpacity="0.25" strokeWidth="2" strokeDasharray="6 10" strokeLinecap="round" />
-              </svg>
-              <div className="hero-bowl">🥗</div>
-              <span className="floaty floaty-1">🥬</span>
-              <span className="floaty floaty-2">🍅</span>
-              <span className="floaty floaty-3">🥒</span>
-              <span className="floaty floaty-4">🥑</span>
-            </div>
 
-            <div className="hero-eyebrow">
-              <span className="hero-dot" />
-              Fresh Daily Delivery
-            </div>
-            <h1>Eat <em>fresh.</em> Feel better.<br />Every day.</h1>
-            <p className="sub">
-              Chef-crafted salads, tailored to your goals and delivered to your door
-              each morning — a premium ritual for a healthier week.
-            </p>
-
-            <div className="trust-row">
-              <div className="trust-badge">🌿 Fresh Daily</div>
-              <div className="trust-badge">🩺 Nutritionist Approved</div>
-              <div className="trust-badge">🎛️ Customizable</div>
-              <div className="trust-badge">🚚 Free Delivery</div>
-            </div>
-          </div>
-
-          {/* ============ PROGRESS ============ */}
-          <div className="progress-wrap">
-            <div className="progress-step">
-              <div className={`progress-node ${step === 1 ? "active" : "done"}`}>{step > 1 ? "✓" : "1"}</div>
-              <span className={`progress-label ${step === 1 ? "active" : ""}`}>Choose Plan</span>
-            </div>
-            <div className="progress-bar"><div className="progress-bar-fill" style={{ width: step > 1 ? "100%" : "0%" }} /></div>
-            <div className="progress-step">
-              <div className={`progress-node ${step === 2 ? "active" : step > 2 ? "done" : ""}`}>{step > 2 ? "✓" : "2"}</div>
-              <span className={`progress-label ${step === 2 ? "active" : ""}`}>Choose Salads</span>
-            </div>
-            <div className="progress-bar"><div className="progress-bar-fill" style={{ width: step > 2 ? "100%" : "0%" }} /></div>
-            <div className="progress-step">
-              <div className={`progress-node ${step === 3 ? "active" : ""}`}>3</div>
-              <span className={`progress-label ${step === 3 ? "active" : ""}`}>Checkout</span>
-            </div>
-          </div>
-
-          {/* ============ STEP 1: PLAN ============ */}
-          <div className="section-head">
-            <div className="section-eyebrow">Step 1</div>
-            <h2 className="section-title">Choose your plan</h2>
-          </div>
-
-          <div className="plan-grid">
-            {plans.map((plan, idx) => (
-              <div
-                key={plan._id}
-                className={`plan-card ${selectedPlan === plan._id ? "selected" : ""}`}
-                onClick={() => handleSelectPlan(plan)}
-              >
-                {idx === 1 && <div className="plan-popular">MOST POPULAR</div>}
-                <div className="plan-icon">{idx === 0 ? "🥗" : idx === 1 ? "🌿" : "✨"}</div>
-                <h3>{plan.name}</h3>
-                <div className="plan-units">{plan.units} meals · {plan.validity} days</div>
-                <div className="plan-price-row">
-                  <span className="amt">₹{plan.price}</span>
-                  <span className="per">total</span>
-                </div>
-                <div className="plan-per-unit">₹{plan.pricePerUnit} / meal</div>
-                <div className="plan-tags">
-                  {plan.deliveryPatterns?.slice(0, 2).map((d) => (
-                    <span className="plan-tag" key={d}>{d}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* ============ LOGISTICS: slot + date ============ */}
-          <div className="logistics-card">
-            <div className="logistics-inner">
-              <div>
-                <div className="field-label">Delivery Slot</div>
-                <div className="slot-pills">
-                  {slots.map((slot) => (
-                    <div
-                      key={slot._id}
-                      className={`slot-pill ${selectedSlot === slot._id ? "active" : ""}`}
-                      onClick={() => setSelectedSlot(slot._id)}
-                    >
-                      {slot.shift} • {slot.startTime}-{slot.endTime}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <div className="field-label">Start Date</div>
-                <input
-                  type="date"
-                  className="date-input"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* ============ STEP 2: SALADS (auto-expands on plan select) ============ */}
-          <div ref={saladSectionRef} className={`salad-section ${selectedPlan ? "expanded" : "collapsed"}`}>
-            <div className="section-head">
-              <div className="section-eyebrow">Step 2</div>
-              <h2 className="section-title">Choose your salads</h2>
-            </div>
-
-            {mealSelections.map((meal, index) => {
-              const isExpanded = expandedDay === meal.day;
-              const selectedSalad = meal.selectedSalad || salads.find((s) => s._id === meal.salad);
-
-              return (
-                <div className="day-card" key={meal.day} style={{ animationDelay: `${index * 0.04}s` }}>
-                  <div className="day-card-head">
-                    <div className="day-title">
-                      <div className="day-num">{meal.day}</div>
-                      <div>
-                        <h4>Day {meal.day}</h4>
-                        {selectedSalad && <div className="day-selected-name">{selectedSalad.name}</div>}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="chip-row">
-                    {salads.map((salad) => (
-                      <div
-                        key={salad._id}
-                        className={`salad-chip ${meal.salad === salad._id ? "selected" : ""}`}
-                        onClick={() => handlePickSalad(index, salad)}
-                      >
-                        <span className="chip-check">✓</span>
-<div className="chip-thumb">
-  <img
-    src={salad.image}
-    alt={salad.name}
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      borderRadius: "12px",
-    }}
+  <SubscriptionHeader
+    step={step}
+    plans={plans}
+    selectedPlan={selectedPlan}
+    handleSelectPlan={handleSelectPlan}
   />
-</div>                        <div className="chip-name">{salad.name}</div>
-                        <div className="chip-kcal">{salad.calories} kcal</div>
-                      </div>
-                    ))}
-                  </div>
 
-                {selectedSalad && (
-  <>
-    <div className="tag-row" style={{ marginTop: "12px" }}>
-      {selectedSalad.variants?.vegan && (
-        <button
-          type="button"
-          className={`variant-pill ${
-            meal.variant === "vegan" ? "active" : ""
-          }`}
-         onClick={() =>
-  setMealSelections((prev) => {
-    const updated = [...prev];
+<DeliverySection
+  slots={slots}
+  selectedSlot={selectedSlot}
+  setSelectedSlot={setSelectedSlot}
+  startDate={startDate}
+  setStartDate={setStartDate}
+  deliveryPattern={deliveryPattern}
+  setDeliveryPattern={setDeliveryPattern}
+/>
 
-    updated[index] = {
-      ...updated[index],
-      variant:
-        updated[index].variant === "vegan"
-          ? "regular"
-          : "vegan",
-    };
+  <MealSelectionSection
+    selectedPlan={selectedPlan}
+    saladSectionRef={saladSectionRef}
+    mealSelections={mealSelections}
+    salads={salads}
+    expandedDay={expandedDay}
+    setExpandedDay={setExpandedDay}
+    handlePickSalad={handlePickSalad}
+    setMealSelections={setMealSelections}
+    deriveTags={deriveTags}
+    setPreviewImage={setPreviewImage}
+    subscribed={subscribed}
+      slots={slots}
+        startDate={startDate}
 
-    return updated;
-  })
-}
-        >
-          🌱 Vegan
-        </button>
-      )}
 
-      {selectedSalad.variants?.jain && (
-        <button
-          type="button"
-          className={`variant-pill ${
-            meal.variant === "jain" ? "active" : ""
-          }`}
-         onClick={() =>
-  setMealSelections((prev) => {
-    const updated = [...prev];
-
-    updated[index] = {
-      ...updated[index],
-      variant:
-        updated[index].variant === "jain"
-          ? "regular"
-          : "jain",
-    };
-
-    return updated;
-  })
-}
-        >
-          🪷 Jain
-        </button>
-      )}
-    </div>
-
-    <button
-      className="detail-toggle"
-      onClick={() => setExpandedDay(isExpanded ? null : meal.day)}
-    >
-      {isExpanded ? "Hide details ▲" : "View nutrition & details ▼"}
-    </button>
-  </>
-)}
-
-                  {isExpanded && selectedSalad && (
-                    <div className="salad-detail-panel">
-                      <div className="detail-grid">
-                        <div
-                          className="detail-image-col"
-                          onClick={() => setPreviewImage(selectedSalad.image)}
-                        >
-                          <img src={selectedSalad.image} alt={selectedSalad.name} />
-                          <div className="detail-zoom-badge">🔍</div>
-                        </div>
-
-                        <div className="detail-content-col">
-                          <h5>{selectedSalad.name}</h5>
-                          <p className="desc">{selectedSalad.description}</p>
-
-                          <div className="macro-grid">
-                            <div className="macro-cell"><div className="k">Calories</div><div className="v">{selectedSalad.calories}</div></div>
-                            <div className="macro-cell"><div className="k">Protein</div><div className="v">{selectedSalad.protein}g</div></div>
-                            <div className="macro-cell"><div className="k">Carbs</div><div className="v">{selectedSalad.carbs}g</div></div>
-                            <div className="macro-cell"><div className="k">Fat</div><div className="v">{selectedSalad.fat}g</div></div>
-                          </div>
-
-                          <div className="tag-row">
-                            {deriveTags(selectedSalad).map((t) => (
-                              <span key={t.key} className={`diet-tag ${t.key}`}>{t.label}</span>
-                            ))}
-                          </div>
-
-                          {selectedSalad.ingredients?.length > 0 && (
-                            <div className="ing-row">
-                              {selectedSalad.ingredients.map((item, i) => (
-                                <span key={i} className="ing-chip">{item}</span>
-                              ))}
-                            </div>
-                          )}
-
-                          {selectedSalad.dressings?.length > 0 && (
-                            <p className="desc" style={{ margin: 0 }}>
-                              Dressing: {selectedSalad.dressings.join(", ")}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {subscribed && (
-            <div className="success-banner">
-              🎉 You're subscribed! Redirecting to your subscription…
-            </div>
-          )}
-        </div>
+  />
+{/* <ChooseBowlModal
+    open={showSelector}
+    salads={salads}
+    onClose={() => setShowSelector(false)}
+    onSelect={(salad) => {
+        handlePickSalad(selectedMealIndex, salad);
+        setShowSelector(false);
+    }}
+/> */}
+</div>
 
         {/* ============ STICKY SUMMARY + CTA (only after 1+ salad picked) ============ */}
         {selectedPlan && selectedSaladCount > 0 && !subscribed && (
@@ -1238,7 +1169,7 @@ const handleStartSubscription = () => {
   </div>
 )}
     </>
-  );
+  )
 };
 
 export default Subscriptions;

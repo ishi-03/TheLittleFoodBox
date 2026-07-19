@@ -1,5 +1,18 @@
 const API = `${import.meta.env.VITE_API_URL}/api/subscriptions`;
+export const createSubscription = async (body) => {
+  const token = localStorage.getItem("token");
 
+  const res = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  return await res.json();
+};
 export const getSubscriptions = async () => {
   const token = localStorage.getItem("token");
 

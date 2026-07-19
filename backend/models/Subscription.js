@@ -24,7 +24,18 @@ const subscriptionSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-
+deliveryAddress: {
+  fullName: String,
+  phone: String,
+  alternatePhone: String,
+  house: String,
+  street: String,
+  landmark: String,
+  city: String,
+  state: String,
+  pincode: String,
+  addressType: String,
+},
     deliveryPattern: {
       type: String,
       enum: ["Daily", "Alternate Day"],
@@ -37,38 +48,67 @@ const subscriptionSchema = new mongoose.Schema(
     },
 mealSelections: [
   {
-    day: Number,
+    mealNo: Number,
+
+    date: Date,
+
+    deliverySlotId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DeliverySlot",
+    },
 
     salad: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Salad",
     },
 
-    dressing: {
+    dressing: String,
+
+    vegan: Boolean,
+
+    jain: Boolean,
+
+    isEdited: {
+      type: Boolean,
+      default: false,
+    },
+
+    deliveredAt: Date,
+
+    status: {
       type: String,
-      default: "",
-    },
-
-    vegan: {
-      type: Boolean,
-      default: false,
-    },
-
-    jain: {
-      type: Boolean,
-      default: false,
+      enum: [
+        "Pending",
+        "Confirmed",
+        "Delivered",
+        "Skipped",
+      ],
+      default: "Pending",
     },
   },
 ],
-    status: {
-      type: String,
-      enum: ["active", "paused", "completed", "cancelled"],
-      default: "active",
-    },
-  },
+
+status: {
+  type: String,
+  enum: ["active", "paused", "completed", "cancelled"],
+  default: "active",
+},
+
+paymentStatus: {
+  type: String,
+  default: "Paid",
+},
+
+paymentId: String,
+
+orderId: String,
+
+paymentDate: Date,
+},
   {
     timestamps: true,
   }
 );
+
 
 export default mongoose.model("Subscription", subscriptionSchema);

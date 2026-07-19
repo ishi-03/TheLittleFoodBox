@@ -4,7 +4,7 @@ export default function MealPlanModal({
   subscription,
 }) {
   if (!open || !subscription) return null;
-
+console.log(subscription.mealSelections);
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 backdrop-blur-sm p-4">
 
@@ -38,7 +38,120 @@ export default function MealPlanModal({
         {/* Body */}
 
         <div className="max-h-[70vh] overflow-y-auto p-6">
+<div className="mb-6 grid gap-4 md:grid-cols-2">
 
+  {/* Customer */}
+
+  <div className="rounded-xl border border-stone-200 bg-white p-4">
+    <h3 className="mb-3 font-semibold text-stone-800">
+      👤 Customer Details
+    </h3>
+
+    <p><strong>Name:</strong> {subscription.userId?.name}</p>
+    <p><strong>Email:</strong> {subscription.userId?.email}</p>
+    <p><strong>Phone:</strong> {subscription.deliveryAddress?.phone}</p>
+  </div>
+
+  {/* Subscription */}
+
+  <div className="rounded-xl border border-stone-200 bg-white p-4">
+    <h3 className="mb-3 font-semibold text-stone-800">
+      📦 Subscription
+    </h3>
+
+    <p><strong>Plan:</strong> {subscription.planId?.name}</p>
+
+    <p>
+      <strong>Start Date:</strong>{" "}
+      {new Date(subscription.startDate).toLocaleDateString()}
+    </p>
+
+    <p>
+      <strong>Slot:</strong>{" "}
+      {subscription.deliverySlotId?.startTime} -
+      {subscription.deliverySlotId?.endTime}
+    </p>
+
+<p className="flex items-center gap-2">
+  <strong>Status:</strong>
+
+  <span
+    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+      subscription.paymentStatus === "Paid"
+        ? "bg-green-100 text-green-700"
+        : "bg-red-100 text-red-700"
+    }`}
+  >
+    {subscription.paymentStatus}
+  </span>
+</p>  </div>
+
+  {/* Address */}
+
+  <div className="rounded-xl border border-stone-200 bg-white p-4 md:col-span-2">
+    <h3 className="mb-3 font-semibold text-stone-800">
+      📍 Delivery Address
+    </h3>
+
+    <p>{subscription.deliveryAddress?.fullName}</p>
+
+    <p>
+      {subscription.deliveryAddress?.house},{" "}
+      {subscription.deliveryAddress?.street}
+    </p>
+
+    <p>{subscription.deliveryAddress?.landmark}</p>
+
+    <p>
+      {subscription.deliveryAddress?.city},{" "}
+      {subscription.deliveryAddress?.state} -
+      {subscription.deliveryAddress?.pincode}
+    </p>
+
+    <p>
+      <strong>Type:</strong>{" "}
+      {subscription.deliveryAddress?.addressType}
+    </p>
+
+    {subscription.deliveryAddress?.alternatePhone && (
+      <p>
+        <strong>Alt Phone:</strong>{" "}
+        {subscription.deliveryAddress.alternatePhone}
+      </p>
+    )}
+  </div>
+
+  {/* Payment */}
+
+  <div className="rounded-xl border border-stone-200 bg-white p-4 md:col-span-2">
+    <h3 className="mb-3 font-semibold text-stone-800">
+      💳 Payment
+    </h3>
+
+    <p>
+      <strong>Status:</strong> {subscription.paymentStatus}
+    </p>
+
+    <p>
+      <strong>Payment ID:</strong> {subscription.paymentId}
+    </p>
+
+    <p>
+      <strong>Order ID:</strong> {subscription.orderId}
+    </p>
+
+    <p>
+      <strong>Payment Date:</strong>{" "}
+      {subscription.paymentDate
+        ? new Date(subscription.paymentDate).toLocaleString()
+        : "-"}
+    </p>
+  </div>
+
+</div>
+<h3 className="mb-4 text-2xl font-semibold text-stone-800">
+  Subscription Details
+</h3>
           {subscription.mealSelections?.length === 0 && (
             <div className="text-center text-stone-500 py-8">
               No Meal Plan Selected
@@ -48,15 +161,29 @@ export default function MealPlanModal({
           {subscription.mealSelections?.map((meal) => (
 
             <div
-              key={meal.day}
+key={meal.mealNo}
               className="mb-4 rounded-xl border border-stone-200 bg-white p-5 last:mb-0"
             >
 
               <div className="mb-3 flex items-center justify-between">
 
-                <h3 className="text-lg font-semibold text-stone-800">
-                  Day {meal.day}
-                </h3>
+               <div>
+  <h3 className="text-lg font-semibold text-stone-800">
+    Day {meal.mealNo}
+  </h3>
+
+  <p className="mt-1 text-sm text-stone-500">
+    📅 {new Date(meal.date).toLocaleDateString()}
+  </p>
+
+  {meal.deliverySlotId && (
+    <p className="text-sm font-medium text-emerald-700">
+      🕒 {meal.deliverySlotId.shift} •{" "}
+      {meal.deliverySlotId.startTime} - {meal.deliverySlotId.endTime}
+    </p>
+  )}
+</div>
+
 
               </div>
 

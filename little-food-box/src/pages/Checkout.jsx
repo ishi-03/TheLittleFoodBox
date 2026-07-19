@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import {
+import { useLocation, useNavigate } from "react-router-dom";import {
   FaMapMarkerAlt,
   FaPhone,
   FaUser,
@@ -14,7 +13,9 @@ import {
   FaLeaf,
   FaCheckCircle,
 } from "react-icons/fa";
-
+import { createOrder } from "../admin/services/paymentApi.js";
+import { verifyPayment } from "../admin/services/paymentApi.js";
+import { createSubscription } from "../admin/services/subscriptionApi.js";
 /**
  * Checkout.jsx
  * -------------------------------------------------------------------------
@@ -27,34 +28,47 @@ import {
  */
 
 const Checkout = () => {
+    const navigate = useNavigate();
   // ---------------------------------------------------------------------
   // Receive plan & slot passed from the Subscription Plans page
   // ---------------------------------------------------------------------
   const { state } = useLocation();
   const plan = state?.plan;
-  const slot = state?.slot;
+const slot = state?.slot;
+const startDate = state?.startDate;
+const mealSelections = state?.mealSelections;
+const deliveryPattern = state?.deliveryPattern;
 
-  
+  if (!plan || !slot) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <h2>Invalid Checkout. Please select a subscription plan first.</h2>
+    </div>
+  );
+}
  
 
   const displayPlan = {
-    name: plan?.name ?? dummyPlan.name,
-    duration: plan?.duration ?? dummyPlan.duration,
-    price: plan?.price ?? dummyPlan.price,
-    description: plan?.description ?? dummyPlan.description,
-  };
+  name: plan?.name || "",
+  duration: plan?.validity || "",
+  price: plan?.price || 0,
+  description: plan?.description || "",
+};
 
-  const displaySlot = {
-    day: slot?.day ?? dummySlot.day,
-    time: slot?.time ?? dummySlot.time,
-  };
+const displaySlot = {
+  day: slot?.shift || "",
+  time: `${slot?.startTime || ""} - ${slot?.endTime || ""}`,
+};
 
   // Expected start date -> tomorrow, formatted nicely
-  const expectedStartDate = new Date(Date.now() + 24 * 60 * 60 * 1000).toLocaleDateString(
-    "en-IN",
-    { weekday: "long", year: "numeric", month: "long", day: "numeric" }
-  );
-
+ const expectedStartDate = startDate
+  ? new Date(startDate).toLocaleDateString("en-IN", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : "";
   // ---------------------------------------------------------------------
   // Local state: delivery address form
   // ---------------------------------------------------------------------
@@ -118,8 +132,7 @@ const Checkout = () => {
   // ---------------------------------------------------------------------
   // Submit handler — validation only for now, Razorpay comes later
   // ---------------------------------------------------------------------
-  const handleProceedToPayment = () => {
-    const isValid = validate();
+const handleProceedToPayment = async () => {    const isValid = validate();
 
     if (!isValid) {
       setOrderConfirmed(false);
@@ -127,11 +140,84 @@ const Checkout = () => {
     }
 
     // Log collected data — this is where Razorpay will hook in later
-    console.log("Delivery Address:", address);
-    console.log("Selected Plan:", displayPlan);
-    console.log("Selected Slot:", displaySlot);
+  try {
+  const response = await createOrder(displayPlan.price);
 
-    setOrderConfirmed(true);
+const options = {
+  key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+
+  amount: response.order.amount,
+
+  currency: response.order.currency,
+
+  name: "The Little Food Box",
+
+  description: displayPlan.name,
+
+  order_id: response.order.id,
+
+  prefill: {
+    name: address.fullName,
+    contact: address.phone,
+  },
+
+  theme: {
+    color: "#3A5A40",
+  },
+
+  handler: async function (paymentResponse) {
+
+  const verify = await verifyPayment(paymentResponse);
+
+  if (!verify.success) {
+    alert("Payment Verification Failed");
+    return;
+  }
+
+  const subscription = await createSubscription({
+  planId: plan._id,
+  deliverySlotId: slot._id,
+  startDate,
+  deliveryPattern,
+  notes: "",
+  mealSelections,
+
+  deliveryAddress: {
+    fullName: address.fullName,
+    phone: address.phone,
+    alternatePhone: address.altPhone,
+    house: address.houseNo,
+    street: address.street,
+    landmark: address.landmark,
+    city: address.city,
+    state: address.state,
+    pincode: address.pincode,
+    addressType: address.addressType,
+  },
+
+  paymentStatus: "Paid",
+  paymentId: paymentResponse.razorpay_payment_id,
+  orderId: paymentResponse.razorpay_order_id,
+  paymentDate: new Date(),
+});
+
+  if (subscription.success) {
+    alert("Subscription Created Successfully");
+
+    navigate("/my-subscription");
+  } else {
+    alert(subscription.message);
+  }
+},
+};
+
+const razorpay = new window.Razorpay(options);
+
+razorpay.open();
+} catch (error) {
+  console.error(error);
+  alert("Unable to create payment order");
+}
   };
 
   // Order summary calculations

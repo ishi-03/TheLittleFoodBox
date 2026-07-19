@@ -5,13 +5,19 @@ import SubscriptionPlan from "../models/SubscriptionPlan.js";
 
 export const createSubscription = async (req, res) => {
   try {
-    const {
-      planId,
-      deliverySlotId,
-      startDate,
-      deliveryPattern,
-      notes,
-    } = req.body;
+  const {
+  planId,
+  deliverySlotId,
+  startDate,
+  deliveryPattern,
+  notes,
+  mealSelections,
+  deliveryAddress,
+  paymentStatus,
+  paymentId,
+  orderId,
+  paymentDate,
+} = req.body;
 
     // Get selected plan
     const plan = await SubscriptionPlan.findById(planId);
@@ -24,17 +30,7 @@ export const createSubscription = async (req, res) => {
     }
 
     // Generate blank meal selections
-    const mealSelections = [];
-
-    for (let i = 1; i <= plan.units; i++) {
-      mealSelections.push({
-        day: i,
-        salad: null,
-        dressing: "",
-        vegan: false,
-        jain: false,
-      });
-    }
+   
 
     const subscription = await Subscription.create({
       userId: req.user.id,
@@ -44,6 +40,12 @@ export const createSubscription = async (req, res) => {
       deliveryPattern,
       notes,
       mealSelections,
+        deliveryAddress,
+        paymentStatus,
+paymentId,
+orderId,
+paymentDate,
+
     });
 
     res.status(201).json({
@@ -66,8 +68,8 @@ export const getSubscription = async (req, res) => {
     const subscription = await Subscription.findById(req.params.id)
       .populate("planId")
       .populate("deliverySlotId")
-      .populate("mealSelections.salad");
-
+.populate("mealSelections.salad")
+.populate("mealSelections.deliverySlotId");
     if (!subscription) {
       return res.status(404).json({
         success: false,
@@ -117,8 +119,8 @@ export const getAllSubscriptions = async (req, res) => {
   .populate("userId")
   .populate("planId")
   .populate("deliverySlotId")
-  .populate("mealSelections.salad");
-
+.populate("mealSelections.salad")
+.populate("mealSelections.deliverySlotId");
     res.json({
       success: true,
       subscriptions,
@@ -135,10 +137,10 @@ export const getAllSubscriptions = async (req, res) => {
 
 export const updateSubscription = async (req, res) => {
   try {
-    const subscription = await Subscription.findByIdAndUpdate(
+   const subscription = await Subscription.findByIdAndUpdate(
   req.params.id,
   {
-    mealSelections: req.body.mealSelections,
+    ...req.body,
   },
   {
     new: true,
