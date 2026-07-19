@@ -100,7 +100,24 @@ if (!open) return null;
         </div>
       </>
     )}
+{selectedSalad.dressings?.length > 0 && (
+  <>
+    <h3 className="mt-6 font-semibold">
+      Available Dressings
+    </h3>
 
+    <div className="mt-2 flex flex-wrap gap-2">
+      {selectedSalad.dressings.map((dressing) => (
+        <span
+          key={dressing}
+          className="rounded-full bg-emerald-100 px-3 py-1 text-sm text-emerald-700"
+        >
+          🥣 {dressing}
+        </span>
+      ))}
+    </div>
+  </>
+)}
     <button
       className="mt-8 w-full rounded-xl bg-emerald-600 py-3 font-semibold text-white"
       onClick={() => onSelect(selectedSalad)}
