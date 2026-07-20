@@ -130,11 +130,9 @@ if (!token) {
                  <button
   className="manage-btn"
   style={styles.manageBtn}
-  onClick={() =>
-    alert("Coming Soon")
-  }
+ onClick={() => navigate(`/manage-subscription/${sub._id}`)}
 >
-  Manage Plan →
+  View Plan →
 </button>
                 </div>
               </div>

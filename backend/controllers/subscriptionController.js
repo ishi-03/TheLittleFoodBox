@@ -65,11 +65,14 @@ paymentDate,
 
 export const getSubscription = async (req, res) => {
   try {
-    const subscription = await Subscription.findById(req.params.id)
-      .populate("planId")
-      .populate("deliverySlotId")
-.populate("mealSelections.salad")
-.populate("mealSelections.deliverySlotId");
+const subscription = await Subscription.findOne({
+  _id: req.params.id,
+  userId: req.user.id,
+})
+  .populate("planId")
+  .populate("deliverySlotId")
+  .populate("mealSelections.salad")
+  .populate("mealSelections.deliverySlotId");     
     if (!subscription) {
       return res.status(404).json({
         success: false,

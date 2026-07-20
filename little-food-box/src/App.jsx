@@ -15,6 +15,7 @@ import Profile from "./pages/profile.jsx";
 import Register from "./pages/Register.jsx";
 import About from "./pages/About.jsx";
 import Checkout from "./pages/Checkout.jsx";
+import ManageSubscription from "./pages/ManageSubscription.jsx";
 // import CustomizeSubscription from "./admin/pages/CustomizeSubscription.jsx";
 // Admin
 import ProtectedAdmin from "./admin/components/ProtectedAdmin.jsx";
@@ -44,6 +45,10 @@ export default function App() {
         <Route path="/subscription" element={<Subscriptions />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/my-subscription" element={<MySubscription />} />
+        <Route
+  path="/manage-subscription/:id"
+  element={<ManageSubscription />}
+/>
         <Route path="/about" element={<About />} />
       </Route>
       {/* <Route
