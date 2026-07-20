@@ -22,7 +22,7 @@ export default function SubscriptionPlans() {
   const [slots, setSlots] = useState([]);
   const [slotOpen, setSlotOpen] = useState(false);
   const [editingSlot, setEditingSlot] = useState(null);
-
+const [loadingPlans, setLoadingPlans] = useState(true);
   // ================= LOAD PLANS =================
 
   const loadPlans = async (retry = 0) => {

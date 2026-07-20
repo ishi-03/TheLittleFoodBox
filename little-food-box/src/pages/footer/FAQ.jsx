@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+
 const faqs = [
   {
     q: "How do subscriptions work?",
@@ -5,11 +8,11 @@ const faqs = [
   },
   {
     q: "Can I customize my meals?",
-    a: "Yes, meal customization is available depending on the selected plan."
+    a: "Yes, meal customization is available depending on the selected plan. For any change of salad, please contact the owner directly."
   },
   {
     q: "Can I change my delivery slot?",
-    a: "Yes, before the cutoff time and subject to availability."
+    a: "Yes, before the cutoff time and subject to availability. For any change of delivery time, please contact the owner directly."
   },
   {
     q: "Do you offer Jain or Vegan meals?",
@@ -30,19 +33,29 @@ const faqs = [
 ];
 
 const FAQs = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-[#1a120f] text-[#f5f1eb] px-6 py-20">
+    <div className="min-h-screen bg-[#faf8f5] text-[#2b2320] px-6 py-20">
       <div className="max-w-4xl mx-auto">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8"
+        >
+          <ArrowLeft size={18} />
+          Back
+        </button>
+
         <h1 className="text-4xl font-light mb-10">Frequently Asked Questions</h1>
 
         <div className="space-y-6">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-[#4a3a31] rounded-xl p-6"
+              className="border border-[#e6ddd3] rounded-xl p-6 bg-white shadow-sm"
             >
               <h2 className="text-xl mb-3">{faq.q}</h2>
-              <p className="text-gray-300">{faq.a}</p>
+              <p className="text-gray-600">{faq.a}</p>
             </div>
           ))}
         </div>
