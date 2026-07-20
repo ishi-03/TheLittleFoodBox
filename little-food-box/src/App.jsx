@@ -11,7 +11,7 @@ import Contact from "./pages/Contact.jsx";
 import Subscriptions from "./pages/Subscriptions.jsx";
 import MySubscription from "./pages/MySubscription.jsx";
 import GrazingTable from "./pages/GrazingTable.jsx";
-import MealsOnWheels from "./pages/MealsonWheels.jsx";
+import MealsOnWheels from "./pages/MealsOnWheels.jsx";
 import Login from "./pages/Login.jsx";
 import Profile from "./pages/profile.jsx";
 import Register from "./pages/Register.jsx";
