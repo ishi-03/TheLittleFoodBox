@@ -399,14 +399,7 @@ const css = `
   .big-order-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px var(--terra-glow); }
   .big-order-btn > * { position: relative; z-index: 1; }
 
-  /* ── FOOTER ── */
-  .site-footer { background: var(--espresso); border-top: 1px solid rgba(255,255,255,0.05); padding: 40px 24px; text-align: center; }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-weight: 600; color: var(--cream); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
-  .footer-logo em { color: var(--terra); font-style: italic; }
-  .footer-tagline { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(253,246,236,0.28); margin-bottom: 16px; }
-  .footer-heart { color: var(--terra); animation: heartbeat 2s ease-in-out infinite; display: inline-block; }
-  @keyframes heartbeat { 0%,100%{transform:scale(1)} 14%{transform:scale(1.3)} 28%{transform:scale(1)} 42%{transform:scale(1.15)} 56%{transform:scale(1)} }
-  .footer-copy { font-size: 11px; color: rgba(253,246,236,0.22); }
+ 
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -447,6 +440,7 @@ export default function About() {
   const [counts, setCounts] = useState({ orders: 0, dishes: 0, years: 0, happy: 0 });
   const targets = { orders: 500, dishes: 40, years: 3, happy: 200 };
 const navigate = useNavigate();
+
   useEffect(() => {
     const duration = 2000;
     const start = Date.now();
@@ -622,7 +616,7 @@ const navigate = useNavigate();
         <p className="order-desc">Choose how you'd like your food — daily tiffin, weekly meal plan, or a one-time order for the family.</p>
         <div className="order-options">
           {[
-            { emoji: "🌅", title: "Daily Tiffin",    sub: "Lunch & Dinner, everyday" },
+            { emoji: "🌅", title: "Daily Salads",    sub: "Lunch & Dinner, everyday" },
             { emoji: "📅", title: "Weekly Plan",     sub: "Subscribe & save more" },
             { emoji: "🎉", title: "One-time Order",  sub: "For occasions & get-togethers" },
           ].map(({ emoji, title, sub }) => (
@@ -633,18 +627,30 @@ const navigate = useNavigate();
             </div>
           ))}
         </div>
-        <button className="big-order-btn">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span>Place Your Order</span>
-        </button>
+        <button
+  className="big-order-btn"
+  onClick={() => navigate("/subscription")}
+>
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 0 1-8 0"/>
+  </svg>
+
+  <span>Place Your Order</span>
+</button>
       </section>
 
-      {/* FOOTER */}
-      <footer className="site-footer">
-        <div className="footer-logo">🍱 The <em>Little</em> Food Box</div>
-        <div className="footer-tagline">Home · Crafted · Daily</div>
-        <div className="footer-copy">Made with <span className="footer-heart">♥</span> from our home kitchen · {new Date().getFullYear()}</div>
-      </footer>
+  
     </>
   );
 }

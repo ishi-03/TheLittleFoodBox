@@ -354,17 +354,7 @@ Tell us what you’re <br />craving today 🍽️
         </div>
       </div>
 
-      {/* Footer */}
-      <div style={{
-        borderTop: "1px solid #e0d5c5",
-        textAlign: "center",
-        padding: "1.5rem",
-        fontSize: "11px",
-        color: "#9a7d65",
-        letterSpacing: "0.08em",
-      }}>
-        © 2025 The Little Food Box · Made with 🧡 in Ahmedabad &nbsp;·&nbsp; All prices inclusive · Service with a smile 😊
-      </div>
+   
     </div>
         </>
 

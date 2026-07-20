@@ -5,13 +5,12 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
    NAVIGATION DATA
 ───────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
-  { name: "Home", to: "/", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836" },
-  { name: "About", to: "/about", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061" },
-  { name: "Menu", to: "/menu", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c" },
-  { name: "Subscription", to: "/subscription", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836" },
-  { name: "Contact", to: "/contact", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061" }
+  { name: "Home", to: "/", img: "/hero1.jpg" },
+  { name: "About", to: "/about", img: "/hero2.jpg" },
+  { name: "Menu", to: "/menu", img: "/hero3.jpg" },
+  { name: "Subscription", to: "/subscription", img: "/hero4.jpg" },
+  { name: "Contact", to: "/contact", img: "/hero5.jpg" },
 ];
-
 
 /* ─────────────────────────────────────────────────────────────
    STYLES
@@ -116,7 +115,15 @@ html, body, #root {
   from { width: 0; opacity: 0; }
   to   { width: 60px; opacity: 1; }
 }
-
+.little-word {
+  text-transform: none;
+  font-size: 1.2em;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin: 0 6px;
+}
 /* Main brand title */
 .ntb-hero-title {
   font-family: 'Cinzel', serif;
@@ -572,13 +579,13 @@ export default function Navbar() {
       {/* ── Flowing image background ── */}
       <div className="ntb-images">
         <div className="ntb-images-track">
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80" alt="" />
-          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80" alt="" />
-          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80" alt="" />
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80" alt="" />
-          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80" alt="" />
-          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80" alt="" />
-        </div>
+  <img src="/hero1.jpg" alt="" />
+  <img src="/hero2.jpg" alt="" />
+  <img src="/hero3.jpg" alt="" />
+  <img src="/hero4.jpg" alt="" />
+  <img src="/hero5.jpg" alt="" />
+  <img src="/hero1.jpg" alt="" />
+</div>
       </div>
 
       {/* ── Grain overlay ── */}
@@ -637,8 +644,9 @@ export default function Navbar() {
       >
         <span className="ntb-hero-rule" />
 
-        <h1 className="ntb-hero-title">The Little Food Box</h1>
-
+<h1 className="ntb-hero-title">
+  THE <span className="little-word">Little</span> FOOD BOX
+</h1>
         <div className="ntb-hero-sub-rule">
           <span>Curated · Crafted · Delivered</span>
         </div>
@@ -648,9 +656,8 @@ export default function Navbar() {
           onClick={openMenu}
           aria-label="Open navigation"
           aria-expanded={isOpen}
-        >
-          Explore Menu
-          <span className="ntb-arrow">↓</span>
+        > 
+Indulge in Culinary Delights 
         </button>
       </div>
     </>

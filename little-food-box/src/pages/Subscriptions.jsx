@@ -762,6 +762,7 @@ const [startDate, setStartDate] = useState(
   const [previewImage, setPreviewImage] = useState(null);
   const saladSectionRef = useRef(null);
   const [deliveryPattern, setDeliveryPattern] = useState("Daily");
+  const [loadingPlans, setLoadingPlans] = useState(true);
 useEffect(() => {
   const close = (e) => {
     if (e.key === "Escape") {
@@ -774,21 +775,43 @@ useEffect(() => {
   return () =>
     window.removeEventListener("keydown", close);
 }, []);
-  useEffect(() => {
-    loadPlans();
-    loadSlots();
-    loadSalads();
-  }, []);
 
-  const loadPlans = async () => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/subscription-plans`);
-      const data = await res.json();
-      if (data.success) setPlans(data.plans.filter((p) => p.active));
-    } catch (err) {
-      console.log(err);
+useEffect(() => {
+  setLoadingPlans(true);
+
+  loadPlans();
+  loadSlots();
+  loadSalads();
+}, []);
+
+const loadPlans = async (retry = 0) => {
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/subscription-plans`
+    );
+
+    if (!res.ok) throw new Error("Request failed");
+
+    const data = await res.json();
+
+    if (data.success) {
+      setPlans(data.plans.filter((p) => p.active));
+      setLoadingPlans(false);   // <-- Success par loading band
+      return;
     }
-  };
+
+    throw new Error("No plans");
+  } catch (err) {
+    console.log(`Retry ${retry + 1}`);
+
+    if (retry < 5) {
+      setTimeout(() => loadPlans(retry + 1), 3000);
+    } else {
+      setLoadingPlans(false);   // <-- Agar 5 retry ke baad bhi fail ho
+      console.error(err);
+    }
+  }
+};
 
   const loadSalads = async () => {
     try {
@@ -1038,12 +1061,13 @@ navigate(`/checkout/${selectedPlan}`, {
 
         <div className="sub-container">
 
-  <SubscriptionHeader
-    step={step}
-    plans={plans}
-    selectedPlan={selectedPlan}
-    handleSelectPlan={handleSelectPlan}
-  />
+ <SubscriptionHeader
+  step={step}
+  plans={plans}
+  loadingPlans={loadingPlans}
+  selectedPlan={selectedPlan}
+  handleSelectPlan={handleSelectPlan}
+/>
 
 <DeliverySection
   slots={slots}

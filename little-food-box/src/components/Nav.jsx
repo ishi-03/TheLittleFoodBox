@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const NAV_LINKS = [
-  { label: "Menu", href: "/menu" },
-  { label: "Subscription", href: "/subscription" },
-  { label: "My Subscription", href: "/my-subscription" },
-  { label: "Contact", href: "/contact" },
   { label: "About", href: "/about" },
+  { label: "Menu", href: "/menu" },
+  { label: "Meals on Wheels", href: "/meals-on-wheels" },
+  { label: "Grazing Tables", href: "/grazing-tables" },
+  { label: "Subscription", href: "/subscription" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /**
@@ -552,23 +554,23 @@ export default function Nav({
         <div className="nav-inner">
 
           {/* Brand */}
-          <a href="/" className="nav-brand">
+<Link to="/" className="nav-brand">
             <span className="nav-brand-name">The Little Food Box</span>
             <span className="nav-brand-sub">Home kitchen · Made with love 🍱</span>
-          </a>
+          </Link>
 
           {/* Desktop nav links */}
           <ul className="nav-links">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={label}>
-                <a
-                  href={href}
+                <NavLink
+                  to={href}
                   className={[
                     isActive(href) ? "active pill" : "",
                   ].filter(Boolean).join(" ")}
                 >
                   {label}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -577,14 +579,14 @@ export default function Nav({
           <div className="nav-auth">
             {user ? (
               <>
-                <a
-                  href="https://wa.me/918236055718"
+                <NavLink
+                  to="https://wa.me/918236055718"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-cta"
                 >
                   Order Now
-                </a>
+                </NavLink>
 
                 {/* Avatar + dropdown */}
                 <div className="nav-avatar-wrap" ref={avatarRef}>
@@ -611,20 +613,20 @@ export default function Nav({
                       <div className="avatar-dropdown-label">✦ Member</div>
                     </div>
                     {user?.role === "admin" && (
-  <a
-    href="/admin"
+  <NavLink
+    to="/admin"
     onClick={() => setAvatarOpen(false)}
   >
     <span className="drop-icon">🛠️</span>
     Admin Dashboard
-  </a>
+  </NavLink>
 )}
-                    <a href="/my-subscription" onClick={() => setAvatarOpen(false)}>
+                    <NavLink to="/my-subscription" onClick={() => setAvatarOpen(false)}>
                       <span className="drop-icon">📦</span> My Subscription
-                    </a>
-                    <a href="/profile" onClick={() => setAvatarOpen(false)}>
+                    </NavLink>
+                    <NavLink to="/profile" onClick={() => setAvatarOpen(false)}>
                       <span className="drop-icon">👤</span> Profile
-                    </a>
+                    </NavLink>
                     <button
                       className="dropdown-item logout-item"
                       onClick={() => {
@@ -677,14 +679,14 @@ export default function Nav({
 
         <div className="drawer-links">
           {NAV_LINKS.map(({ label, href }) => (
-            <a
+            <NavLink
               key={label}
-              href={href}
+              to={href}
               className={isActive(href) ? "active" : ""}
               onClick={() => setMenuOpen(false)}
             >
               {label}
-            </a>
+            </NavLink>
           ))}
         </div>
 
@@ -692,15 +694,15 @@ export default function Nav({
 
         {user ? (
           <>
-            <a
-              href="https://wa.me/918236055718"
+            <NavLink
+              to="https://wa.me/918236055718"
               target="_blank"
               rel="noopener noreferrer"
               className="drawer-cta"
               onClick={() => setMenuOpen(false)}
             >
               Order on WhatsApp
-            </a>
+            </NavLink>
             <button
               className="drawer-logout"
 onClick={() => {

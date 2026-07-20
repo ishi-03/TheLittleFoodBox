@@ -4,6 +4,7 @@
    const SubscriptionHeader = ({
   step,
   plans,
+  loadingPlans,
   selectedPlan,
   handleSelectPlan,
 }) => {
@@ -66,31 +67,58 @@
             <h2 className="section-title">Choose your plan</h2>
           </div>
 
-          <div className="plan-grid">
-            {plans.map((plan, idx) => (
-              <div
-                key={plan._id}
-                className={`plan-card ${selectedPlan === plan._id ? "selected" : ""}`}
-                onClick={() => handleSelectPlan(plan)}
-              >
-                {idx === 1 && <div className="plan-popular">MOST POPULAR</div>}
-                <div className="plan-icon">{idx === 0 ? "🥗" : idx === 1 ? "🌿" : "✨"}</div>
-                <h3>{plan.name}</h3>
-                <div className="plan-units">{plan.units} meals · {plan.validity} days</div>
-                <div className="plan-price-row">
-                  <span className="amt">₹{plan.price}</span>
-                  <span className="per">total</span>
-                </div>
-                <div className="plan-per-unit">₹{plan.pricePerUnit} / meal</div>
-                <div className="plan-tags">
-                  {plan.deliveryPatterns?.slice(0, 2).map((d) => (
-                    <span className="plan-tag" key={d}>{d}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+       <div className="plan-grid">
+  {loadingPlans ? (
+    <div
+      style={{
+        gridColumn: "1 / -1",
+        textAlign: "center",
+        padding: "60px 20px",
+      }}
+    >
+      <h3>Loading Plans...</h3>
+      <p style={{ color: "#777", marginTop: "10px" }}>
+        Waking up server. This may take 20–30 seconds.
+      </p>
+    </div>
+  ) : (
+    plans.map((plan, idx) => (
+      <div
+        key={plan._id}
+        className={`plan-card ${selectedPlan === plan._id ? "selected" : ""}`}
+        onClick={() => handleSelectPlan(plan)}
+      >
+        {idx === 1 && <div className="plan-popular">MOST POPULAR</div>}
+        <div className="plan-icon">
+          {idx === 0 ? "🥗" : idx === 1 ? "🌿" : "✨"}
+        </div>
 
+        <h3>{plan.name}</h3>
+
+        <div className="plan-units">
+          {plan.units} meals · {plan.validity} days
+        </div>
+
+        <div className="plan-price-row">
+          <span className="amt">₹{plan.price}</span>
+          <span className="per">total</span>
+        </div>
+
+        <div className="plan-per-unit">
+          ₹{plan.pricePerUnit} / meal
+        </div>
+
+        <div className="plan-tags">
+          {plan.deliveryPatterns?.slice(0, 2).map((d) => (
+            <span className="plan-tag" key={d}>
+              {d}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))
+  )}
+</div>
     </>
   );
 };

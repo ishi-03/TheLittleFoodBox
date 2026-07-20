@@ -208,19 +208,7 @@ console.log("Saved User:", localStorage.getItem("user"));
           </p>
         </div>
 
-        {/* FOOTER */}
-        <p
-          className="hidden md:flex"
-          style={{
-            position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)",
-            fontSize: 11, color: "#7a8a7a", whiteSpace: "nowrap",
-            alignItems: "center", gap: 8, zIndex: 1,
-          }}
-        >
-          <span style={{ fontSize: 14, opacity: 0.5 }}>🌿</span>
-          Good food is the ingredient that brings us together.
-          <span style={{ fontSize: 14, opacity: 0.5 }}>🌿</span>
-        </p>
+    
       </div>
     </div>
   );

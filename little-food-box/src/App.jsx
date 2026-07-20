@@ -10,12 +10,17 @@ import MenuCard from "./pages/MenuCard.jsx";
 import Contact from "./pages/Contact.jsx";
 import Subscriptions from "./pages/Subscriptions.jsx";
 import MySubscription from "./pages/MySubscription.jsx";
+import GrazingTable from "./pages/GrazingTable.jsx";
+import MealsOnWheels from "./pages/MealsonWheels.jsx";
 import Login from "./pages/Login.jsx";
 import Profile from "./pages/profile.jsx";
 import Register from "./pages/Register.jsx";
 import About from "./pages/About.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import ManageSubscription from "./pages/ManageSubscription.jsx";
+import PrivacyPolicy from "./pages/footer/PrivacyPolicy.jsx";
+import Terms from "./pages/footer/Terms.jsx";
+import FAQs from "./pages/footer/FAQ.jsx";
 // import CustomizeSubscription from "./admin/pages/CustomizeSubscription.jsx";
 // Admin
 import ProtectedAdmin from "./admin/components/ProtectedAdmin.jsx";
@@ -23,6 +28,7 @@ import AdminLayout from "./admin/layouts/AdminLayout.jsx";
 import AdminSalads from "./admin/pages/AdminSalads.jsx";
 import SubscriptionPlans from "./admin/pages/SubscriptionPlans.jsx";
 import AdminSubscriptions from "./admin/pages/AdminSubscriptions.jsx";
+
 import AdminUsers from "./admin/pages/AdminUsers.jsx";
 // import Categories from "./admin/pages/Categories.jsx";
 // import MenuItems from "./admin/pages/MenuItems.jsx";
@@ -45,16 +51,17 @@ export default function App() {
         <Route path="/subscription" element={<Subscriptions />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/my-subscription" element={<MySubscription />} />
+        <Route path="/grazing-tables" element={<GrazingTable />} />
+        <Route path="/meals-on-wheels" element={<MealsOnWheels />} />
         <Route
   path="/manage-subscription/:id"
   element={<ManageSubscription />}
 />
         <Route path="/about" element={<About />} />
       </Route>
-      {/* <Route
-  path="/customize-subscription/:id"
-  element={<CustomizeSubscription />}
-/> */}
+     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms" element={<Terms />} />
+<Route path="/faqs" element={<FAQs />} />
       {/* ================= AUTH ================= */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

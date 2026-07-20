@@ -25,17 +25,36 @@ export default function SubscriptionPlans() {
 
   // ================= LOAD PLANS =================
 
-  const loadPlans = async () => {
-    try {
-      const data = await getPlans();
+  const loadPlans = async (retry = 0) => {
+  try {
+    setLoadingPlans(true);
 
-      if (data.success) {
-        setPlans(data.plans);
-      }
-    } catch (err) {
-      console.log(err);
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/subscription-plans`
+    );
+
+    if (!res.ok) throw new Error("API Error");
+
+    const data = await res.json();
+
+    if (data.success) {
+      setPlans(data.plans.filter((p) => p.active));
+      setLoadingPlans(false);
+      return;
     }
-  };
+
+    throw new Error("No plans");
+  } catch (err) {
+    console.log("Retry:", retry);
+
+    if (retry < 5) {
+      setTimeout(() => loadPlans(retry + 1), 3000);
+    } else {
+      setLoadingPlans(false);
+      console.error(err);
+    }
+  }
+};
 
   const loadSlots = async () => {
     try {

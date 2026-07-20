@@ -507,24 +507,7 @@ onChange={(e) =>
 
       {/* Footer */}
 
-      <div className="flex justify-end gap-3 border-t border-stone-200 px-6 py-5">
-
-        <button
-          onClick={onClose}
-          className="rounded-lg border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-600 hover:bg-stone-50 transition-colors"
-        >
-          Cancel
-        </button>
-
-        <button
-          onClick={handleSave}
-          className="rounded-lg bg-emerald-800 px-6 py-2.5 text-sm font-semibold text-white hover:bg-emerald-900 transition-colors"
-        >
-          {editingSalad ? "Update Salad" : "Save Salad"}
-        </button>
-
-      </div>
-
+     
     </div>
   </div>
 )

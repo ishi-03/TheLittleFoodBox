@@ -556,14 +556,7 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
             </div>
           </div>
 
-          <footer style={{ height: 40, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 40px", borderTop: "1px solid var(--border)", flexShrink: 0 }}>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: 10.5, color: "var(--text-muted)" }}>All prices inclusive · Service with a smile 😊</span>
-            <div style={{ display: "flex", gap: 16 }}>
-              {["🌿 100% Veg", "🥚 No eggs", "🧂 Customisable"].map((t, i) => (
-                <span key={i} style={{ fontFamily: "var(--font-body)", fontSize: 10.5, color: "var(--text-muted)" }}>{t}</span>
-              ))}
-            </div>
-          </footer>
+        
         </main>
 
 
