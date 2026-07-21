@@ -8,7 +8,7 @@ import {
   updateSlot,
   deleteSlot,
 } from "../services/deliverySlotApi";
-
+import { formatTime } from "../../utils/time.js";
 export default function DeliverySlots() {
   const [slots, setSlots] = useState([]);
   const [open, setOpen] = useState(false);
@@ -151,9 +151,9 @@ export default function DeliverySlots() {
               <tr key={slot._id}>
                 <td>{slot.shift}</td>
 
-                <td>{slot.startTime}</td>
+                <td>{formatTime(slot.startTime)}</td>
 
-                <td>{slot.endTime}</td>
+                <td>{formatTime(slot.endTime)}</td>
 
                 <td>
                   {slot.active

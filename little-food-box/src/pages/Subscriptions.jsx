@@ -864,16 +864,14 @@ meals.push({
   day: i,
   date: new Date(current),
   deliverySlotId: selectedSlot,
-
   salad: defaultSalad?._id || "",
   selectedSalad: defaultSalad || null,
-
   dressing: defaultSalad?.dressings?.[0] || "",
   vegan: false,
   jain: false,
   variant: "regular",
+  note: "", // NEW
 });
-
     current.setDate(
       current.getDate() +
         (deliveryPattern === "Alternate Day" ? 2 : 1)
@@ -936,8 +934,9 @@ date: meal.date,     deliverySlotId:
       dressing: oldMeal.dressing,
       vegan: oldMeal.vegan,
       jain: oldMeal.jain,
-      variant: oldMeal.variant,
-      isEdited: oldMeal.isEdited,
+     variant: oldMeal.variant,
+note: oldMeal.note,
+isEdited: oldMeal.isEdited,
       status: oldMeal.status,
     };
   });
@@ -984,8 +983,9 @@ date: meal.date,     deliverySlotId:
       dressing: oldMeal.dressing,
       vegan: oldMeal.vegan,
       jain: oldMeal.jain,
-      variant: oldMeal.variant,
-      isEdited: oldMeal.isEdited,
+   variant: oldMeal.variant,
+note: oldMeal.note,
+isEdited: oldMeal.isEdited,
       status: oldMeal.status,
     };
   });

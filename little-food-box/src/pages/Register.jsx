@@ -144,7 +144,8 @@ navigate("/subscription");
               borderRadius: 999,
               background: "linear-gradient(to right, #5c704f, #4e6b4e, #2f3e2f)",
               color: "white",
-              fontWeight: 600
+              fontWeight: 600,
+              cursor: "pointer",
             }}
           >
             REGISTER →

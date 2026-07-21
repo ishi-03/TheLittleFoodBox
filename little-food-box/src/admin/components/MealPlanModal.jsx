@@ -1,5 +1,6 @@
 import html2pdf from "html2pdf.js";
 import { useRef, useState } from "react";
+import { formatTime } from "../../utils/time.js";
 function StatusBadge({ status }) {
   const styles = {
     Active: "bg-emerald-50 text-emerald-700 border-emerald-200",
@@ -117,8 +118,7 @@ function MealCard({ meal }) {
               {meal.deliverySlotId && (
                 <span className="text-stone-400">
                   {" "}
-                  · {meal.deliverySlotId.shift ? `${meal.deliverySlotId.shift} · ` : ""}
-                  {meal.deliverySlotId.startTime} - {meal.deliverySlotId.endTime}
+                  · {formatTime(meal.deliverySlotId.startTime)} - {formatTime(meal.deliverySlotId.endTime)}
                 </span>
               )}
             </p>
@@ -182,7 +182,7 @@ function MealCard({ meal }) {
                     {meal.deliverySlotId && (
                       <span>
                         <strong className="font-medium text-stone-600">Slot:</strong>{" "}
-                        {meal.deliverySlotId.startTime} - {meal.deliverySlotId.endTime}
+                        {formatTime(meal.deliverySlotId.startTime)} - {formatTime(meal.deliverySlotId.endTime)}
                       </span>
                     )}
                   </div>
@@ -286,6 +286,17 @@ function MealCard({ meal }) {
 
                 <MealStatusBadge status={meal.status} />
               </div>
+              {meal.note && (
+  <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3">
+    <p className="text-xs font-semibold uppercase text-amber-700">
+      Special Instructions
+    </p>
+
+    <p className="mt-1 text-sm text-stone-700">
+      {meal.note}
+    </p>
+  </div>
+)}
             </div>
           )}
         </div>
@@ -375,7 +386,7 @@ const handleExportPDF = () => {
             <StatCard
               icon="🕒"
               label="Current Slot"
-              value={slot ? `${slot.startTime} - ${slot.endTime}` : undefined}
+              value={slot ? `${formatTime(slot.startTime)} - ${formatTime(slot.endTime)}` : undefined}
             />
             <StatCard icon="💳" label="Payment Status" value={subscription.paymentStatus} />
             <StatCard icon="🧾" label="Payment ID" value={subscription.paymentId} />

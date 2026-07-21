@@ -1,5 +1,5 @@
 import React from "react";
-
+import { formatTime } from "../../utils/time.js";
 const DeliverySection = ({
     slots,
     selectedSlot,
@@ -24,7 +24,7 @@ const DeliverySection = ({
                                     className={`slot-pill ${selectedSlot === slot._id ? "active" : ""}`}
                                     onClick={() => setSelectedSlot(slot._id)}
                                 >
-                                    {slot.shift} • {slot.startTime}-{slot.endTime}
+                                    {slot.shift} • {formatTime(slot.startTime)}-{formatTime(slot.endTime)}
                                 </div>
                             ))}
                         </div>

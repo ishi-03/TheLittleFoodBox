@@ -49,7 +49,6 @@ deliveryAddress: {
 mealSelections: [
   {
     mealNo: Number,
-
     date: Date,
 
     deliverySlotId: {
@@ -68,6 +67,13 @@ mealSelections: [
 
     jain: Boolean,
 
+    note: {
+      type: String,
+      default: "",
+      trim: true,
+      maxlength: 250,
+    },
+
     isEdited: {
       type: Boolean,
       default: false,
@@ -77,12 +83,7 @@ mealSelections: [
 
     status: {
       type: String,
-      enum: [
-        "Pending",
-        "Confirmed",
-        "Delivered",
-        "Skipped",
-      ],
+      enum: ["Pending", "Confirmed", "Delivered", "Skipped"],
       default: "Pending",
     },
   },

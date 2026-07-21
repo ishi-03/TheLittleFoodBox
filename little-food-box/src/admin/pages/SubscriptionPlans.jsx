@@ -14,7 +14,7 @@ import {
   updateSlot,
   deleteSlot,
 } from "../services/deliverySlotApi";
-
+import { formatTime } from "../../utils/time";
 export default function SubscriptionPlans() {
   const [plans, setPlans] = useState([]);
   const [open, setOpen] = useState(false);
@@ -452,13 +452,13 @@ const [loadingPlans, setLoadingPlans] = useState(true);
                       <div className="text-[11px] uppercase tracking-wide text-[#9A9A92]">
                         Start
                       </div>
-                      <div className="text-[#4A4A45]">{slot.startTime}</div>
+                      <div className="text-[#4A4A45]">{formatTime(slot.startTime)}</div>
                     </div>
                     <div>
                       <div className="text-[11px] uppercase tracking-wide text-[#9A9A92]">
                         End
                       </div>
-                      <div className="text-[#4A4A45]">{slot.endTime}</div>
+                      <div className="text-[#4A4A45]">{formatTime(slot.endTime)}</div>
                     </div>
                     <div>
                       <div className="text-[11px] uppercase tracking-wide text-[#9A9A92]">
@@ -524,10 +524,9 @@ const [loadingPlans, setLoadingPlans] = useState(true);
                         {slot.shift}
                       </td>
                       <td className="border-b border-[#F3F1E9] px-4 py-4 text-[#4A4A45]">
-                        {slot.startTime}
-                      </td>
+{formatTime(slot.startTime)}                      </td>
                       <td className="border-b border-[#F3F1E9] px-4 py-4 text-[#4A4A45]">
-                        {slot.endTime}
+                        {formatTime(slot.endTime)}
                       </td>
                       <td className="border-b border-[#F3F1E9] px-4 py-4">
                         <span
