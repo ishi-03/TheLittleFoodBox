@@ -1,7 +1,7 @@
+import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 import path from "path";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -13,10 +13,11 @@ import deliverySlotRoutes from "./routes/deliverySlotRoutes.js";
 // import orderRoutes from "./routes/orderRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import saladRoutes from "./routes/saladRoutes.js";
-dotenv.config();
+// dotenv.config();
+console.log("SERVER API KEY:", process.env.CLOUDINARY_API_KEY);
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
-
+import menuItemRoutes from "./routes/menuItemRoutes.js";
 const app = express();
 
 // -------------------- Middleware --------------------
@@ -70,7 +71,7 @@ app.use("/api/delivery-slots", deliverySlotRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/payment", paymentRoutes);
-
+app.use("/api/menu-items", menuItemRoutes);
 // -------------------- Start Server --------------------
 
 const PORT = process.env.PORT || 5000;

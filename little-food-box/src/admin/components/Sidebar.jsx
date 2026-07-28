@@ -26,6 +26,10 @@ export default function Sidebar({ isOpen, onClose }) {
       name: "🥗 Salads",
       path: "/admin/salads",
     },
+    {
+      name: "🍽️ Menu Items",
+      path: "/admin/menu-items",
+    }
   ];
 
   const logout = () => {

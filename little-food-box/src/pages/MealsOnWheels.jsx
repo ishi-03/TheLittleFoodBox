@@ -184,8 +184,9 @@ export default function MealsOnWheels() {
               and authentic flavours for homes, offices and special occasions.
             </p>
             <a
-              href="#pricing"
-              className="inline-flex items-center gap-2 rounded-full bg-[#B5451B] text-[#FFFDF9] px-8 py-3.5 text-sm font-medium tracking-wide shadow-[0_10px_30px_-10px_rgba(181,69,27,0.55)] hover:bg-[#963a17] hover:shadow-[0_14px_36px_-8px_rgba(181,69,27,0.6)] transition-all duration-300"
+href="https://wa.me/918236055718"
+target="_blank"
+rel="noopener noreferrer"              className="inline-flex items-center gap-2 rounded-full bg-[#B5451B] text-[#FFFDF9] px-8 py-3.5 text-sm font-medium tracking-wide shadow-[0_10px_30px_-10px_rgba(181,69,27,0.55)] hover:bg-[#963a17] hover:shadow-[0_14px_36px_-8px_rgba(181,69,27,0.6)] transition-all duration-300"
             >
               Get a Quotation
             </a>
@@ -325,8 +326,9 @@ export default function MealsOnWheels() {
             personalised quotation.
           </p>
           <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-[#B5451B] text-[#FFFDF9] px-9 py-3.5 text-sm font-medium tracking-wide hover:bg-[#c85428] transition-colors duration-300"
+href="https://wa.me/918236055718"
+target="_blank"
+rel="noopener noreferrer"            className="inline-flex items-center gap-2 rounded-full bg-[#B5451B] text-[#FFFDF9] px-9 py-3.5 text-sm font-medium tracking-wide hover:bg-[#c85428] transition-colors duration-300"
           >
             Contact for Pricing
           </a>
@@ -376,8 +378,9 @@ export default function MealsOnWheels() {
               we&rsquo;ll prepare a menu your guests will love.
             </p>
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-[#FFFDF9] text-[#B5451B] px-9 py-3.5 text-sm font-medium tracking-wide hover:bg-[#FFF6E9] hover:-translate-y-0.5 transition-all duration-300"
+href="https://wa.me/918236055718"
+target="_blank"
+rel="noopener noreferrer"              className="inline-flex items-center gap-2 rounded-full bg-[#FFFDF9] text-[#B5451B] px-9 py-3.5 text-sm font-medium tracking-wide hover:bg-[#FFF6E9] hover:-translate-y-0.5 transition-all duration-300"
             >
               Contact Us
             </a>

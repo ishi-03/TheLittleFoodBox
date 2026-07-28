@@ -1,19 +1,21 @@
 import express from "express";
 import {
-  getMenu,
+  getMenuItems,
   createMenuItem,
   updateMenuItem,
   deleteMenuItem,
-} from "../controllers/menuItemControllers.js";
-
+} from "../controllers/menuItemController.js";
+import upload from "../middleware/upload.js";
 const router = express.Router();
 
-router.route("/")
-  .get(getMenu)
-  .post(createMenuItem);
+// Get all menu items
+router.get("/", getMenuItems);
 
-router.route("/:id")
-  .put(updateMenuItem)
-  .delete(deleteMenuItem);
+router.post("/", upload.single("image"), createMenuItem);
+
+router.put("/:id", upload.single("image"), updateMenuItem);
+
+// Delete menu item
+router.delete("/:id", deleteMenuItem);
 
 export default router;

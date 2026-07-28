@@ -2,17 +2,40 @@ import mongoose from "mongoose";
 
 const menuItemSchema = new mongoose.Schema(
   {
-    name: String,
-    price: mongoose.Schema.Types.Mixed,
-
-    veg: {
-      type: Boolean,
-      default: false,
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
-    spicy: {
-      type: Boolean,
-      default: false,
+    price: {
+      type: String,
+      required: true,
+    },
+
+    unit: {
+      type: String,
+      default: "",
+    },
+
+    serves: {
+      type: String,
+      default: "",
+    },
+
+    minOrder: {
+      type: String,
+      default: "",
+    },
+
+    category: {
+      type: String,
+      required: true,
+    },
+
+    section: {
+      type: String,
+      required: true,
     },
 
     chefPick: {
@@ -25,22 +48,29 @@ const menuItemSchema = new mongoose.Schema(
       default: false,
     },
 
-    category: [String],
+    spicy: {
+      type: Boolean,
+      default: false,
+    },
 
-    section: String,
-    cuisine: String,
+    image: {
+      type: String,
+      default: "",
+    },
 
-    photo: String,
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
 
-    serves: String,
-    unit: String,
-    minOrder: Number,
+    order: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const Menu = mongoose.model("Menu", menuItemSchema);
-
-export default Menu;
+export default mongoose.model("MenuItem", menuItemSchema);

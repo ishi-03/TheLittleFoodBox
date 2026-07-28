@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 // Customer Layout
 import Layout from "./components/Layout.jsx";
 import Navbar from "./components/Navbar.jsx";
-
+import AdminMenuItems from "./admin/pages/AdminMenuItems.jsx";
 // Customer Pages
 import Menu from "./pages/Menu.jsx";
 import MenuCard from "./pages/MenuCard.jsx";
@@ -88,7 +88,10 @@ export default function App() {
             path="salads"
             element={<AdminSalads />}
           />
-
+<Route
+  path="menu-items"
+  element={<AdminMenuItems />}
+/>
           {/* Future Modules */}
 
           {/*

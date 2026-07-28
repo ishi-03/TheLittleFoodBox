@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import axios from "axios";
 // ── FILTERS: unchanged from original ──
 const FILTERS = [
   { id: "all",       label: "All",           icon: "✦",  match: () => true },
@@ -270,13 +270,62 @@ export default function LittleFoodBox() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ── DATA FETCH: unchanged from original ──
-  useEffect(() => {
-    fetch("/menu.json")
-      .then((res) => res.json())
-      .then((data) => setMenuData(data));
-  }, []);
+ useEffect(() => {
+  const fetchMenu = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/menu-items`
+      );
 
+      const grouped = {};
+
+      data.forEach((item) => {
+        if (!grouped[item.category]) {
+          grouped[item.category] = {
+            id: item.category.toLowerCase().replace(/\s+/g, "-"),
+            category: item.category,
+            tagline: "",
+            color: "#f7e8d0",
+            accent: "#B5451B",
+            sections: [],
+          };
+        }
+
+        let section = grouped[item.category].sections.find(
+          (s) => s.title === item.section
+        );
+
+        if (!section) {
+          section = {
+            title: item.section,
+            items: [],
+          };
+
+          grouped[item.category].sections.push(section);
+        }
+
+        section.items.push({
+          name: item.name,
+          price: item.price,
+          unit: item.unit,
+          serves: item.serves,
+          minOrder: item.minOrder,
+          chefPick: item.chefPick,
+          popular: item.popular,
+          spicy: item.spicy,
+          image: item.image,
+          category: [grouped[item.category].id],
+        });
+      });
+
+      setMenuData(Object.values(grouped));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchMenu();
+}, []);
   // ── ALL DERIVED STATE: unchanged from original ──
   const current = menuData[active] || { sections: [], color: "#f5e6c8", accent: "#b07d3a", category: "Menu" };
   const activeFilterDef = FILTERS.find((f) => f.id === activeFilter);
@@ -378,7 +427,7 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
                     <div key={dish.name} className="dish-row anim-fade-up" style={{ animationDelay: `${(si * 4 + i) * 0.05}s` }}>
                       {/* Inline thumbnail */}
                       <div className="dish-thumb" style={{ width: 80, height: 80 }}>
-                        <img src={dish.photo} alt={dish.name}
+                        <img src={dish.image} alt={dish.name}
                           onError={e => { e.currentTarget.style.opacity = "0"; }} />
                       </div>
                       {/* Text */}
@@ -516,7 +565,7 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
                     <div key={dish.name} className="dish-row anim-fade-up" style={{ animationDelay: `${(si * 4 + i) * 0.05}s` }}>
                       {/* Inline thumbnail */}
                       <div className="dish-thumb">
-                        <img src={dish.photo} alt={dish.name}
+                        <img src={dish.image} alt={dish.name}
                           onError={e => { e.currentTarget.style.opacity = "0"; }} />
                       </div>
                       {/* Text info */}
