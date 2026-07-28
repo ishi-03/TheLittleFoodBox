@@ -67,6 +67,17 @@ const menuItemSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    description: {
+  type: String,
+  default: "",
+},
+
+jain: {
+  type: Boolean,
+  default: false,
+},
+
+
   },
   {
     timestamps: true,

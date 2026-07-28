@@ -315,6 +315,9 @@ export default function LittleFoodBox() {
           spicy: item.spicy,
           image: item.image,
           category: [grouped[item.category].id],
+          isAvailable: item.isAvailable,
+          description: item.description || "",
+          jain: item.jain || false,
         });
       });
 
@@ -564,10 +567,17 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
                   {section.items.map((dish, i) => (
                     <div key={dish.name} className="dish-row anim-fade-up" style={{ animationDelay: `${(si * 4 + i) * 0.05}s` }}>
                       {/* Inline thumbnail */}
-                      <div className="dish-thumb">
-                        <img src={dish.image} alt={dish.name}
-                          onError={e => { e.currentTarget.style.opacity = "0"; }} />
-                      </div>
+   {dish.image && (
+  <div className="dish-thumb">
+    <img
+      src={dish.image}
+      alt={dish.name}
+      onError={(e) => {
+        e.currentTarget.style.display = "none";
+      }}
+    />
+  </div>
+)}
                       {/* Text info */}
                       <div style={{ flex: 1, minWidth: 0 }}>
                         {(dish.chefPick || dish.popular || dish.spicy) && (

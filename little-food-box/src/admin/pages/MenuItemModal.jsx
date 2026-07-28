@@ -33,6 +33,8 @@ const EMPTY_FORM = {
   popular: false,
   spicy: false,
   isAvailable: true,
+  description: "",
+  jain: false,  
 };
 
 /**
@@ -72,6 +74,9 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
         popular: Boolean(initialData.popular),
         spicy: Boolean(initialData.spicy),
         isAvailable: initialData.isAvailable ?? true,
+        description: initialData.description ?? "",
+        jain: Boolean(initialData.jain),
+        
       });
       setImagePreview(initialData.image || null);
     } else {
@@ -142,6 +147,8 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
       popular: form.popular,
       spicy: form.spicy,
       isAvailable: form.isAvailable,
+      description: form.description.trim(),
+jain: form.jain,
     };
 
     // Image is optional. Use FormData only when a new file was picked,
@@ -329,7 +336,20 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
               className="w-full sm:w-1/2 rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 transition-colors"
             />
           </div>
+{/* Description */}
+<div>
+  <label className="block text-sm font-medium text-stone-700 mb-1.5">
+    Description
+  </label>
 
+  <textarea
+    value={form.description}
+    onChange={(e) => handleChange("description", e.target.value)}
+    rows={4}
+    placeholder="Describe the dish..."
+    className="w-full rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 transition-colors resize-none"
+  />
+</div>
           {/* Category + Section (with custom entry) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -404,6 +424,11 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
                 label="Available"
                 checked={form.isAvailable}
                 onChange={(v) => handleChange("isAvailable", v)}
+              />
+              <CheckboxTile
+                label="Jain"
+                checked={form.jain}
+                onChange={(v) => handleChange("jain", v)}
               />
             </div>
           </div>
