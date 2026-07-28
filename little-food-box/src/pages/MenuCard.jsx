@@ -74,7 +74,7 @@ const STYLES = `
   /* dish row — tall, image inline */
   .dish-row {
     display: flex; align-items: center; gap: 20px;
-    padding: 16px 12px; border-radius: 12px; margin: 0 -12px;
+    padding: 20px 12px; border-radius: 12px; margin: 0 -12px;
     border-bottom: 1px solid var(--border);
     transition: background 0.15s ease;
     cursor: default; min-height: 110px;
@@ -121,6 +121,86 @@ const STYLES = `
   @media (max-width: 767px) { .desktop-only { display: none !important; } }
   @media (min-width: 768px) { .mobile-only  { display: none !important; } }
 `;
+
+// ── Badge styles: premium pill design ──
+const BADGE_BASE = {
+  padding: "4px 10px",
+  borderRadius: 999,
+  fontSize: 11,
+  fontWeight: 600,
+  display: "flex",
+  alignItems: "center",
+  gap: 4,
+  fontFamily: "var(--font-body)",
+  whiteSpace: "nowrap",
+};
+
+const BADGE_VARIANTS = {
+  chefPick: { background: "#FDE8ED", color: "#C2185B", border: "1px solid #F8C6D3" },
+  popular:  { background: "#FFF3D6", color: "#8A6D0B", border: "1px solid #F5E3A8" },
+  jain:     { background: "#EAF8E6", color: "#2E7D32", border: "1px solid #C8E6C9" },
+  vegan:    { background: "#E6F7EF", color: "#1B7A4D", border: "1px solid #BFE9D4" },
+  spicy:    { background: "#FDEAEA", color: "#B3261E", border: "1px solid #F5C6C6" },
+};
+
+// ── DishBadges: renders premium pills, only if any flag is true ──
+function DishBadges({ dish, style }) {
+  const badges = [];
+  if (dish.chefPick) badges.push({ key: "chefPick", icon: "❤️", label: "Mum's Fave", variant: BADGE_VARIANTS.chefPick });
+  if (dish.popular)  badges.push({ key: "popular",  icon: "⭐", label: "Fan Favourite", variant: BADGE_VARIANTS.popular });
+  if (dish.jain)     badges.push({ key: "jain",     icon: "🌱", label: "Jain", variant: BADGE_VARIANTS.jain });
+  if (dish.vegan)    badges.push({ key: "vegan",    icon: "🥬", label: "Vegan", variant: BADGE_VARIANTS.vegan });
+  if (dish.spicy)    badges.push({ key: "spicy",    icon: "🌶️", label: "Spicy", variant: BADGE_VARIANTS.spicy });
+
+  if (badges.length === 0) return null;
+
+  return (
+    <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 8, ...style }}>
+      {badges.map((b) => (
+        <span key={b.key} style={{ ...BADGE_BASE, ...b.variant }}>
+          <span>{b.icon}</span>{b.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// ── DishDescription: 2-line clamp, hidden if empty ──
+function DishDescription({ dish, fontSize = 12.5 }) {
+  if (!dish.description) return null;
+  return (
+    <p style={{
+      fontFamily: "var(--font-body)",
+      fontSize,
+      color: "var(--text-muted)",
+      lineHeight: 1.5,
+      marginTop: 4,
+      marginBottom: 8,
+      display: "-webkit-box",
+      WebkitLineClamp: 2,
+      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+    }}>
+      {dish.description}
+    </p>
+  );
+}
+
+// ── DishMeta: clean "👥 Serves 2  ·  Min Qty 2" layout, no empty spaces ──
+function DishMeta({ dish, fontSize = 11 }) {
+  const parts = [];
+  if (dish.unit) parts.push(dish.unit);
+  if (dish.serves) parts.push(`👥 Serves ${dish.serves}`);
+  if (dish.minOrder && Number(dish.minOrder) > 1) parts.push(`Min Qty ${dish.minOrder}`);
+
+  if (parts.length === 0) return null;
+
+  return (
+    <div style={{ fontFamily: "var(--font-body)", fontSize, color: "var(--text-muted)", marginTop: 6 }}>
+      {parts.join("  ·  ")}
+    </div>
+  );
+}
 
 // ── FilterBar: underline-tab style ──
 function FilterBar({ items, activeFilter, onFilterChange, accent }) {
@@ -435,24 +515,15 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
                       </div>
                       {/* Text */}
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        {(dish.chefPick || dish.popular || dish.spicy) && (
-                          <div style={{ display: "flex", gap: 8, marginBottom: 4 }}>
-                            {dish.chefPick && <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "#c06060", fontWeight: 500 }}>♥ Fave</span>}
-                            {dish.popular && <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "#8a7030", fontWeight: 500 }}>★ Popular</span>}
-                            {dish.spicy && <span style={{ fontSize: 10 }}>🌶</span>}
-                          </div>
-                        )}
+                        <DishBadges dish={dish} style={{ marginBottom: 6 }} />
                         <h3 style={{ fontFamily: "var(--font-display)", fontSize: 17, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
                           {dish.name}
                         </h3>
-                        {(dish.unit || dish.serves || dish.minOrder) && (
-                          <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)", marginTop: 3 }}>
-                            {dish.unit}{dish.minOrder ? ` · min. ${dish.minOrder}` : ""}{dish.serves ? `Serves ${dish.serves}` : ""}
-                          </div>
-                        )}
+                        <DishDescription dish={dish} fontSize={11.5} />
+                        <DishMeta dish={dish} fontSize={11} />
                       </div>
                       {/* Price */}
-                      <div style={{ flexShrink: 0 }}>
+                      <div style={{ flexShrink: 0, alignSelf: "center" }}>
                         {dish.price === "Ask"
                           ? <span style={{ fontFamily: "var(--font-body)", fontSize: 13, color: current.accent, fontWeight: 500 }}>On request</span>
                           : <div style={{ fontFamily: "var(--font-display)", fontSize: 17, fontWeight: 400, fontStyle: "italic", color: current.accent, transition: "color 0.5s ease" }}>{fmtPrice(dish.price)}</div>
@@ -580,24 +651,15 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
 )}
                       {/* Text info */}
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        {(dish.chefPick || dish.popular || dish.spicy) && (
-                          <div style={{ display: "flex", gap: 8, marginBottom: 5 }}>
-                            {dish.chefPick && <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "#c06060", fontWeight: 500 }}>♥ Mum's Fave</span>}
-                            {dish.popular && <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "#8a7030", fontWeight: 500 }}>★ Fan Favourite</span>}
-                            {dish.spicy && <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: "#a03020", fontWeight: 500 }}>🌶 Spicy</span>}
-                          </div>
-                        )}
-                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 19, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
+                        <DishBadges dish={dish} style={{ marginBottom: 8 }} />
+                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
                           {dish.name}
                         </h3>
-                        {(dish.unit || dish.serves || dish.minOrder) && (
-                          <div style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>
-                            {dish.unit}{dish.minOrder ? ` · min. order ${dish.minOrder}` : ""}{dish.serves ? `Serves ${dish.serves}` : ""}
-                          </div>
-                        )}
+                        <DishDescription dish={dish} fontSize={13} />
+                        <DishMeta dish={dish} fontSize={12} />
                       </div>
                       {/* Price */}
-                      <div style={{ flexShrink: 0 }}>
+                      <div style={{ flexShrink: 0, alignSelf: "center" }}>
                         {dish.price === "Ask"
                           ? <span style={{ fontFamily: "var(--font-body)", fontSize: 13, color: current.accent, fontWeight: 500 }}>On request</span>
                           : <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 400, fontStyle: "italic", color: current.accent, transition: "color 0.5s ease" }}>{fmtPrice(dish.price)}</div>
