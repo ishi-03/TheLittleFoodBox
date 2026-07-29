@@ -105,43 +105,39 @@ export default function Footer() {
       />
 
       {/* corner flourishes, barely-there */}
-      <LeafMark className="hidden sm:block absolute top-12 left-10 w-8 h-8 text-[#5a7a52]/20" />
-      <LeafMark className="hidden sm:block absolute top-12 right-10 w-8 h-8 text-[#5a7a52]/20 -scale-x-100" />
+      <LeafMark className="hidden sm:block absolute top-4 left-10 w-5 h-5 text-[#5a7a52]/20" />
+      <LeafMark className="hidden sm:block absolute top-4 right-10 w-5 h-5 text-[#5a7a52]/20 -scale-x-100" />
 
-      <div className="relative max-w-7xl mx-auto px-8 sm:px-16 pt-28 sm:pt-32 pb-12">
+      <div className="relative max-w-7xl mx-auto px-8 sm:px-16 pt-8 sm:pt-9 pb-5">
 
         {/* Brand */}
         <div className="flex flex-col items-center text-center">
           <h2
-            className="text-5xl sm:text-[3.5rem] leading-[1.1] tracking-wide text-[#fdf6ec]"
+            className="text-3xl sm:text-[2.25rem] leading-[1.1] tracking-wide text-[#fdf6ec]"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             The Little Food Box
           </h2>
-          <p className="mt-7 sm:mt-8 text-[13px] sm:text-sm text-[#f5e9d4]/55 leading-[2] tracking-[0.03em] max-w-sm">
-            Made fresh every morning.
-            <br />
-            Packed with love.
-            <br />
-            Delivered with care.
+          <p className="mt-2 text-[12px] text-[#f5e9d4]/55 tracking-[0.03em]">
+            Made fresh every morning. Packed with love. Delivered with care.
           </p>
         </div>
 
         {/* Ornamental divider with a small botanical mark at its center */}
-        <div className="flex items-center justify-center gap-5 mt-14 sm:mt-16 mb-20 sm:mb-24">
-          <span className="h-px w-24 sm:w-40 bg-[#f5e9d4]/15" />
-          <OliveBranch className="w-16 h-4 text-[#b5572a]/85 shrink-0" />
-          <span className="h-px w-24 sm:w-40 bg-[#f5e9d4]/15" />
+        <div className="flex items-center justify-center gap-4 mt-4 mb-5">
+          <span className="h-px w-16 sm:w-28 bg-[#f5e9d4]/15" />
+          <OliveBranch className="w-12 h-3 text-[#b5572a]/85 shrink-0" />
+          <span className="h-px w-16 sm:w-28 bg-[#f5e9d4]/15" />
         </div>
 
         {/* Columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-10 sm:gap-x-14 gap-y-14 sm:gap-y-0 text-center justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-10 sm:gap-x-14 gap-y-6 sm:gap-y-0 text-center justify-items-center">
           {columns.map(({ title, links }) => (
             <div key={title}>
-              <h3 className="text-[11px] text-[#e8bfa0]/90 mb-6 tracking-[0.2em] uppercase">
+              <h3 className="text-[11px] text-[#e8bfa0]/90 mb-2 tracking-[0.2em] uppercase">
                 {title}
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-1.5">
                 {links.map((link) => (
                   <li key={link.label}>
                     <FooterLink {...link} />
@@ -153,10 +149,10 @@ export default function Footer() {
 
           {/* Get in touch */}
           <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-[11px] text-[#e8bfa0]/90 mb-6 tracking-[0.2em] uppercase">
+            <h3 className="text-[11px] text-[#e8bfa0]/90 mb-2 tracking-[0.2em] uppercase">
               Get in touch
             </h3>
-            <ul className="space-y-4 mb-8">
+            <ul className="space-y-1.5 mb-3">
               <li>
                 <a
                   href="tel:+9182360 55718"
@@ -190,7 +186,7 @@ export default function Footer() {
               href="https://wa.me/918236055718"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full
                          bg-[#b5572a] text-[#fdf6ec] text-[13px] tracking-[0.04em]
                          shadow-[0_4px_18px_-6px_rgba(181,87,42,0.55)]
                          hover:shadow-[0_10px_28px_-8px_rgba(181,87,42,0.6)]
@@ -203,7 +199,7 @@ export default function Footer() {
               Message us on WhatsApp
             </a>
 
-            <div className="mt-6">
+            <div className="mt-2">
               <a
                 href="https://instagram.com/thelittlefoodbox"
                 target="_blank"
@@ -219,24 +215,24 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="mt-24 sm:mt-28 border-t border-[#f5e9d4]/[0.07]" />
+        <div className="mt-6 border-t border-[#f5e9d4]/[0.07]" />
 
         {/* Bottom bar */}
-        <div className="pt-8 sm:pt-9 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <p className="text-[11px] text-[#f5e9d4]/35 tracking-[0.04em]">
             © {new Date().getFullYear()} The Little Food Box
           </p>
           <p className="text-[11px] text-[#f5e9d4]/35 tracking-[0.04em]">
-  Made with <span className="text-[#b5572a]/80">♥</span> by{" "}
-  <a
-    href="https://www.blainfotech.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-[#f5e9d4]/60 hover:text-[#b5572a] transition-colors duration-300"
-  >
-    BLA Infotech
-  </a>
-</p>
+            Made with <span className="text-[#b5572a]/80">♥</span> by{" "}
+            <a
+              href="https://www.blainfotech.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#f5e9d4]/60 hover:text-[#b5572a] transition-colors duration-300"
+            >
+              BLA Infotech
+            </a>
+          </p>
           <div className="flex items-center gap-3 text-[11px] text-[#f5e9d4]/30 tracking-[0.04em]">
             <a href="/privacy-policy" className="hover:text-[#e8bfa0]/80 transition-colors duration-500 ease-out">
               Privacy
