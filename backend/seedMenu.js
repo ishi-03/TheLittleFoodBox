@@ -1,49 +1,21 @@
 import mongoose from "mongoose";
-import fs from "fs";
-import Menu from "./models/MenuSchema.js";
+import dotenv from "dotenv";
+import MenuItem from "./models/MenuItem.js";
+dotenv.config();
 
-// Read menu.json
-const menuData = JSON.parse(
-  fs.readFileSync("./menu.json", "utf8")
-);
 
-const importMenu = async () => {
+async function seed() {
   try {
-    // Connect MongoDB
-    await mongoose.connect(
-      "mongodb+srv://thelittlefoodbox:tlfbbyparul@mcpcluster.sxchofi.mongodb.net/thelittlefoodbox?retryWrites=true&w=majority"
-    );
+    await mongoose.connect(process.env.MONGO_URI);
 
-    console.log("MongoDB Connected");
+    await MenuItem.insertMany(menu);
 
-    // Clear old menu data
-    await Menu.deleteMany();
-
-    const dishes = [];
-
-    menuData.forEach((cuisine) => {
-      cuisine.sections.forEach((section) => {
-        section.items.forEach((item) => {
-          dishes.push({
-            ...item,
-            cuisine: cuisine.category,
-            section: section.title,
-          });
-        });
-      });
-    });
-
-    await Menu.insertMany(dishes);
-
-    console.log(`${dishes.length} dishes imported successfully`);
-
+    console.log("✅ Menu Imported Successfully");
     process.exit();
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     process.exit(1);
   }
-};
+}
 
-importMenu();
-
-
+seed();

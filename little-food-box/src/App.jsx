@@ -5,7 +5,7 @@ import Layout from "./components/Layout.jsx";
 import Navbar from "./components/Navbar.jsx";
 import AdminMenuItems from "./admin/pages/AdminMenuItems.jsx";
 // Customer Pages
-import Menu from "./pages/Menu.jsx";
+// import Menu from "./pages/Menu.jsx";
 import MenuCard from "./pages/MenuCard.jsx";
 import Contact from "./pages/Contact.jsx";
 import Subscriptions from "./pages/Subscriptions.jsx";
@@ -28,7 +28,7 @@ import AdminLayout from "./admin/layouts/AdminLayout.jsx";
 import AdminSalads from "./admin/pages/AdminSalads.jsx";
 import SubscriptionPlans from "./admin/pages/SubscriptionPlans.jsx";
 import AdminSubscriptions from "./admin/pages/AdminSubscriptions.jsx";
-
+import Platters from "./pages/Platters.jsx";
 import AdminUsers from "./admin/pages/AdminUsers.jsx";
 // import Categories from "./admin/pages/Categories.jsx";
 // import MenuItems from "./admin/pages/MenuItems.jsx";
@@ -45,7 +45,7 @@ export default function App() {
 
       {/* ================= CUSTOMER WEBSITE ================= */}
       <Route element={<Layout />}>
-        <Route path="/menu" element={<Menu />} />
+        {/* <Route path="/menu" element={<Menu />} /> */}
         <Route path="/menucard" element={<MenuCard />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/subscription" element={<Subscriptions />} />
@@ -53,6 +53,7 @@ export default function App() {
         <Route path="/my-subscription" element={<MySubscription />} />
         <Route path="/grazing-tables" element={<GrazingTable />} />
         <Route path="/meals-on-wheels" element={<MealsOnWheels />} />
+        <Route path="/platters" element={<Platters />} />
         <Route
   path="/manage-subscription/:id"
   element={<ManageSubscription />}

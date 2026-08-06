@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
-  { label: "Menu", href: "/menu" },
+  { label: "MenuCard", href: "/menucard" },
   { label: "Meals on Wheels", href: "/meals-on-wheels" },
   { label: "Grazing Tables", href: "/grazing-tables" },
+    { label: "Platters", href: "/platters" },
   { label: "Subscription", href: "/subscription" },
   { label: "Contact", href: "/contact" },
 ];

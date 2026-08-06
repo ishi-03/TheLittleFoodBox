@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { X, Upload, ImageIcon, Loader2 } from "lucide-react";
-
+import imageCompression from "browser-image-compression";
 const DEFAULT_CATEGORIES = [
   "Indian",
   "Italian",
@@ -90,7 +90,16 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
   }, [isOpen, initialData]);
 
   if (!isOpen) return null;
+const compressImage = async (file) => {
+  const options = {
+    maxSizeMB: 0.5,
+    maxWidthOrHeight: 1200,
+    useWebWorker: true,
+    initialQuality: 0.8,
+  };
 
+  return await imageCompression(file, options);
+};
   const handleChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
@@ -98,19 +107,39 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
     }
   };
 
-  const handleImageSelect = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleImageSelect = async (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
-    if (!file.type.startsWith("image/")) {
-      setErrors((prev) => ({ ...prev, image: "Please select a valid image file" }));
-      return;
-    }
+  if (!file.type.startsWith("image/")) {
+    setErrors((prev) => ({
+      ...prev,
+      image: "Please select a valid image file",
+    }));
+    return;
+  }
 
-    setImageFile(file);
-    setImagePreview(URL.createObjectURL(file));
-    setErrors((prev) => ({ ...prev, image: undefined }));
-  };
+  const compressedFile = await compressImage(file);
+
+  setImageFile(compressedFile);
+  setImagePreview(URL.createObjectURL(compressedFile));
+
+  setErrors((prev) => ({
+    ...prev,
+    image: undefined,
+  }));
+  console.log(
+    "Original:",
+    (file.size / 1024).toFixed(0),
+    "KB"
+  );
+
+  console.log(
+    "Compressed:",
+    (compressedFile.size / 1024).toFixed(0),
+    "KB"
+  );
+};
 
   const removeImage = () => {
     setImageFile(null);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import imageCompression from "browser-image-compression";
 export default function SaladModal({
   open,
   onClose,
@@ -29,7 +29,16 @@ export default function SaladModal({
     active: true,
     sortOrder: 0,
   };
+const compressImage = async (file) => {
+  const options = {
+    maxSizeMB: 0.5,
+    maxWidthOrHeight: 1200,
+    useWebWorker: true,
+    initialQuality: 0.8,
+  };
 
+  return await imageCompression(file, options);
+};
   const [form, setForm] = useState(emptyForm);
 
   const [ingredient, setIngredient] = useState("");
@@ -206,12 +215,17 @@ return (
   type="file"
   accept="image/*"
   className={inputClass}
-  onChange={(e) =>
-    setForm({
-      ...form,
-      image: e.target.files[0],
-    })
-  }
+  onChange={async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const compressedFile = await compressImage(file);
+
+  setForm({
+    ...form,
+    image: compressedFile,
+  });
+}}
 />
 {form.image && (
   <img
