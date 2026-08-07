@@ -1,4 +1,4 @@
-import { useState } from "react";
+const WHATSAPP_NUMBER = "919998722140";
 
 const platters = [
   {
@@ -135,6 +135,28 @@ const platters = [
   },
 ];
 
+function handleCustomize(platter) {
+  const message = `Hi! 👋
+I'm interested in customizing the *${platter.name}*.
+
+Here are my requirements:
+📅 Event Date:
+👥 Number of Guests:
+📍 Event Location:
+🍽️ Occasion:
+🥗 Dietary Preferences (Jain/Vegan/No Onion Garlic/etc.):
+✨ Customizations Required:
+📝 Additional Notes:
+
+Please let me know the available options and pricing.
+Thank you! 😊`;
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}
+
 function PlatterCard({ platter, onCustomize }) {
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-[#E7DFD2] shadow-[0_1px_3px_rgba(42,26,14,0.06)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(42,26,14,0.12)]">
@@ -201,7 +223,7 @@ function PlatterCard({ platter, onCustomize }) {
 
         {/* Customize button */}
         <button
-          onClick={() => onCustomize?.(platter)}
+          onClick={() => onCustomize(platter)}
           className="mt-3 w-full rounded-full border border-[#B5451B] bg-transparent py-2.5 text-[13px] font-medium uppercase tracking-[0.08em] text-[#B5451B] transition-all duration-300 hover:bg-[#B5451B] hover:text-[#FFFDF9]"
           style={{ fontFamily: "'Jost', sans-serif" }}
         >
@@ -213,8 +235,6 @@ function PlatterCard({ platter, onCustomize }) {
 }
 
 export default function Platters() {
-  const [selected, setSelected] = useState(null);
-
   return (
     <div className="min-h-screen bg-[#FFFDF9]">
       {/* Hero */}
@@ -262,44 +282,11 @@ export default function Platters() {
             <PlatterCard
               key={platter.id}
               platter={platter}
-              onCustomize={setSelected}
+              onCustomize={handleCustomize}
             />
           ))}
         </div>
       </div>
-
-      {/* Simple customize modal placeholder — wire up to your existing flow */}
-      {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#2A1A0E]/50 px-6"
-          onClick={() => setSelected(null)}
-        >
-          <div
-            className="max-w-sm rounded-2xl bg-[#FFFDF9] p-6 text-center shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3
-              className="mb-2 text-[22px] text-[#2A1A0E]"
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600 }}
-            >
-              {selected.name}
-            </h3>
-            <p
-              className="mb-4 text-[13.5px] text-[#6B5A4A]"
-              style={{ fontFamily: "'Jost', sans-serif" }}
-            >
-              Customize form / booking flow goes here.
-            </p>
-            <button
-              onClick={() => setSelected(null)}
-              className="rounded-full border border-[#B5451B] px-5 py-2 text-[13px] uppercase tracking-[0.08em] text-[#B5451B]"
-              style={{ fontFamily: "'Jost', sans-serif" }}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
