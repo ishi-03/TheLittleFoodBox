@@ -155,7 +155,7 @@ export default function Footer() {
             <ul className="space-y-1.5 mb-3">
               <li>
                 <a
-                  href="tel:+9182360 55718"
+                  href="tel:+91 9998722140"
                   className="relative inline-block text-[13px] text-[#f5e9d4]/65 hover:text-[#e8bfa0]
                              tracking-wide transition-colors duration-500 ease-out
                              after:content-[''] after:absolute after:left-1/2 after:-bottom-1
@@ -163,7 +163,7 @@ export default function Footer() {
                              after:transition-all after:duration-500 after:ease-out
                              hover:after:left-0 hover:after:w-full"
                 >
-                  +91 82360 55718
+                  +91 9998722140
                 </a>
               </li>
               <li>
@@ -183,7 +183,7 @@ export default function Footer() {
             </ul>
 
             <a
-              href="https://wa.me/918236055718"
+              href="https://wa.me/919998722140"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2 rounded-full

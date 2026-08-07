@@ -80,7 +80,7 @@ const navigate = useNavigate();
 
     setSent(true);
 
-    window.open(`https://wa.me/918236055718?text=${text}`, "_blank");
+    window.open(`https://wa.me/919998722140?text=${text}`, "_blank");
 
     setTimeout(() => setSent(false), 3000);
     setForm({ name: "", phone: "", message: "" });
@@ -202,7 +202,7 @@ const navigate = useNavigate();
           <div style={{ display: "flex", flexDirection: "column", gap: "1.6rem" }}>
             {[
               { icon: "👩‍🍳", label: "Your Host", value: "Parul Agrawal" },
-              { icon: "📞", label: "Call / WhatsApp", value: "+91 82360 55718", href: "tel:+918236055718" },
+              { icon: "📞", label: "Call / WhatsApp", value: "+91 9998722140", href: "tel:+919998722140" },
               { icon: "📍", label: "Address", value: "A-102, Palak Elina, Iscon Ambli Road, Ahmedabad" },
               { icon: "🕐", label: "Order", value: "2 days prior" },
             ].map(({ icon, label, value, href }) => (
@@ -321,7 +321,7 @@ Tell us what you’re <br />craving today 🍽️
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/918236055718"
+              href="https://wa.me/919998722140?text=Hi%20I%20would%20like%20to%20enquire%20about%20The%20Little%20Food%20Box"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"

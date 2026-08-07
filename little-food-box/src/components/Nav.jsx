@@ -576,18 +576,20 @@ export default function Nav({
             ))}
           </ul>
 
+
           {/* Desktop auth */}
           <div className="nav-auth">
             {user ? (
               <>
                 <NavLink
-                  to="https://wa.me/918236055718"
+                  to="https://wa.me/919998722140"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-cta"
                 >
                   Order Now
                 </NavLink>
+
 
                 {/* Avatar + dropdown */}
                 <div className="nav-avatar-wrap" ref={avatarRef}>
@@ -696,7 +698,7 @@ export default function Nav({
         {user ? (
           <>
             <NavLink
-              to="https://wa.me/918236055718"
+              to="https://wa.me/919998722140"
               target="_blank"
               rel="noopener noreferrer"
               className="drawer-cta"

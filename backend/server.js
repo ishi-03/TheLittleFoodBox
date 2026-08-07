@@ -18,6 +18,7 @@ console.log("SERVER API KEY:", process.env.CLOUDINARY_API_KEY);
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import menuItemRoutes from "./routes/menuItemRoutes.js";
+import MenuItem from "./models/MenuItem.js";
 const app = express();
 
 // -------------------- Middleware --------------------
@@ -40,7 +41,12 @@ app.use(
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(async () => {
+    console.log("✅ MongoDB Connected");
+
+
+    console.log("✅ Menu items inserted successfully");
+  })
   .catch((err) => console.log(err));
 
 // -------------------- Test Route --------------------
@@ -73,6 +79,8 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/menu-items", menuItemRoutes);
 // -------------------- Start Server --------------------
+
+
 
 const PORT = process.env.PORT || 5000;
 

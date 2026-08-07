@@ -501,7 +501,7 @@ const navigate = useNavigate();
         </div>
         <div className="hero-cta-row">
    <a 
-  href="https://wa.me/918236055718?text=Hi%20I%20want%20to%20order%20from%20The%20LFB" 
+  href="https://wa.me/919998722140?text=Hi%20I%20want%20to%20order%20from%20The%20LFB" 
   target="_blank" 
   rel="noopener noreferrer"
 >

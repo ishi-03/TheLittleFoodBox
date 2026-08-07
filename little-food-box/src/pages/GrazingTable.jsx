@@ -116,8 +116,8 @@ const process = [
   { step: "Celebrate", desc: "You host, we handle the table from start to finish." },
 ];
 
-const WHATSAPP = "https://wa.me/918236055718";
-const PHONE = "tel:+918236055718";
+const WHATSAPP = "https://wa.me/919998722140?text=Hi%20I%20would%20like%20to%20enquire%20about%20Grazing%20Tables";
+const PHONE = "tel:+919998722140";
 
 export default function GrazingTables() {
   return (
