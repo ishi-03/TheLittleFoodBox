@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
+const logo = "/LogoTLB.png";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
-  { label: "MenuCard", href: "/menucard" },
+  { label: "Menu", href: "/menucard" },
   { label: "Meals on Wheels", href: "/meals-on-wheels" },
   { label: "Grazing Tables", href: "/grazing-tables" },
     { label: "Platters", href: "/platters" },
@@ -87,20 +88,20 @@ export default function Nav({
 
         *, *::before, *::after { box-sizing: border-box; }
 
-        /* ── Nav root ── */
-        .nav-root {
-          position: fixed;
-          top: 0; left: 0; right: 0;
-          z-index: 1000;
-          transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
-          padding: 1.35rem 3rem;
-        }
-        .nav-root.at-top { background: transparent; box-shadow: none; }
-        .nav-root.scrolled {
-          background: #fffdf9;
-          box-shadow: 0 1px 0 #e0d5c5, 0 4px 24px rgba(42,26,14,0.07);
-          padding: 0.8rem 3rem;
-        }
+       /* ── Nav root ── */
+.nav-root {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+  padding: 0.9rem 3rem;   /* pehle 1.35rem tha, kam kiya taaki bada logo fit ho */
+}
+.nav-root.at-top { background: transparent; box-shadow: none; }
+.nav-root.scrolled {
+  background: #fffdf9;
+  box-shadow: 0 1px 0 #e0d5c5, 0 4px 24px rgba(42,26,14,0.07);
+  padding: 0.55rem 3rem;  /* pehle 0.8rem tha */
+}
 
         /* ── Inner ── */
         .nav-inner {
@@ -112,13 +113,33 @@ export default function Nav({
           gap: 1.25rem;
         }
 
-        /* ── Brand ── */
-        .nav-brand {
-          text-decoration: none;
+  /* ── Brand ── */
+.nav-brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.nav-brand-logo {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-top: -10px;      /* logo ko thoda upar uthane ke liye */
+  transition: width 0.35s ease, height 0.35s ease, margin-top 0.35s ease;
+}
+.nav-root.scrolled .nav-brand-logo {
+  width: 62px;
+  height: 62px;
+  margin-top: -6px;
+}
+        .nav-brand-text {
           display: flex;
           flex-direction: column;
           line-height: 1;
-          flex-shrink: 0;
         }
         .nav-brand-name {
           font-family: 'Cormorant Garamond', serif;
@@ -414,12 +435,24 @@ export default function Nav({
         .nav-drawer.open { transform: translateX(0); }
 
         .drawer-brand {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 1.5rem;
+        }
+        .drawer-brand-logo {
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        .drawer-brand-name {
           font-family: 'Cormorant Garamond', serif;
           font-size: 1rem;
           font-weight: 700;
           color: #9a7d65;
           letter-spacing: 0.05em;
-          margin-bottom: 1.5rem;
           text-align: center;
         }
 
@@ -555,9 +588,12 @@ export default function Nav({
         <div className="nav-inner">
 
           {/* Brand */}
-<Link to="/" className="nav-brand">
-            <span className="nav-brand-name">The Little Food Box</span>
-            <span className="nav-brand-sub">Home kitchen · Made with love 🍱</span>
+          <Link to="/" className="nav-brand">
+            <img src={logo} alt="The Little Food Box" className="nav-brand-logo" />
+            <span className="nav-brand-text">
+              <span className="nav-brand-name">THE Little FOOD BOX</span>
+              <span className="nav-brand-sub">By Parul Agrawal 🍱</span>
+            </span>
           </Link>
 
           {/* Desktop nav links */}
@@ -669,7 +705,10 @@ export default function Nav({
 
       {/* ── Mobile Drawer ── */}
       <div className={`nav-drawer ${menuOpen ? "open" : ""}`}>
-        <div className="drawer-brand">The Little Food Box 🍱</div>
+        <div className="drawer-brand">
+          <img src={logo} alt="The Little Food Box" className="drawer-brand-logo" />
+          <div className="drawer-brand-name">The Little Food Box 🍱</div>
+        </div>
 
         {user && (
           <div className="drawer-user">

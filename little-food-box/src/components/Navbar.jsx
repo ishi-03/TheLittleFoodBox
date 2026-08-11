@@ -5,11 +5,12 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
    NAVIGATION DATA
 ───────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
-  { name: "Home", to: "/", img: "/hero1.jpg" },
   { name: "About", to: "/about", img: "/hero2.jpg" },
   { name: "Menu", to: "/menu", img: "/hero3.jpg" },
   { name: "Subscription", to: "/subscription", img: "/hero4.jpg" },
+      { name: "Platters", to: "/platters", img: "/hero1.jpg" },
   { name: "Contact", to: "/contact", img: "/hero5.jpg" },
+
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -124,7 +125,18 @@ html, body, #root {
   letter-spacing: 0.03em;
   margin: 0 6px;
 }
-/* Main brand title */
+
+/* Logo image in hero — replaces text title */
+.ntb-hero-logo {
+  width: clamp(140px, 22vw, 220px);
+  height: auto;
+  margin: 0 auto 14px;
+  display: block;
+  animation: titleReveal 1.4s cubic-bezier(.22,1,.36,1) .1s both;
+  filter: drop-shadow(0 4px 30px rgba(0,0,0,0.4));
+}
+
+/* Main brand title (kept in markup for SEO/accessibility, visually hidden) */
 .ntb-hero-title {
   font-family: 'Cinzel', serif;
  font-size: clamp(18pt, 3.5vw, 28pt);
@@ -483,6 +495,11 @@ font-size: 16px;
     left: 16px;
   }
 
+  /* Hero logo (mobile) */
+  .ntb-hero-logo {
+    width: clamp(110px, 30vw, 160px);
+  }
+
   /* Hero text */
   .ntb-hero-title {
     font-size: clamp(16pt, 6vw, 22pt);
@@ -644,9 +661,12 @@ export default function Navbar() {
       >
         <span className="ntb-hero-rule" />
 
-<h1 className="ntb-hero-title">
-  THE <span className="little-word">Little</span> FOOD BOX
-</h1>
+        <img
+          src="/TLBLogo.png"
+          alt="The Little Food Box"
+          className="ntb-hero-logo"
+        />
+
         <div className="ntb-hero-sub-rule">
           <span>Curated · Crafted · Delivered</span>
         </div>
