@@ -558,12 +558,6 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
 
         {/* SIDEBAR */}
         <aside style={{ width: 220, flexShrink: 0, display: "flex", flexDirection: "column", background: "var(--surface)", borderRight: "1px solid var(--border)", padding: "32px 16px" }}>
-          <div style={{ marginBottom: 40, paddingLeft: 12 }}>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.5px", lineHeight: 1.2, marginBottom: 4 }}>
-              THE <span style={{ fontStyle: "italic", fontWeight: 600, color: current.accent }}>Little</span><br />FOOD BOX
-            </div>
-            <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)" }}> By Parul Agrawal 🏡</div>
-          </div>
 
           <div style={{ paddingLeft: 12, marginBottom: 8 }}>
             <span style={{ fontFamily: "var(--font-body)", fontSize: 10, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "var(--text-muted)" }}>Menu</span>
