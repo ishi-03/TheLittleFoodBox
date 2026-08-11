@@ -122,7 +122,6 @@ const PHONE = "tel:+919998722140";
 export default function GrazingTables() {
   return (
     <>
-      <Nav />
 
       <main className="min-h-screen bg-[#FFFDF9] text-[#2A1A0E] overflow-x-hidden">
         {/* 1. Hero */}

@@ -156,7 +156,7 @@ const occasions = [
 export default function MealsOnWheels() {
   return (
     <div className="min-h-screen bg-[#FFFDF9] text-[#2A1A0E]">
-      <Nav />
+      
 
       {/* ---------------- Hero ---------------- */}
       <section className="relative overflow-hidden">
