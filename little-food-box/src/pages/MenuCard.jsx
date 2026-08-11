@@ -516,7 +516,7 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
                       {/* Text */}
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <DishBadges dish={dish} style={{ marginBottom: 6 }} />
-                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 17, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
+                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 15, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
                           {dish.name}
                         </h3>
                         <DishDescription dish={dish} fontSize={11.5} />
@@ -614,8 +614,8 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
              <h1
   style={{
     fontFamily: "var(--font-display)",
-fontSize: "clamp(26px,2.5vw,34px)",    fontWeight: 600,
-    color: "var(--text-primary)",
+fontSize: "clamp(22px, 2vw, 28px)",
+fontWeight: 600,    color: "var(--text-primary)",
     letterSpacing: "-1.2px",
     lineHeight: 1
   }}
