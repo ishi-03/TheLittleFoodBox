@@ -84,7 +84,7 @@ export default function Nav({
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,400;1,700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=DM+Sans:wght@300;400;500;600&display=swap');
 
         *, *::before, *::after { box-sizing: border-box; }
 
@@ -139,23 +139,35 @@ export default function Nav({
         .nav-brand-text {
           display: flex;
           flex-direction: column;
+          align-items: center;
           line-height: 1;
         }
         .nav-brand-name {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 1.25rem;
+          font-family: 'Fraunces', serif;
+          font-optical-sizing: auto;
+          font-size: 1.3rem;
           font-weight: 700;
+          letter-spacing: 0.005em;
           color: #2a1a0e;
-          line-height: 1.1;
+          line-height: 1.15;
           white-space: nowrap;
+          text-align: center;
+        }
+        .nav-brand-name em {
+          font-style: italic;
+          font-weight: 600;
+          color: #b5451b;
         }
         .nav-brand-sub {
           font-family: 'DM Sans', sans-serif;
           font-size: 9.5px;
-          letter-spacing: 0.1em;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
           color: #9a7d65;
-          margin-top: 2px;
+          margin-top: 4px;
           white-space: nowrap;
+          text-align: center;
         }
 
         /* ── Desktop links ── */
@@ -591,7 +603,7 @@ export default function Nav({
           <Link to="/" className="nav-brand">
             <img src={logo} alt="The Little Food Box" className="nav-brand-logo" />
             <span className="nav-brand-text">
-              <span className="nav-brand-name">THE Little FOOD BOX</span>
+              <span className="nav-brand-name">THE <em>Little</em> FOOD BOX</span>
               <span className="nav-brand-sub">By Parul Agrawal 🍱</span>
             </span>
           </Link>

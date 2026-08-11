@@ -611,9 +611,17 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
               {current.tagline}
             </p>
             <div style={{ display: "flex", alignItems: "flex-end", gap: 12, marginBottom: 20 }}>
-              <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(34px,4vw,52px)", fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-1.5px", lineHeight: 1 }}>
-                {current.category}
-              </h1>
+             <h1
+  style={{
+    fontFamily: "var(--font-display)",
+fontSize: "clamp(26px,2.5vw,34px)",    fontWeight: 600,
+    color: "var(--text-primary)",
+    letterSpacing: "-1.2px",
+    lineHeight: 1
+  }}
+>
+  {current.category}
+</h1>
             </div>
             <FilterBar key={`fb-${panelKey}`} items={allItems} activeFilter={activeFilter} onFilterChange={handleFilterChange} accent={current.accent} />
           </div>
@@ -652,7 +660,7 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
                       {/* Text info */}
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <DishBadges dish={dish} style={{ marginBottom: 8 }} />
-                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
+                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 16, fontWeight: 600, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
                           {dish.name}
                         </h3>
                         <DishDescription dish={dish} fontSize={13} />

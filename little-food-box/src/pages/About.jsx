@@ -427,7 +427,7 @@ const menuItems = [
 const values = [
   { icon: "🏠", title: "Home-Made Always", text: "Every single item is made by Parul herself — no outsourcing, no factory shortcuts, ever." },
   { icon: "🌍", title: "Multi-Cuisine Mastery", text: "From smoky Indian spices to Italian herbs and Mexican heat — one kitchen, many worlds." },
-  { icon: "💛", title: "Made for You", text: "Customised orders, personal preferences, dietary needs — The LFB bends the menu for its people." },
+  { icon: "💛", title: "Made for You", text: "Customised orders, personal preferences, dietary needs — The Little Food Box bends the menu for its people." },
 ];
 
 const testimonials = [
@@ -514,7 +514,7 @@ const navigate = useNavigate();
     <span>Order Now</span>
   </button>
 </a>
-<Link to="/menu">
+<Link to="/menucard">
   <button className="btn-outline">See the Menu</button>
 </Link>        </div>
         <div className="scroll-hint">

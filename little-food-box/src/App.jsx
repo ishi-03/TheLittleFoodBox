@@ -46,7 +46,6 @@ export default function App() {
 
       {/* ================= CUSTOMER WEBSITE ================= */}
       <Route element={<Layout />}>
-        {/* <Route path="/menu" element={<Menu />} /> */}
         <Route path="/menucard" element={<MenuCard />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/subscription" element={<Subscriptions />} />

@@ -158,7 +158,7 @@ export default function Sidebar({ isOpen, onClose }) {
         >
 
           <a
-            href="/menu"
+            href="/menucard"
             className="block mb-0 md:mb-0"
             style={{
               display: "block",

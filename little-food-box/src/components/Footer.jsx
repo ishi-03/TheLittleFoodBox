@@ -48,7 +48,7 @@ const columns = [
   {
     title: "Explore",
     links: [
-      { label: "Menu", href: "/menu" },
+      { label: "Menu", href: "/menucard" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],

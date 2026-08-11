@@ -6,7 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 ───────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
   { name: "About", to: "/about", img: "/hero2.jpg" },
-  { name: "Menu", to: "/menu", img: "/hero3.jpg" },
+  { name: "Menu", to: "/menucard", img: "/hero3.jpg" },
   { name: "Subscription", to: "/subscription", img: "/hero4.jpg" },
       { name: "Platters", to: "/platters", img: "/hero1.jpg" },
   { name: "Contact", to: "/contact", img: "/hero5.jpg" },
