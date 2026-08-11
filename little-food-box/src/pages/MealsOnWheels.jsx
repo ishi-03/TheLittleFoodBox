@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "../components/Nav";
 
 // ---------- Small inline icon set (no external libraries) ----------
 const IconLeaf = (props) => (

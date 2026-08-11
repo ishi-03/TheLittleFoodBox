@@ -453,10 +453,10 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
               <div>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.4px", lineHeight: 1.15 }}>
-                  The Little Food Box
+                  THE <span style={{ fontStyle: "italic", fontWeight: 600, color: current.accent }}>Little</span> FOOD BOX
                 </div>
                 <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)", marginTop: 2 }}>
-                  Home kitchen · Made with love 🏡
+                  By Parul Agrawal 🏡
                 </div>
               </div>
               <button
@@ -560,9 +560,9 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
         <aside style={{ width: 220, flexShrink: 0, display: "flex", flexDirection: "column", background: "var(--surface)", borderRight: "1px solid var(--border)", padding: "32px 16px" }}>
           <div style={{ marginBottom: 40, paddingLeft: 12 }}>
             <div style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.5px", lineHeight: 1.2, marginBottom: 4 }}>
-              The Little<br />Food Box
+              THE <span style={{ fontStyle: "italic", fontWeight: 600, color: current.accent }}>Little</span><br />FOOD BOX
             </div>
-            <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)" }}>Home kitchen · Made with love 🏡</div>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)" }}> By Parul Agrawal 🏡</div>
           </div>
 
           <div style={{ paddingLeft: 12, marginBottom: 8 }}>
