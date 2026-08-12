@@ -567,6 +567,8 @@ const fmtPrice = (p) => {
                       {/* Inline thumbnail */}
                       <div className="dish-thumb" style={{ width: 80, height: 80 }}>
                         <img src={dish.image} alt={dish.name}
+                          loading="lazy"
+                          decoding="async"
                           onError={e => { e.currentTarget.style.opacity = "0"; }} />
                       </div>
                       {/* Text */}
@@ -722,6 +724,8 @@ const fmtPrice = (p) => {
                           <img
                             src={dish.image}
                             alt={dish.name}
+                             loading="lazy"
+  decoding="async"
                             onError={(e) => {
                               e.currentTarget.style.display = "none";
                             }}
