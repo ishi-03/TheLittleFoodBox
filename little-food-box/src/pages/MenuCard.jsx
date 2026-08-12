@@ -487,8 +487,24 @@ export default function LittleFoodBox() {
   // ── ALL HANDLERS: unchanged from original ──
   const switchTab = (i) => { if (i === active) return; setActive(i); setPanelKey((k) => k + 1); setActiveFilter("all"); };
   const handleFilterChange = (id) => { setActiveFilter(id); setPanelKey((k) => k + 1); };
-  const fmtPrice = (p) => p === "Ask" ? null : `₹${Number(p).toLocaleString("en-IN")}`;
+const fmtPrice = (p) => {
+  if (
+    p === "Ask" ||
+    p === "On Request" ||
+    p === "On req" ||
+    p === "" ||
+    p === null ||
+    p === undefined
+  ) {
+    return "On request";
+  }
 
+  const num = Number(p);
+
+  if (isNaN(num)) return "On request";
+
+  return `₹${num.toLocaleString("en-IN")}`;
+};
   /* ════════════════════════════════════
      MOBILE LAYOUT
   ════════════════════════════════════ */

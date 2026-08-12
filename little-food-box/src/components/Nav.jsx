@@ -596,16 +596,13 @@ export default function Nav({
     width: 40px;
     height: 40px;
   }
-
   .nav-links,
   .nav-auth {
     display: none !important;
   }
-
   .nav-hamburger {
     display: flex;
   }
-
   .nav-offset {
     height: 64px;
   }
