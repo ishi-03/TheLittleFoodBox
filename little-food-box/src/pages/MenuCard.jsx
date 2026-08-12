@@ -509,7 +509,6 @@ export default function LittleFoodBox() {
                 style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", borderRadius: 999, border: `1px solid ${current.accent}44`, background: `${current.color}50`, cursor: "pointer", WebkitTapHighlightColor: "transparent" }}
               >
                 <span className="pulse" style={{ width: 6, height: 6, borderRadius: "50%", background: "#4a9a40", display: "inline-block" }} />
-                <span style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, color: current.accent }}>Order</span>
               </button>
             </div>
 
