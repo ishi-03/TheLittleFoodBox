@@ -503,14 +503,7 @@ export default function LittleFoodBox() {
           {/* MOBILE HEADER */}
           <header style={{ flexShrink: 0, padding: "16px 20px 0", background: "var(--surface)", borderBottom: "1px solid var(--border)" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-              <div>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.4px", lineHeight: 1.15 }}>
-                  THE <span style={{ fontStyle: "italic", fontWeight: 600, color: current.accent }}>Little</span> FOOD BOX
-                </div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)", marginTop: 2 }}>
-                  By Parul Agrawal 🏡
-                </div>
-              </div>
+             
               <button
                 onClick={() => setShowOrder(true)}
                 style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", borderRadius: 999, border: `1px solid ${current.accent}44`, background: `${current.color}50`, cursor: "pointer", WebkitTapHighlightColor: "transparent" }}
