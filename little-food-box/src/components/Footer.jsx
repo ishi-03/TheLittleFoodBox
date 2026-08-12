@@ -168,6 +168,19 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="tel:+91 9998722140"
+                  className="relative inline-block text-[13px] text-[#f5e9d4]/65 hover:text-[#e8bfa0]
+                             tracking-wide transition-colors duration-500 ease-out
+                             after:content-[''] after:absolute after:left-1/2 after:-bottom-1
+                             after:w-0 after:h-px after:bg-[#e8bfa0]/70
+                             after:transition-all after:duration-500 after:ease-out
+                             hover:after:left-0 hover:after:w-full"
+                >
+                  +91 8236055718
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:thelittlefoodbox@gmail.com"
                   className="relative inline-block text-[13px] text-[#f5e9d4]/65 hover:text-[#e8bfa0]
                              tracking-wide transition-colors duration-500 ease-out
