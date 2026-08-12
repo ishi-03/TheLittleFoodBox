@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+
+// ── MODULE-LEVEL CACHE ──
+// Persists across component mounts (e.g. navigating away from MENU and back)
+// so we don't refetch + reshow a 2-3s loading state every single time.
+let menuCache = null;        // grouped menu array, once fetched successfully
+let menuFetchPromise = null; // in-flight request, shared if multiple mounts race
+
 // ── FILTERS: unchanged from original ──
 const FILTERS = [
   { id: "all",       label: "All",           icon: "✦",  match: () => true },
@@ -229,8 +236,6 @@ function FilterBar({ items, activeFilter, onFilterChange, accent }) {
   );
 }
 
-
-
 // ── OrderSheet: unchanged logic ──
 function OrderSheet({ accent, color, onClose }) {
   return (
@@ -333,15 +338,42 @@ function CuisineNav({ menuData, active, onSwitch, accent }) {
   );
 }
 
+// ── NEW: DishRowSkeleton / MenuSkeleton ──
+// Reuses the exact .dish-row / .dish-thumb / .pulse classes already in STYLES,
+// so it sits in the layout with zero visual jank once real data swaps in.
+function DishRowSkeleton({ delay = 0, thumbSize = 96 }) {
+  return (
+    <div className="dish-row anim-fade-up" style={{ animationDelay: `${delay}s` }}>
+      <div className="dish-thumb pulse" style={{ width: thumbSize, height: thumbSize }} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="pulse" style={{ width: "45%", height: 14, borderRadius: 4, background: "rgba(0,0,0,0.08)", marginBottom: 10 }} />
+        <div className="pulse" style={{ width: "80%", height: 11, borderRadius: 4, background: "rgba(0,0,0,0.06)", marginBottom: 6 }} />
+        <div className="pulse" style={{ width: "55%", height: 11, borderRadius: 4, background: "rgba(0,0,0,0.06)", marginBottom: 8 }} />
+        <div className="pulse" style={{ width: "30%", height: 10, borderRadius: 4, background: "rgba(0,0,0,0.05)" }} />
+      </div>
+    </div>
+  );
+}
+
+function MenuSkeleton({ count = 4, thumbSize = 96 }) {
+  return (
+    <div>
+      {Array.from({ length: count }).map((_, i) => (
+        <DishRowSkeleton key={i} delay={i * 0.05} thumbSize={thumbSize} />
+      ))}
+    </div>
+  );
+}
+
 export default function LittleFoodBox() {
-  // ── ALL STATE: unchanged from original ──
-  const [menuData, setMenuData] = useState([]);
+  // ── STATE: added `loading` ──
+  const [menuData, setMenuData] = useState(menuCache || []);
+  const [loading, setLoading] = useState(!menuCache); // false immediately if cache already warm
   const [active, setActive] = useState(0);
   const [panelKey, setPanelKey] = useState(0);
   const [activeFilter, setActiveFilter] = useState("all");
   const [showOrder, setShowOrder] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -350,92 +382,112 @@ export default function LittleFoodBox() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
- useEffect(() => {
-  const fetchMenu = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/menu-items`
-      );
-
-      const grouped = {};
-
-      data.forEach((item) => {
-        if (!grouped[item.category]) {
-          grouped[item.category] = {
-            id: item.category.toLowerCase().replace(/\s+/g, "-"),
-            category: item.category,
-            tagline: "",
-            color: "#f7e8d0",
-            accent: "#B5451B",
-            sections: [],
-          };
-        }
-
-        let section = grouped[item.category].sections.find(
-          (s) => s.title === item.section
-        );
-
-        if (!section) {
-          section = {
-            title: item.section,
-            items: [],
-          };
-
-          grouped[item.category].sections.push(section);
-        }
-
-        section.items.push({
-          name: item.name,
-          price: item.price,
-          unit: item.unit,
-          serves: item.serves,
-          minOrder: item.minOrder,
-          chefPick: item.chefPick,
-          popular: item.popular,
-          spicy: item.spicy,
-          image: item.image,
-          category: [grouped[item.category].id],
-          isAvailable: item.isAvailable,
-          description: item.description || "",
-          jain: item.jain || false,
-        });
-      });
-
-      setMenuData(Object.values(grouped));
-    } catch (err) {
-      console.error(err);
+  useEffect(() => {
+    // Already have data from a previous mount (e.g. navigated MENU -> away -> MENU) — skip fetch entirely.
+    if (menuCache) {
+      setMenuData(menuCache);
+      setLoading(false);
+      return;
     }
-  };
 
-  fetchMenu();
-}, []);
+    let cancelled = false;
+
+    const fetchMenu = async () => {
+      setLoading(true);
+      try {
+        // Dedupe: if a fetch is already in flight (e.g. StrictMode double-invoke,
+        // or a fast remount), reuse the same promise instead of firing a second request.
+        if (!menuFetchPromise) {
+          menuFetchPromise = axios.get(`${import.meta.env.VITE_API_URL}/api/menu-items`);
+        }
+        const { data } = await menuFetchPromise;
+
+        const grouped = {};
+
+        data.forEach((item) => {
+          if (!grouped[item.category]) {
+            grouped[item.category] = {
+              id: item.category.toLowerCase().replace(/\s+/g, "-"),
+              category: item.category,
+              tagline: "",
+              color: "#f7e8d0",
+              accent: "#B5451B",
+              sections: [],
+            };
+          }
+
+          let section = grouped[item.category].sections.find(
+            (s) => s.title === item.section
+          );
+
+          if (!section) {
+            section = {
+              title: item.section,
+              items: [],
+            };
+
+            grouped[item.category].sections.push(section);
+          }
+
+          section.items.push({
+            name: item.name,
+            price: item.price,
+            unit: item.unit,
+            serves: item.serves,
+            minOrder: item.minOrder,
+            chefPick: item.chefPick,
+            popular: item.popular,
+            spicy: item.spicy,
+            image: item.image,
+            category: [grouped[item.category].id],
+            isAvailable: item.isAvailable,
+            description: item.description || "",
+            jain: item.jain || false,
+          });
+        });
+
+        const result = Object.values(grouped);
+        menuCache = result; // warm the cache for future mounts
+
+        if (!cancelled) setMenuData(result);
+      } catch (err) {
+        console.error(err);
+        menuFetchPromise = null; // allow a retry on next mount since this attempt failed
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchMenu();
+
+    return () => { cancelled = true; };
+  }, []);
+
   // ── ALL DERIVED STATE: unchanged from original ──
   const current = menuData[active] || { sections: [], color: "#f5e6c8", accent: "#b07d3a", category: "Menu" };
   const activeFilterDef = FILTERS.find((f) => f.id === activeFilter);
- const cuisineId = current.id;
+  const cuisineId = current.id;
 
-// collect ALL sections from all cuisines
-const allSections = menuData.flatMap(c => c.sections || []);
+  // collect ALL sections from all cuisines
+  const allSections = menuData.flatMap(c => c.sections || []);
 
-const filteredSections = allSections
-  .map(section => ({
-    ...section,
-    items: section.items.filter(
-      dish =>
-        (!dish.category || dish.category.includes(cuisineId)) &&
-        activeFilterDef.match(dish)
-    )
-  }))
-  .filter(section => section.items.length > 0);
-const filteredItems = filteredSections.flatMap(s => s.items);
-const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
+  const filteredSections = allSections
+    .map(section => ({
+      ...section,
+      items: section.items.filter(
+        dish =>
+          (!dish.category || dish.category.includes(cuisineId)) &&
+          activeFilterDef.match(dish)
+      )
+    }))
+    .filter(section => section.items.length > 0);
+  const filteredItems = filteredSections.flatMap(s => s.items);
+  const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
 
   // ── ALL HANDLERS: unchanged from original ──
   const switchTab = (i) => { if (i === active) return; setActive(i); setPanelKey((k) => k + 1); setActiveFilter("all"); };
   const handleFilterChange = (id) => { setActiveFilter(id); setPanelKey((k) => k + 1); };
   const fmtPrice = (p) => p === "Ask" ? null : `₹${Number(p).toLocaleString("en-IN")}`;
-
-
 
   /* ════════════════════════════════════
      MOBILE LAYOUT
@@ -468,30 +520,34 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
               </button>
             </div>
 
-
             {/* category nav — 4 pills visible + arrows */}
-            <CuisineNav menuData={menuData} active={active} onSwitch={switchTab} accent={current.accent} />
+            {!loading && <CuisineNav menuData={menuData} active={active} onSwitch={switchTab} accent={current.accent} />}
 
             {/* dish-level filters */}
-            <div key={`mfilter-${panelKey}`} style={{ display: "flex", gap: 20, overflowX: "auto", scrollbarWidth: "none", borderBottom: "1px solid var(--border)", marginLeft: -20, marginRight: -20, paddingLeft: 20, paddingRight: 20 }}>
-              {FILTERS.filter(f => f.id === "all" || allItems.filter(f.match).length > 0).map(f => (
-                <button
-                  key={f.id}
-                  className={`filter-tab ${activeFilter === f.id ? "active" : ""}`}
-                  style={{ "--tab-accent": current.accent, flexShrink: 0 }}
-                  onClick={() => handleFilterChange(f.id)}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
+            {!loading && (
+              <div key={`mfilter-${panelKey}`} style={{ display: "flex", gap: 20, overflowX: "auto", scrollbarWidth: "none", borderBottom: "1px solid var(--border)", marginLeft: -20, marginRight: -20, paddingLeft: 20, paddingRight: 20 }}>
+                {FILTERS.filter(f => f.id === "all" || allItems.filter(f.match).length > 0).map(f => (
+                  <button
+                    key={f.id}
+                    className={`filter-tab ${activeFilter === f.id ? "active" : ""}`}
+                    style={{ "--tab-accent": current.accent, flexShrink: 0 }}
+                    onClick={() => handleFilterChange(f.id)}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </header>
 
           {/* MOBILE CONTENT */}
           <div key={panelKey} className="scroll" style={{ flex: 1, overflowY: "auto", padding: "0 20px 24px" }}>
 
-            {/* dish list */}
-            {filteredItems.length === 0 ? (
+            {loading ? (
+              <div style={{ paddingTop: 20 }}>
+                <MenuSkeleton count={4} thumbSize={80} />
+              </div>
+            ) : filteredItems.length === 0 ? (
               <div style={{ textAlign: "center", padding: "48px 24px" }}>
                 <div style={{ fontSize: 44, marginBottom: 12, opacity: 0.25 }}>🍱</div>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 19, color: "var(--text-primary)", fontWeight: 700, marginBottom: 6 }}>Nothing here!</div>
@@ -542,7 +598,6 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
             </div>
           </div>
 
-
         </div>
       </>
     );
@@ -565,19 +620,25 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
 
           {/* category nav: unchanged data (menuData from fetch) */}
           <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: 2, overflowY: "auto" }} className="scroll">
-            {menuData.map((m, i) => (
-              <button key={m.id} onClick={() => switchTab(i)} className={`nav-link ${i === active ? "active" : ""}`} style={{ "--accent-bg": `${m.accent}14` }}>
-                <div style={{ width: 3, height: 16, borderRadius: 99, background: i === active ? m.accent : "transparent", transition: "background 0.2s ease", flexShrink: 0 }} />
-                <span style={{ fontFamily: "var(--font-display)", fontSize: 15, fontWeight: i === active ? 600 : 300, fontStyle: i === active ? "normal" : "italic", color: i === active ? "var(--text-primary)" : "var(--text-secondary)", transition: "all 0.2s ease" }}>
-                  {m.category}
-                </span>
-                {i === active && (
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: m.accent, marginLeft: "auto", opacity: 0.7 }}>
-                    {m.sections.flatMap(s => s.items).length}
+            {loading ? (
+              Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="pulse" style={{ height: 32, borderRadius: 8, background: "rgba(0,0,0,0.05)", margin: "3px 0" }} />
+              ))
+            ) : (
+              menuData.map((m, i) => (
+                <button key={m.id} onClick={() => switchTab(i)} className={`nav-link ${i === active ? "active" : ""}`} style={{ "--accent-bg": `${m.accent}14` }}>
+                  <div style={{ width: 3, height: 16, borderRadius: 99, background: i === active ? m.accent : "transparent", transition: "background 0.2s ease", flexShrink: 0 }} />
+                  <span style={{ fontFamily: "var(--font-display)", fontSize: 15, fontWeight: i === active ? 600 : 300, fontStyle: i === active ? "normal" : "italic", color: i === active ? "var(--text-primary)" : "var(--text-secondary)", transition: "all 0.2s ease" }}>
+                    {m.category}
                   </span>
-                )}
-              </button>
-            ))}
+                  {i === active && (
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: 10, color: m.accent, marginLeft: "auto", opacity: 0.7 }}>
+                      {m.sections.flatMap(s => s.items).length}
+                    </span>
+                  )}
+                </button>
+              ))
+            )}
           </nav>
 
           <div style={{ borderTop: "1px dashed rgba(0,0,0,0.1)", paddingTop: 20, paddingLeft: 12 }}>
@@ -601,28 +662,44 @@ const allItems = menuData.flatMap(c => c.sections.flatMap(s => s.items));
 
           {/* category heading: uses current.tagline, current.category, allItems — all from fetched data */}
           <div key={`dhead-${active}`} style={{ padding: "28px 40px 0", flexShrink: 0, animation: "fadeUp 0.45s cubic-bezier(0.16,1,0.3,1) both" }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: current.accent, fontWeight: 500, letterSpacing: "1.4px", textTransform: "uppercase", marginBottom: 8, transition: "color 0.4s ease" }}>
-              {current.tagline}
-            </p>
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 12, marginBottom: 20 }}>
-             <h1
-  style={{
-    fontFamily: "var(--font-display)",
-fontSize: "clamp(22px, 2vw, 28px)",
-fontWeight: 600,    color: "var(--text-primary)",
-    letterSpacing: "-1.2px",
-    lineHeight: 1
-  }}
->
-  {current.category}
-</h1>
-            </div>
-            <FilterBar key={`fb-${panelKey}`} items={allItems} activeFilter={activeFilter} onFilterChange={handleFilterChange} accent={current.accent} />
+            {loading ? (
+              <>
+                <div className="pulse" style={{ width: 120, height: 10, borderRadius: 4, background: "rgba(0,0,0,0.06)", marginBottom: 10 }} />
+                <div className="pulse" style={{ width: 220, height: 26, borderRadius: 6, background: "rgba(0,0,0,0.08)", marginBottom: 20 }} />
+              </>
+            ) : (
+              <>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: 10, color: current.accent, fontWeight: 500, letterSpacing: "1.4px", textTransform: "uppercase", marginBottom: 8, transition: "color 0.4s ease" }}>
+                  {current.tagline}
+                </p>
+                <div style={{ display: "flex", alignItems: "flex-end", gap: 12, marginBottom: 20 }}>
+                  <h1
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "clamp(22px, 2vw, 28px)",
+                      fontWeight: 600,
+                      color: "var(--text-primary)",
+                      letterSpacing: "-1.2px",
+                      lineHeight: 1
+                    }}
+                  >
+                    {current.category}
+                  </h1>
+                </div>
+              </>
+            )}
+            {!loading && (
+              <FilterBar key={`fb-${panelKey}`} items={allItems} activeFilter={activeFilter} onFilterChange={handleFilterChange} accent={current.accent} />
+            )}
           </div>
 
           {/* dish list: uses filteredSections, filteredItems — all derived from fetched data */}
           <div key={panelKey} className="scroll" style={{ flex: 1, overflowY: "auto", padding: "0 40px 40px" }}>
-            {filteredItems.length === 0 ? (
+            {loading ? (
+              <div style={{ paddingTop: 8 }}>
+                <MenuSkeleton count={5} thumbSize={96} />
+              </div>
+            ) : filteredItems.length === 0 ? (
               <div style={{ textAlign: "center", padding: "64px 24px" }}>
                 <div style={{ fontSize: 48, marginBottom: 14, opacity: 0.25 }}>🍱</div>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "var(--text-primary)", fontWeight: 600, marginBottom: 8 }}>Nothing here!</div>
@@ -640,17 +717,17 @@ fontWeight: 600,    color: "var(--text-primary)",
                   {section.items.map((dish, i) => (
                     <div key={dish.name} className="dish-row anim-fade-up" style={{ animationDelay: `${(si * 4 + i) * 0.05}s` }}>
                       {/* Inline thumbnail */}
-   {dish.image && (
-  <div className="dish-thumb">
-    <img
-      src={dish.image}
-      alt={dish.name}
-      onError={(e) => {
-        e.currentTarget.style.display = "none";
-      }}
-    />
-  </div>
-)}
+                      {dish.image && (
+                        <div className="dish-thumb">
+                          <img
+                            src={dish.image}
+                            alt={dish.name}
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                            }}
+                          />
+                        </div>
+                      )}
                       {/* Text info */}
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <DishBadges dish={dish} style={{ marginBottom: 8 }} />
@@ -679,9 +756,7 @@ fontWeight: 600,    color: "var(--text-primary)",
             </div>
           </div>
 
-        
         </main>
-
 
       </div>
     </>
