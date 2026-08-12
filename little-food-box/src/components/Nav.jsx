@@ -579,12 +579,37 @@ export default function Nav({
         .nav-offset { height: 72px; }
 
         @media (max-width: 900px) {
-          .nav-root { padding: 1rem 1.5rem; }
-          .nav-root.scrolled { padding: 0.75rem 1.5rem; }
-          .nav-links, .nav-auth { display: none !important; }
-          .nav-hamburger { display: flex; }
-          .nav-offset { height: 60px; }
-        }
+  .nav-root {
+    padding: 0.65rem 1rem;
+  }
+
+  .nav-root.scrolled {
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-brand-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .nav-root.scrolled .nav-brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-links,
+  .nav-auth {
+    display: none !important;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-offset {
+    height: 64px;
+  }
+}
 
         @media (max-width: 1080px) and (min-width: 901px) {
           .nav-links { gap: 0; }

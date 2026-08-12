@@ -158,13 +158,13 @@ export default function GrazingTables() {
             </div>
 
             <div className="relative">
-              <div className="relative rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(42,26,14,0.18)] aspect-[4/5]">
-                <img
-                  src="/grazing-hero.png"
-                  alt="Grazing table spread"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+             <div className="relative rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(42,26,14,0.18)]">
+  <img
+    src="/grazing-hero.png"
+    alt="Grazing table spread"
+    className="w-full h-auto object-contain"
+  />
+</div>
               <div className="absolute -bottom-8 -left-8 bg-[#FBF6ED] rounded-2xl px-6 py-5 shadow-[0_20px_50px_rgba(42,26,14,0.12)] hidden md:block">
                 <p className="font-serif text-2xl">19+</p>
                 <p className="text-xs uppercase tracking-widest text-[#2A1A0E]/60 mt-1">
