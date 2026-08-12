@@ -502,15 +502,7 @@ export default function LittleFoodBox() {
 
           {/* MOBILE HEADER */}
           <header style={{ flexShrink: 0, padding: "16px 20px 0", background: "var(--surface)", borderBottom: "1px solid var(--border)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-             
-              <button
-                onClick={() => setShowOrder(true)}
-                style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", borderRadius: 999, border: `1px solid ${current.accent}44`, background: `${current.color}50`, cursor: "pointer", WebkitTapHighlightColor: "transparent" }}
-              >
-                <span className="pulse" style={{ width: 6, height: 6, borderRadius: "50%", background: "#4a9a40", display: "inline-block" }} />
-              </button>
-            </div>
+           
 
             {/* category nav — 4 pills visible + arrows */}
             {!loading && <CuisineNav menuData={menuData} active={active} onSwitch={switchTab} accent={current.accent} />}
