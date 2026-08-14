@@ -135,7 +135,7 @@ html, body, #root {
   display: block;
   padding: 1px;
   border-radius: 50%;
-  background: #fdfaf5;
+  background: rgba(253, 250, 245, 0.65);
   box-shadow: 0 4px 30px rgba(0,0,0,0.35);
   animation: titleReveal 1.4s cubic-bezier(.22,1,.36,1) .1s both;
   position: relative;
