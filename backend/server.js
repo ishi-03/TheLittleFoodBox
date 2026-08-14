@@ -54,7 +54,12 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Backend Running 🚀");
 });
-
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is awake 🚀",
+  });
+});
 // -------------------- API Routes --------------------
 
 app.use("/api/auth", authRoutes);
