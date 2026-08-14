@@ -130,10 +130,16 @@ html, body, #root {
 .ntb-hero-logo {
   width: clamp(140px, 22vw, 220px);
   height: auto;
+  aspect-ratio: 1 / 1;
   margin: 0 auto 14px;
   display: block;
+  padding: 1px;
+  border-radius: 50%;
+  background: #fdfaf5;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.35);
   animation: titleReveal 1.4s cubic-bezier(.22,1,.36,1) .1s both;
-  filter: drop-shadow(0 4px 30px rgba(0,0,0,0.4));
+  position: relative;
+  top: -20px;
 }
 
 /* Main brand title (kept in markup for SEO/accessibility, visually hidden) */
