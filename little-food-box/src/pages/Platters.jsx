@@ -8,8 +8,7 @@ const platters = [
     description:
       "Choice of 2 dips + 2 cream cheese balls with accompaniments, or 4 dips OR 4 cream cheese balls with accompaniments.",
     tags: ["Dips", "Cream Cheese Balls", "Customizable", "Accompaniments"],
-    image:
-      "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=800&q=80",
+    image: "./dipsPlatter.png",
     popular: true,
   },
   {
@@ -19,8 +18,7 @@ const platters = [
     description:
       "Nachos, tacos, refried beans, guacamole, salsa, quesadillas and a lot more.",
     tags: ["Nachos", "Tacos", "Guacamole", "Salsa", "Quesadillas"],
-    image:
-      "https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&fit=crop&w=800&q=80",
+    image: "./mexicanPlatter.png",
   },
   {
     id: "bao",
@@ -31,7 +29,7 @@ const platters = [
       "Bao bread, garlic mushroom, spicy paneer, pan fried veggies, sauces and a lot more.",
     tags: ["Bao Bread", "Garlic Mushroom", "Spicy Paneer", "Pan Fried Veggies"],
     image:
-      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+      "./baoPlatter.png",
   },
   {
     id: "mediterranean",
@@ -41,7 +39,7 @@ const platters = [
       "Hummus, pita, lavash, muhammara, baba ganoush and a lot more.",
     tags: ["Hummus", "Pita", "Lavash", "Muhammara", "Baba Ganoush"],
     image:
-      "https://images.unsplash.com/photo-1544510808-15a4f68c2a2b?auto=format&fit=crop&w=800&q=80",
+      "./meditterianPlatter.png",
   },
   {
     id: "tea-time",
@@ -51,7 +49,7 @@ const platters = [
       "Vada pav, dabeli, vol-au-vent, pita pocket, focaccia bread sandwich.",
     tags: ["Vada Pav", "Dabeli", "Vol-au-vent", "Focaccia Sandwich"],
     image:
-      "https://images.unsplash.com/photo-1606491956391-89b1ee5e2f79?auto=format&fit=crop&w=800&q=80",
+    "teaPlatter.png",
   },
   {
     id: "burger",
@@ -70,7 +68,7 @@ const platters = [
       "Classic hummus, varieties of lavash, pita bread, falafel bullets, fresh vegetables.",
     tags: ["Classic Hummus", "Lavash", "Pita Bread", "Falafel"],
     image:
-      "https://images.unsplash.com/photo-1571745544682-826b45ca7a19?auto=format&fit=crop&w=800&q=80",
+      "./hummusPlatter.png",
   },
   {
     id: "guacamole",
@@ -110,7 +108,7 @@ const platters = [
       "Whole wheat dough balls stuffed with sattu, 3 types of chokha and a lot more.",
     tags: ["Stuffed Litti", "3 Types of Chokha", "Accompaniments"],
     image:
-      "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80",
+      "./littiPlatter.png",
   },
   {
     id: "chinese",
