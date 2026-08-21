@@ -31,14 +31,24 @@ const DeliverySection = ({
                     </div>
                     <div>
                         <div className="field-label">Start Date</div>
-                      <input
-  type="date"
-  className="date-input"
-  value={startDate}
-  min={new Date(Date.now() + 24 * 60 * 60 * 1000)
-    .toISOString()
-    .split("T")[0]}
-  onChange={(e) => setStartDate(e.target.value)}
+                  <input
+    type="date"
+    className="date-input"
+    value={startDate}
+    min={new Date(Date.now() + 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0]}
+    onChange={(e) => {
+        const selectedDate = new Date(e.target.value + "T00:00:00");
+
+        // Sunday = 0
+        if (selectedDate.getDay() === 0) {
+            alert("Sunday is an off day. Please select another date.");
+            return;
+        }
+
+        setStartDate(e.target.value);
+    }}
 />
                     </div>
                     <div style={{ marginBottom: "20px" }}>
