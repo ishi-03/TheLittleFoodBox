@@ -1,5 +1,8 @@
 import React from "react";
 import { formatTime } from "../../utils/time.js";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const DeliverySection = ({
     slots,
     selectedSlot,
@@ -31,25 +34,26 @@ const DeliverySection = ({
                     </div>
                     <div>
                         <div className="field-label">Start Date</div>
-                  <input
-    type="date"
-    className="date-input"
-    value={startDate}
-    min={new Date(Date.now() + 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split("T")[0]}
-    onChange={(e) => {
-        const selectedDate = new Date(e.target.value + "T00:00:00");
-
-        // Sunday = 0
-        if (selectedDate.getDay() === 0) {
-            alert("Sunday is an off day. Please select another date.");
-            return;
-        }
-
-        setStartDate(e.target.value);
-    }}
-/>
+                        <DatePicker
+                            selected={startDate ? new Date(startDate + "T00:00:00") : null}
+                            onChange={(date) => {
+                                if (!date) return;
+                                const yyyy = date.getFullYear();
+                                const mm = String(date.getMonth() + 1).padStart(2, "0");
+                                const dd = String(date.getDate()).padStart(2, "0");
+                                setStartDate(`${yyyy}-${mm}-${dd}`);
+                            }}
+                            filterDate={(date) => date.getDay() !== 0}
+                            minDate={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="Select a date"
+                            className="date-input"
+                            wrapperClassName="date-input-wrapper"
+                            portalId="datepicker-portal"
+                            withPortal={window.innerWidth < 640}
+                            popperPlacement="bottom-start"
+                            popperProps={{ strategy: "fixed" }}
+                        />
                     </div>
                     <div style={{ marginBottom: "20px" }}>
                         <div className="field-label">Delivery Pattern</div>
@@ -78,4 +82,3 @@ const DeliverySection = ({
 };
 
 export default DeliverySection;
-
