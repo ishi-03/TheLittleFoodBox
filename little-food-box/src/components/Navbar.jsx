@@ -5,11 +5,11 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
    NAVIGATION DATA
 ───────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
-  { name: "About", to: "/about", img: "/hero2.jpg" },
-  { name: "Menu", to: "/menucard", img: "/hero3.jpg" },
-  { name: "Subscription", to: "/subscription", img: "/hero4.jpg" },
-      { name: "Platters", to: "/platters", img: "/hero1.jpg" },
-  { name: "Contact", to: "/contact", img: "/hero5.jpg" },
+  { name: "About", to: "/about", img: "/hero2.webp" },
+  { name: "Menu", to: "/menucard", img: "/hero3.webp" },
+  { name: "Subscription", to: "/subscription", img: "/hero4.webp" },
+      { name: "Platters", to: "/platters", img: "/hero1.webp" },
+  { name: "Contact", to: "/contact", img: "/hero5.webp" },
 
 ];
 
@@ -602,12 +602,12 @@ export default function Navbar() {
       {/* ── Flowing image background ── */}
       <div className="ntb-images">
         <div className="ntb-images-track">
-  <img src="/hero1.jpg" alt="" />
-  <img src="/hero2.jpg" alt="" />
-  <img src="/hero3.jpg" alt="" />
-  <img src="/hero4.jpg" alt="" />
-  <img src="/hero5.jpg" alt="" />
-  <img src="/hero1.jpg" alt="" />
+  <img src="/hero1.webp" alt="" />
+  <img src="/hero2.webp" alt="" />
+  <img src="/hero3.webp" alt="" />
+  <img src="/hero4.webp" alt="" />
+  <img src="/hero5.webp" alt="" />
+  <img src="/hero1.webp" alt="" />
 </div>
       </div>
 
@@ -668,7 +668,7 @@ export default function Navbar() {
         <span className="ntb-hero-rule" />
 
         <img
-          src="/TLBLogo.png"
+          src="/TLBLogo.webp"
           alt="The Little Food Box"
           className="ntb-hero-logo"
         />

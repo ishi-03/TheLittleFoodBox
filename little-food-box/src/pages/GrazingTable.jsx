@@ -102,10 +102,10 @@ const perfectFor = [
 ];
 
 const gallery = [
-  { src: "/grazing-1.jpg", h: "h-72" },
-  { src: "/grazing-2.jpg", h: "h-96" },
-  { src: "/grazing-3.jpg", h: "h-80" },
-  { src: "/grazing-4.jpg", h: "h-64" },
+  { src: "/grazing-1.webp", h: "h-72" },
+  { src: "/grazing-2.webp", h: "h-96" },
+  { src: "/grazing-3.webp", h: "h-80" },
+  { src: "/grazing-4.webp", h: "h-64" },
 ];
 
 const process = [
@@ -160,7 +160,7 @@ export default function GrazingTables() {
             <div className="relative">
              <div className="relative rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(42,26,14,0.18)]">
   <img
-    src="/grazing-hero.png"
+    src="/grazing-hero.webp"
     alt="Grazing table spread"
     className="w-full h-auto object-contain"
   />
@@ -221,7 +221,7 @@ export default function GrazingTables() {
               </div>
 
               <div className="relative rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(42,26,14,0.15)] aspect-[4/5]">
-                <img src="/grazing-2.png" alt="Grazing table detail" className="w-full h-full object-cover" />
+                <img src="/grazing-2.webp" alt="Grazing table detail" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>

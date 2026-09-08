@@ -194,7 +194,7 @@ rel="noopener noreferrer"              className="inline-flex items-center gap-2
           <div className="relative">
             <div className="aspect-[4/5] w-full rounded-[2.5rem] overflow-hidden shadow-[0_30px_60px_-25px_rgba(42,26,14,0.25)] border border-[#2A1A0E]/5">
               <img
-                src="/hero-breakfast.png"
+                src="/hero-breakfast.webp"
                 alt="Freshly prepared homemade breakfast spread"
                 className="w-full h-full object-cover"
               />
@@ -286,12 +286,12 @@ rel="noopener noreferrer"              className="inline-flex items-center gap-2
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6 [&>*:nth-child(1)]:row-span-2 [&>*:nth-child(4)]:row-span-2">
           {[
-            { ratio: "aspect-[3/4]", src: "/gallery-1.jpeg" },
-            { ratio: "aspect-square", src: "/gallery-2.jpeg" },
-            { ratio: "aspect-square", src: "/gallery-3.jpeg" },
-            // { ratio: "aspect-[3/4]", src: "/images/gallery-4.jpg" },
-            // { ratio: "aspect-square", src: "/images/gallery-5.jpg" },
-            // { ratio: "aspect-square", src: "/images/gallery-6.jpg" },
+            { ratio: "aspect-[3/4]", src: "/gallery-1.webp" },
+            { ratio: "aspect-square", src: "/gallery-2.webp" },
+            { ratio: "aspect-square", src: "/gallery-3.webp" },
+            // { ratio: "aspect-[3/4]", src: "/images/gallery-4.webp" },
+            // { ratio: "aspect-square", src: "/images/gallery-5.webp" },
+            // { ratio: "aspect-square", src: "/images/gallery-6.webp" },
           ].map(({ ratio, src }, i) => (
             <div
               key={i}

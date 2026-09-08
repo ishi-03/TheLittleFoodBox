@@ -78,7 +78,23 @@ jain: {
 },
 
 
+// ---- Platter customization (NEW) ----
+hasCustomization: {
+  type: Boolean,
+  default: false,
+},
+
+customizationGroups: [
+  {
+    title: { type: String, required: true },   // e.g. "Choose Dips"
+    maxSelect: { type: Number, default: 1 },     // e.g. 2 → "choose any 2"
+    options: [{ type: String }],                 // e.g. ["Hummus", "Guacamole", "Salsa"]
   },
+],
+
+},
+
+  
   {
     timestamps: true,
   }

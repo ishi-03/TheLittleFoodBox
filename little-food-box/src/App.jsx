@@ -17,6 +17,7 @@ const Profile = lazy(() => import("./pages/profile.jsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const Checkout = lazy(() => import("./pages/Checkout.jsx"));
+
 const ManageSubscription = lazy(() =>
   import("./pages/ManageSubscription.jsx")
 );
@@ -60,6 +61,9 @@ const AdminMenuItems = lazy(() =>
   import("./admin/pages/AdminMenuItems.jsx")
 );
 
+const AdminOrders = lazy(() =>
+  import("./admin/pages/AdminOrders.jsx")
+);
 
 // ─────────────────────────────────────────────
 // Loading Screen
@@ -230,6 +234,10 @@ export default function App() {
               path="menu-items"
               element={<AdminMenuItems />}
             />
+            <Route
+  path="orders"
+  element={<AdminOrders />}
+/>
 
           </Route>
 

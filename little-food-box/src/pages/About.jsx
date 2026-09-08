@@ -430,6 +430,7 @@ const values = [
   { icon: "💛", title: "Made for You", text: "Customised orders, personal preferences, dietary needs — The Little Food Box bends the menu for its people." },
 ];
 
+
 const testimonials = [
   { text: "The cream cheese dips are genuinely unlike anything I've had — I brought them to a party and people wouldn't stop asking where they were from.", author: "Ananya R., Party Host" },
   { text: "Parul's grazing table at my sister's baby shower was the highlight of the evening. Absolutely stunning and delicious.", author: "Meera T., Event Customer" },
@@ -467,6 +468,7 @@ const navigate = useNavigate();
   style={{
     position: "absolute",
     top: "90px",
+
     left: "24px",
     background: "transparent",
     border: "none",
@@ -475,6 +477,7 @@ const navigate = useNavigate();
     color: "#6b3f23",
     zIndex: 20,
     transition: "color 0.2s"
+
   }}
   onMouseEnter={e => e.currentTarget.style.color = "#b5572a"}
   onMouseLeave={e => e.currentTarget.style.color = "#6b3f23"}
@@ -487,10 +490,12 @@ const navigate = useNavigate();
         <div className="hero-ring hero-ring-2" />
         <div className="hero-eyebrow">Home · Kitchen · Heart</div>
         <span className="hero-emoji">🍱</span>
+
         <h1 className="hero-title">The <em>Little</em><br />Food Box</h1>
         <p className="hero-sub">Home · Crafted · Daily · With Love</p>
         <p className="hero-desc">
           Real food made in a real home. Every box carries{" "}
+
           <strong>recipes passed down through generations</strong> — packed with
           honest ingredients and zero compromises.
         </p>
@@ -505,6 +510,7 @@ const navigate = useNavigate();
   target="_blank" 
   rel="noopener noreferrer"
 >
+  
   <button className="btn-primary">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -530,6 +536,7 @@ const navigate = useNavigate();
           { num: `${counts.dishes}+`, label: "Dishes on Menu" },
           { num: `${counts.happy}+`, label: "Happy Families" },
           { num: `${counts.years}yr`, label: "Years Running" },
+          
         ].map(({ num, label }, i) => (
           <>
             {i > 0 && <div className="strip-sep" key={`sep-${i}`} />}
@@ -654,3 +661,5 @@ const navigate = useNavigate();
     </>
   );
 }
+
+

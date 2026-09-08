@@ -36,6 +36,11 @@ export default function Sidebar({ isOpen, onClose }) {
       icon: "🍽️",
       path: "/admin/menu-items",
     },
+    {
+  name: "Orders",
+  icon: "🧾",
+  path: "/admin/orders",
+},
   ];
 
   const logout = () => {

@@ -34,7 +34,9 @@ const EMPTY_FORM = {
   spicy: false,
   isAvailable: true,
   description: "",
-  jain: false,  
+  jain: false,
+  hasCustomization: false,
+  customizationGroups: [],
 };
 
 /**
@@ -76,7 +78,12 @@ export default function MenuItemModal({ isOpen, onClose, onSave, initialData }) 
         isAvailable: initialData.isAvailable ?? true,
         description: initialData.description ?? "",
         jain: Boolean(initialData.jain),
-        
+        hasCustomization: Boolean(initialData.hasCustomization),
+        customizationGroups: (initialData.customizationGroups || []).map((g) => ({
+          title: g.title ?? "",
+          maxSelect: g.maxSelect ?? 1,
+          optionsInput: (g.options || []).join(", "),
+        })),
       });
       setImagePreview(initialData.image || null);
     } else {
@@ -147,6 +154,33 @@ const compressImage = async (file) => {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  // ---- Customization group helpers ----
+  const addGroup = () => {
+    setForm((prev) => ({
+      ...prev,
+      customizationGroups: [
+        ...prev.customizationGroups,
+        { title: "", maxSelect: 1, optionsInput: "" },
+      ],
+    }));
+  };
+
+  const removeGroup = (index) => {
+    setForm((prev) => ({
+      ...prev,
+      customizationGroups: prev.customizationGroups.filter((_, i) => i !== index),
+    }));
+  };
+
+  const updateGroup = (index, field, value) => {
+    setForm((prev) => ({
+      ...prev,
+      customizationGroups: prev.customizationGroups.map((g, i) =>
+        i === index ? { ...g, [field]: value } : g
+      ),
+    }));
+  };
+
   const validate = () => {
     const nextErrors = {};
 
@@ -177,7 +211,22 @@ const compressImage = async (file) => {
       spicy: form.spicy,
       isAvailable: form.isAvailable,
       description: form.description.trim(),
-jain: form.jain,
+      jain: form.jain,
+      hasCustomization: form.hasCustomization,
+      // Backend expects an array of { title, maxSelect, options }.
+      // Sent as a JSON string here since it also has to survive multipart/form-data.
+      customizationGroups: JSON.stringify(
+        form.customizationGroups
+          .filter((g) => g.title.trim())
+          .map((g) => ({
+            title: g.title.trim(),
+            maxSelect: Number(g.maxSelect) || 1,
+            options: g.optionsInput
+              .split(",")
+              .map((o) => o.trim())
+              .filter(Boolean),
+          }))
+      ),
     };
 
     // Image is optional. Use FormData only when a new file was picked,
@@ -460,6 +509,86 @@ jain: form.jain,
                 onChange={(v) => handleChange("jain", v)}
               />
             </div>
+          </div>
+
+          {/* Customization */}
+          <div className="border-t border-stone-200 pt-5">
+            <label className="flex items-center gap-2 mb-3">
+              <input
+                type="checkbox"
+                checked={form.hasCustomization}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, hasCustomization: e.target.checked }))
+                }
+                className="rounded border-stone-300 text-emerald-700 focus:ring-emerald-600"
+              />
+              <span className="text-sm font-medium text-stone-700">
+                This item has customization options
+              </span>
+            </label>
+
+            {form.hasCustomization && (
+              <div className="space-y-3 bg-stone-50 rounded-xl p-4 border border-stone-200">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-stone-700">
+                    Customization Groups
+                  </span>
+                  <button
+                    type="button"
+                    onClick={addGroup}
+                    className="text-xs font-medium text-emerald-700 hover:text-emerald-800"
+                  >
+                    + Add Group
+                  </button>
+                </div>
+
+                {form.customizationGroups.map((group, gIdx) => (
+                  <div
+                    key={gIdx}
+                    className="bg-white rounded-lg border border-stone-200 p-3 space-y-2"
+                  >
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Group title e.g. Choose Dips"
+                        value={group.title}
+                        onChange={(e) => updateGroup(gIdx, "title", e.target.value)}
+                        className="flex-1 px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+                      />
+                      <input
+                        type="number"
+                        min={1}
+                        placeholder="Max"
+                        value={group.maxSelect}
+                        onChange={(e) => updateGroup(gIdx, "maxSelect", e.target.value)}
+                        className="w-20 px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeGroup(gIdx)}
+                        className="p-2 text-stone-400 hover:text-red-600"
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Options, comma separated e.g. Hummus, Guacamole, Salsa"
+                      value={group.optionsInput}
+                      onChange={(e) => updateGroup(gIdx, "optionsInput", e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/30"
+                    />
+                  </div>
+                ))}
+
+                {form.customizationGroups.length === 0 && (
+                  <p className="text-xs text-stone-500">
+                    Koi group nahi hai — "+ Add Group" par click karke "Choose 2 Dips"
+                    jaisa option define karo.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Footer actions */}

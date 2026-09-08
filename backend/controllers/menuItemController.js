@@ -1,5 +1,20 @@
 import MenuItem from "../models/MenuItem.js";
 
+// FormData sends customizationGroups as a JSON string; plain JSON body sends
+// it as an actual array already. Handle both.
+const parseCustomizationGroups = (groups) => {
+  if (!groups) return [];
+  if (typeof groups === "string") {
+    try {
+      const parsed = JSON.parse(groups);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+  return Array.isArray(groups) ? groups : [];
+};
+
 // Get all menu items
 export const getMenuItems = async (req, res) => {
   try {
@@ -20,10 +35,11 @@ export const getMenuItems = async (req, res) => {
 // Create menu item
 export const createMenuItem = async (req, res) => {
   try {
-const menuItem = await MenuItem.create({
-  ...req.body,
-  image: req.file ? req.file.path : "",
-});
+    const menuItem = await MenuItem.create({
+      ...req.body,
+      customizationGroups: parseCustomizationGroups(req.body.customizationGroups),
+      image: req.file ? req.file.path : "",
+    });
     res.status(201).json({
       success: true,
       message: "Menu item created successfully",
@@ -40,19 +56,25 @@ const menuItem = await MenuItem.create({
 // Update menu item
 export const updateMenuItem = async (req, res) => {
   try {
-   const updateData = {
-  ...req.body,
-};
+    const updateData = {
+      ...req.body,
+    };
 
-if (req.file) {
-  updateData.image = req.file.path;
-}
+    if (req.body.customizationGroups !== undefined) {
+      updateData.customizationGroups = parseCustomizationGroups(
+        req.body.customizationGroups
+      );
+    }
 
-const menuItem = await MenuItem.findByIdAndUpdate(
-  req.params.id,
-  updateData,
-  { new: true }
-);
+    if (req.file) {
+      updateData.image = req.file.path;
+    }
+
+    const menuItem = await MenuItem.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    );
 
     if (!menuItem) {
       return res.status(404).json({

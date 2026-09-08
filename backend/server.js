@@ -10,7 +10,7 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
 import subscriptionPlanRoutes from "./routes/subscriptionPlanRoutes.js";
 import deliverySlotRoutes from "./routes/deliverySlotRoutes.js";
-// import orderRoutes from "./routes/orderRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import saladRoutes from "./routes/saladRoutes.js";
 // dotenv.config();
@@ -78,7 +78,7 @@ app.use("/api/subscription-plans", subscriptionPlanRoutes);
 
 app.use("/api/delivery-slots", deliverySlotRoutes);
 
-// app.use("/api/orders", orderRoutes);
+app.use("/api/orders", orderRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/payment", paymentRoutes);

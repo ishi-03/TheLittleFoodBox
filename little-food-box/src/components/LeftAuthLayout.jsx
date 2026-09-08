@@ -1,7 +1,7 @@
 import React from "react";
 
 function LeftAuthLayout({
-  image = "/login.png",
+  image = "/login.webp",
   tagline = "Good Food,",
   heading = "little box of",
   highlight = "happiness",
