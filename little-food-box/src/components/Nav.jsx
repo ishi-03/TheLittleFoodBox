@@ -446,6 +446,24 @@ export default function Nav({
         }
         .nav-drawer.open { transform: translateX(0); }
 
+        .drawer-close {
+          position: absolute;
+          top: 18px;
+          right: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+          background: #fdf8f3;
+          border: 1px solid #e0d5c5;
+          color: #6b5440;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+        }
+        .drawer-close:hover { background: #2a1a0e; color: #f5f0e8; }
+
         .drawer-brand {
           display: flex;
           flex-direction: column;
@@ -558,6 +576,27 @@ export default function Nav({
           transition: background 0.2s;
         }
         .drawer-cta:hover { background: #b5451b; }
+
+        .drawer-admin-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          font-weight: 600;
+          padding: 12px 32px;
+          background: #fdf3ec;
+          color: #8b3a1f;
+          border: 1px solid #f0cdb8;
+          border-radius: 3px;
+          text-decoration: none;
+          margin-bottom: 0.7rem;
+          transition: background 0.2s, color 0.2s;
+        }
+        .drawer-admin-link:hover { background: #b5451b; color: #fff; border-color: #b5451b; }
 
         .drawer-logout {
           font-family: 'DM Sans', sans-serif;
@@ -739,6 +778,27 @@ export default function Nav({
 
       {/* ── Mobile Drawer ── */}
       <div className={`nav-drawer ${menuOpen ? "open" : ""}`}>
+        <button
+          className="drawer-close"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
         <div className="drawer-brand">
           <img src={logo} alt="The Little Food Box" className="drawer-brand-logo" />
           <div className="drawer-brand-name">The Little Food Box 🍱</div>
@@ -770,6 +830,15 @@ export default function Nav({
 
         {user ? (
           <>
+            {user?.role === "admin" && (
+              <NavLink
+                to="/admin"
+                className="drawer-admin-link"
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="drop-icon">🛠️</span> Admin Dashboard
+              </NavLink>
+            )}
             <NavLink
               to="https://wa.me/919998722140"
               target="_blank"

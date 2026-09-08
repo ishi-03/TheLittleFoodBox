@@ -90,14 +90,14 @@ export default function Sidebar({ isOpen, onClose }) {
       />
 
       <aside
-        className={`fixed top-0 left-0 w-[260px] md:w-[260px] h-screen z-50 flex flex-col box-border overflow-x-hidden overflow-y-auto transition-transform duration-300 ease-in-out bg-gradient-to-b from-[#fdf8f3] to-[#eef1e7] border-r border-[#e0d5c5] p-5 ${
+        className={`fixed top-0 left-0 w-[82vw] max-w-[260px] md:w-[260px] h-[100dvh] z-50 flex flex-col box-border overflow-x-hidden bg-gradient-to-b from-[#fdf8f3] to-[#eef1e7] border-r border-[#e0d5c5] transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
         {/* Mobile Close Button */}
         <button
           onClick={closeSidebar}
-          className="md:hidden absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-lg bg-white/70 text-[#6b5440] border border-[#e0d5c5] cursor-pointer hover:bg-white transition-colors"
+          className="md:hidden absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-lg bg-white/70 text-[#6b5440] border border-[#e0d5c5] cursor-pointer hover:bg-white transition-colors z-10"
           aria-label="Close menu"
         >
           <svg
@@ -116,10 +116,10 @@ export default function Sidebar({ isOpen, onClose }) {
           </svg>
         </button>
 
-        {/* Brand */}
-        <div className="mb-8 text-center pt-1">
+        {/* Brand (fixed, never scrolls away) */}
+        <div className="shrink-0 px-4 sm:px-5 pt-5 pb-6 text-center">
           <div
-            className="text-[1.4rem] font-bold text-[#2a1a0e] leading-tight"
+            className="text-[1.3rem] sm:text-[1.4rem] font-bold text-[#2a1a0e] leading-tight"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             🥗 Admin Panel
@@ -132,8 +132,11 @@ export default function Sidebar({ isOpen, onClose }) {
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        {/* Navigation (scrolls independently, so bottom section stays visible) */}
+        <nav
+          className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-5"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
           {menus.map((menu) => {
             const active = pathname === menu.path;
 
@@ -148,16 +151,16 @@ export default function Sidebar({ isOpen, onClose }) {
                     : "text-[#5a4636] font-normal hover:bg-white/70 hover:text-[#b5451b]"
                 }`}
               >
-                <span className="text-base leading-none">{menu.icon}</span>
-                <span>{menu.name}</span>
+                <span className="text-base leading-none shrink-0">{menu.icon}</span>
+                <span className="truncate">{menu.name}</span>
               </Link>
             );
           })}
         </nav>
 
-        {/* Bottom Section */}
+        {/* Bottom Section (fixed, always visible on every screen size) */}
         <div
-          className="pt-5 border-t border-[#e0d5c5]"
+          className="shrink-0 px-4 sm:px-5 pt-4 pb-5 border-t border-[#e0d5c5] bg-gradient-to-b from-[#fdf8f3] to-[#eef1e7]"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           <a

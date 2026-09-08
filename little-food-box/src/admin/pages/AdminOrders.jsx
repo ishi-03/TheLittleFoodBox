@@ -145,10 +145,10 @@ export default function AdminOrders() {
   const handleSaveOrder = async (payload, id) => {
     if (id) {
       await updateOrder(id, payload);
-      showToast("success", "Order update ho gaya");
+      showToast("success", "Order updated");
     } else {
       await createOrder(payload);
-      showToast("success", "Order add ho gaya");
+      showToast("success", "Order added");
     }
     await fetchOrders();
   };
