@@ -65,7 +65,7 @@ export default function AdminOrders() {
       const data = await getOrders();
       setOrders(Array.isArray(data) ? data : []);
     } catch (err) {
-      setLoadError(err?.message || "Orders load nahi ho paye. Dobara try karo.");
+      setLoadError(err?.message || "Orders not loading. Try again.");
     } finally {
       setIsLoading(false);
     }
@@ -441,7 +441,7 @@ function LoadingState() {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-stone-500">
       <Loader2 size={28} className="animate-spin mb-3 text-emerald-700" />
-      <p className="text-sm">Orders load ho rahe hain...</p>
+      <p className="text-sm">Orders loading</p>
     </div>
   );
 }
