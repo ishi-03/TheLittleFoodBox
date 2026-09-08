@@ -583,8 +583,8 @@ const compressImage = async (file) => {
 
                 {form.customizationGroups.length === 0 && (
                   <p className="text-xs text-stone-500">
-                    Koi group nahi hai — "+ Add Group" par click karke "Choose 2 Dips"
-                    jaisa option define karo.
+                    
+No customization groups added yet. Click "Add Group" to create options for this dish.
                   </p>
                 )}
               </div>

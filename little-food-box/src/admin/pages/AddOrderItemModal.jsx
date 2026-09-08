@@ -137,7 +137,7 @@ export default function AddOrderItemModal({ isOpen, onClose, menuItems, onAdd })
               <div className="space-y-2 max-h-[50vh] overflow-y-auto">
                 {filteredItems.length === 0 ? (
                   <p className="text-sm text-stone-500 text-center py-8">
-                    Koi dish nahi mila.
+                    No dishes found.
                   </p>
                 ) : (
                   filteredItems.map((item) => (
@@ -217,20 +217,18 @@ export default function AddOrderItemModal({ isOpen, onClose, menuItems, onAdd })
                   </div>
                 ))}
 
-              {selectedItem.hasCustomization && (
-                <div className="mb-5">
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Customization Notes (optional)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Koi extra customization ho to yaha likho..."
-                    className="w-full px-3 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600"
-                  />
-                </div>
-              )}
+              <div className="mb-5">
+                <label className="block text-sm font-medium text-stone-700 mb-2">
+                  Item Note (optional)
+                </label>
+                <input
+                  type="text"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="write any special instructions for this item"
+                  className="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600"
+                />
+              </div>
 
               {/* Quantity */}
               <div className="flex items-center justify-between mb-6">

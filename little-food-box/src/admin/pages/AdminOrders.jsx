@@ -160,7 +160,7 @@ export default function AdminOrders() {
         prev.map((o) => (o._id === order._id ? { ...o, orderStatus: newStatus } : o))
       );
     } catch (err) {
-      showToast("error", "Status update nahi ho paya");
+      showToast("error", "Status update failed");
     }
   };
 
@@ -466,14 +466,14 @@ function EmptyState({ hasSearch, onAdd }) {
     <div className="flex flex-col items-center justify-center py-16 px-6 text-center bg-white rounded-2xl border border-stone-200">
       {hasSearch ? (
         <>
-          <p className="text-sm font-medium text-stone-700">Koi order match nahi hua</p>
-          <p className="text-sm text-stone-500 mt-1">Search ya date filter alag try karo.</p>
+          <p className="text-sm font-medium text-stone-700">No orders found</p>
+          <p className="text-sm text-stone-500 mt-1">Try a different search or date filter.</p>
         </>
       ) : (
         <>
-          <p className="text-sm font-medium text-stone-700">Abhi tak koi order nahi</p>
+          <p className="text-sm font-medium text-stone-700">No orders yet</p>
           <p className="text-sm text-stone-500 mt-1 mb-4">
-            Pehla order manually add karo.
+            Add your first order manually.
           </p>
           <button
             onClick={onAdd}

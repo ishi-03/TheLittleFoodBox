@@ -304,7 +304,7 @@ const addItemLine = (line) =>
 
             {items.length === 0 ? (
               <p className="text-sm text-stone-500 border border-dashed border-stone-300 rounded-xl px-4 py-6 text-center">
-                Abhi tak koi item add nahi hua — "+ Add Item" par click karo.
+                No items added yet. Click "Add Item" to include dishes in this order.
               </p>
             ) : (
               <div className="space-y-2">
