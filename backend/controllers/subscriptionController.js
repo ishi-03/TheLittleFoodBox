@@ -1,5 +1,7 @@
 import Subscription from "../models/Subscription.js";
 import SubscriptionPlan from "../models/SubscriptionPlan.js";
+import User from "../models/User.js";
+import { sendWhatsAppTemplate } from "../services/whatsappService.js";
 
 // ================= CREATE =================
 
@@ -47,6 +49,16 @@ orderId,
 paymentDate,
 
     });
+
+    // WhatsApp confirmation - customer ko subscription start hone ka msg
+    const user = await User.findById(req.user.id);
+    if (user?.phone) {
+      sendWhatsAppTemplate({
+        to: user.phone,
+        templateName: "subscription_started",
+        bodyParams: [user.name, plan.name],
+      }).catch((err) => console.error("WhatsApp subscription msg failed:", err));
+    }
 
     res.status(201).json({
       success: true,

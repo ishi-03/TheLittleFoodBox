@@ -1,4 +1,5 @@
 import Order from "../models/Order.js";
+import { sendWhatsAppTemplate } from "../services/whatsappService.js";
 
 const calculateTotal = (items = []) =>
   items.reduce(
@@ -51,6 +52,20 @@ export const createOrder = async (req, res) => {
     payload.totalAmount = calculateTotal(payload.items);
 
     const order = await Order.create(payload);
+
+    // WhatsApp confirmation - maam jo number punch kare usi par jaayega
+    if (order.customerPhone) {
+      sendWhatsAppTemplate({
+        to: order.customerPhone,
+        templateName: "order_confirmed",
+        bodyParams: [
+          order.customerName,
+          order.totalAmount,
+          new Date(order.deliveryDate).toLocaleDateString("en-IN"),
+        ],
+      }).catch((err) => console.error("WhatsApp order msg failed:", err));
+    }
+
     res.status(201).json({
       success: true,
       message: "Order created successfully",

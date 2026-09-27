@@ -77,7 +77,6 @@ jain: {
   default: false,
 },
 
-
 // ---- Platter customization (NEW) ----
 hasCustomization: {
   type: Boolean,
@@ -93,8 +92,6 @@ customizationGroups: [
 ],
 
 },
-
-  
   {
     timestamps: true,
   }
