@@ -6,6 +6,7 @@ import path from "path";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import whatsappWebhookRoutes from "./routes/Whatsappwebhookroutes.js";
 // import menuItemRoutes from "./routes/menuItemRoutes.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
 import subscriptionPlanRoutes from "./routes/subscriptionPlanRoutes.js";
@@ -82,6 +83,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api/whatsapp", whatsappWebhookRoutes);
 app.use("/api/menu-items", menuItemRoutes);
 // -------------------- Start Server --------------------
 

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Mail, Lock, Eye } from "lucide-react";
+import { Mail, Lock, Eye, Phone } from "lucide-react";
 import LeftAuthLayout from "../components/LeftAuthLayout";
 const Register = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
     password: "",
     confirmPassword: ""
   });
@@ -31,6 +32,7 @@ const Register = () => {
       body: JSON.stringify({
         name: form.name,
         email: form.email,
+        phone: form.phone,
         password: form.password,
         confirmPassword: form.confirmPassword,
 
@@ -105,6 +107,20 @@ navigate("/subscription");
               name="email"
               placeholder="youremail@example.com"
               onChange={handleChange}
+              style={{ border: "none", background: "transparent", outline: "none", marginLeft: 10, width: "100%" }}
+            />
+          </div>
+
+          {/* PHONE */}
+          <label style={{ fontSize: 11, color: "#6f7f6f" }}>Phone Number</label>
+          <div style={{ display: "flex", alignItems: "center", border: "1.5px solid #ddd6cc", borderRadius: 999, padding: "11px 18px", background: "#faf7f2", marginBottom: 14 }}>
+            <Phone size={16} />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="98765 43210"
+              onChange={handleChange}
+              required
               style={{ border: "none", background: "transparent", outline: "none", marginLeft: 10, width: "100%" }}
             />
           </div>

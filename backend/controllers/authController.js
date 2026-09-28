@@ -16,6 +16,12 @@ export const register = async (req, res) => {
       });
     }
 
+if (!phone) {
+  return res.status(400).json({
+    success: false,
+    message: "Phone number is required",
+  });
+}
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
