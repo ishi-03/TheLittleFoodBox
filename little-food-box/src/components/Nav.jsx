@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
-const logo = "/LogoTLB.png";
+const logo = "/TLBLogo.webp";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Menu", href: "/menucard" },

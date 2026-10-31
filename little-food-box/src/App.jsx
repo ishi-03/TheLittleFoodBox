@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // Customer Layout
 import Layout from "./components/Layout.jsx";
 import Navbar from "./components/Navbar.jsx";
-
+import ScrollToTop from "./admin/components/ScrollToTop.jsx";
 // Customer Pages
 const MenuCard = lazy(() => import("./pages/MenuCard.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
@@ -97,6 +97,7 @@ function PageLoader() {
 export default function App() {
   return (
     <Suspense fallback={<PageLoader />}>
+      <ScrollToTop />
       <Routes>
 
         {/* ================= LANDING PAGE ================= */}
